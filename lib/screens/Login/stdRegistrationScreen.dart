@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class stdmainscreen extends StatelessWidget {
+class stdRegistrationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,6 +14,7 @@ class stdmainscreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
+            mainAxisSize: MainAxisSize.max,
             children: [
               SizedBox(
                 height: 150,
@@ -67,7 +68,8 @@ class stdmainscreen extends StatelessWidget {
                 height: 20,
               ),
               ElevatedButton(
-                  onPressed: () => Navigator.of(context).pushNamed('stdlog'),
+                  onPressed: () =>
+                      Navigator.of(context).pushNamed('stdLoginscreen'),
                   child: Text(
                     'Log In',
                     style: TextStyle(

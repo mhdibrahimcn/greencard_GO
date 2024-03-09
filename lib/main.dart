@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:green/screens/Homescreen/homescreenLogin.dart';
-import 'package:green/screens/Login/stdlog.dart';
-import 'package:green/screens/Login/stdmainscreen.dart';
+import 'package:flutter/services.dart';
+import 'package:green/screens/Homescreen/stdHomescreenLogin.dart';
+import 'package:green/screens/Login/stdLoginScreen.dart';
+import 'package:green/screens/Login/stdRegistrationScreen.dart';
 
 void main(List<String> args) {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Color.fromARGB(248, 116, 188, 236),
+    systemNavigationBarIconBrightness: Brightness.dark,
+  ));
   runApp(Myapp());
 }
 
@@ -12,24 +18,18 @@ class Myapp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    //   systemNavigationBarColor: Colors.blue,
+    // ));
     return MaterialApp(
       theme: ThemeData(primaryColor: Color.fromARGB(255, 145, 199, 148)),
-      home: stdmainscreen(),
+      debugShowCheckedModeBanner: false,
+      home: stdRegistrationScreen(),
       routes: {
-        'stdlog': (context) => stdlog(),
-        'homescreenLogin': (context) => homescreenLogin(),
+        'stdRegistration': (context) => stdRegistrationScreen(),
+        'stdLoginscreen': (context) => stdLoginScreen(),
+        'stdHomeScreen': (context) => stdHomescreen(),
       },
-    );
-  }
-}
-
-class homescreen extends StatelessWidget {
-  const homescreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(child: Text('helooo')),
     );
   }
 }

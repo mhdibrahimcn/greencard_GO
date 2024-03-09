@@ -2,14 +2,14 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-class stdlog extends StatefulWidget {
-  const stdlog({super.key});
+class stdLoginScreen extends StatefulWidget {
+  const stdLoginScreen({super.key});
 
   @override
-  State<stdlog> createState() => _stdlogState();
+  State<stdLoginScreen> createState() => _stdLoginScreenState();
 }
 
-class _stdlogState extends State<stdlog> {
+class _stdLoginScreenState extends State<stdLoginScreen> {
   bool _passwordVisible = false;
   bool _obscuretext = true;
   double _blurvalue = 0;
@@ -155,8 +155,8 @@ class _stdlogState extends State<stdlog> {
                       //Login button
 
                       ElevatedButton(
-                          onPressed: () => Navigator.of(context)
-                              .pushNamed('homescreenLogin'),
+                          onPressed: () =>
+                              Navigator.of(context).pushNamed('stdHomeScreen'),
                           child: Text(
                             'Log In',
                             style: TextStyle(
