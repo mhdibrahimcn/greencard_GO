@@ -5,11 +5,15 @@ class floatingActionInNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
-      hoverColor: Colors.blue,
-      backgroundColor: Color.fromARGB(255, 255, 239, 239),
-      onPressed: () {},
-      child: const Icon(Icons.qr_code),
+    return Container(
+      width: 65,
+      height: 65,
+      child: FloatingActionButton(
+        hoverColor: Colors.blue,
+        backgroundColor: Color.fromARGB(255, 255, 239, 239),
+        onPressed: () {},
+        child: const Icon(Icons.qr_code),
+      ),
     );
   }
 }
