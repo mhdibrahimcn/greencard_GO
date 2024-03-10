@@ -14,7 +14,7 @@ class bottomNavigation extends StatelessWidget {
           child: GNav(
               selectedIndex: 0,
               onTabChange: (value) {},
-              iconSize: 32,
+              iconSize: 20,
               rippleColor: Colors.yellow,
               tabBackgroundColor: Color.fromARGB(255, 231, 220, 116),
               activeColor: const Color.fromARGB(255, 0, 0, 0),

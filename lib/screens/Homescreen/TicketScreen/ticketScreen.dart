@@ -35,6 +35,4 @@ class Ticketscreen extends StatelessWidget {
       ),
     );
   }
-
-  void ticketTextStyle() {}
 }

@@ -7,17 +7,14 @@ class ticketWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
+    return Center(
         child: TicketWidget(
-          color: Colors.blue,
-          width: 330,
-          height: 400,
-          isCornerRounded: true,
-          padding: EdgeInsets.all(20),
-          child: Ticketscreen(),
-        ),
-      ),
-    );
+      color: Color.fromARGB(248, 116, 188, 236),
+      width: 330,
+      height: 200,
+      isCornerRounded: true,
+      padding: EdgeInsets.all(20),
+      child: Ticketscreen(),
+    ));
   }
 }

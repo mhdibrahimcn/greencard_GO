@@ -67,7 +67,7 @@ class _stdLoginScreenState extends State<stdLoginScreen> {
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Colors.grey,
+                              color: Colors.black45,
                               width: 2,
                             ),
                             borderRadius: BorderRadius.circular(20.0),
@@ -101,7 +101,7 @@ class _stdLoginScreenState extends State<stdLoginScreen> {
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               width: 2,
-                              color: Colors.grey,
+                              color: Colors.black45,
                             ),
                             borderRadius: BorderRadius.circular(27.0),
                           ),
@@ -123,7 +123,7 @@ class _stdLoginScreenState extends State<stdLoginScreen> {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20.0),
                           ),
-                          hintStyle: TextStyle(color: Colors.grey[100]),
+                          hintStyle: TextStyle(color: Colors.grey[300]),
                         ),
                       ),
 

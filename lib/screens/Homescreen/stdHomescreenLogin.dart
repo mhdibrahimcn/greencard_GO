@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:green/screens/Bottomnavigation/FloatingAction/FloatingActionInNav.dart';
 import 'package:green/screens/Bottomnavigation/bottomnavigation.dart';
 import 'package:green/screens/Homescreen/Profilescreen/profilescreen.dart';
-import 'package:green/screens/Homescreen/Widget/ticketWidget.dart';
+import 'package:green/screens/Homescreen/TicketScreen/remaningScreenInTicket.dart';
 import 'package:green/screens/SystemNavbarConfig/Systemnavbarconfig.dart';
 
 class stdHomescreen extends StatelessWidget {
   stdHomescreen({super.key});
 
   final pages = const [
-    ticketWidget(),
+    remaningScreenInTicket(),
     profileScreen(),
   ];
   @override
   Widget build(BuildContext context) {
     SystemNavbarconfig().SystemNavconfig(Color.fromARGB(255, 255, 255, 255));
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Color.fromARGB(255, 238, 254, 255),
       resizeToAvoidBottomInset: false,
       extendBody: true,
       floatingActionButton: floatingActionInNav(),
