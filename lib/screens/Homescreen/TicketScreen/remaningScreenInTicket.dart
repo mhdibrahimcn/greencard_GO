@@ -14,9 +14,18 @@ class remaningScreenInTicket extends StatelessWidget {
       ),
       Padding(
         padding: const EdgeInsets.all(25.0),
-        child: Text(
-          'Hi User!',
-          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Hi User!',
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            ),
+            CircleAvatar(
+              radius: 25,
+              child: Icon(Icons.person),
+            )
+          ],
         ),
       ),
       SizedBox(
@@ -27,8 +36,29 @@ class remaningScreenInTicket extends StatelessWidget {
         height: 20,
       ),
       Row(
-        children: [dayProgressbarWidget(), travelUpDownStatusWidget()],
+        children: [
+          dayProgressbarWidget(),
+          travelUpDownStatusWidget(),
+        ],
       ),
+      ElevatedButton(
+          onPressed: () {
+            showBottomSheet(
+              context: context,
+              builder: (context) {
+                return ClipRRect(
+                  borderRadius: BorderRadius.circular(30),
+                  child: Container(
+                    color: Colors.greenAccent,
+                    height: 500,
+                    width: 380,
+                    child: Text('hello'),
+                  ),
+                );
+              },
+            );
+          },
+          child: Text('clickme'))
     ]);
   }
 }

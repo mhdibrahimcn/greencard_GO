@@ -19,16 +19,24 @@ class bottomNavigation extends StatelessWidget {
               tabBackgroundColor: Color.fromARGB(255, 231, 220, 116),
               activeColor: const Color.fromARGB(255, 0, 0, 0),
               backgroundColor: Color.fromARGB(248, 116, 188, 236),
-              gap: 40,
+              gap: 15,
               tabs: [
                 GButton(
                   icon: Icons.home,
                   text: 'Home',
                 ),
                 GButton(
+                  icon: Icons.payment,
+                  text: 'Payment',
+                ),
+                GButton(
+                  icon: Icons.history,
+                  text: 'History',
+                ),
+                GButton(
                   icon: Icons.person,
                   text: 'profile',
-                )
+                ),
               ])),
     );
   }
