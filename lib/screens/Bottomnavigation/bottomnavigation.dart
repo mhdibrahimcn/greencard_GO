@@ -16,7 +16,6 @@ class bottomNavigation extends StatelessWidget {
               onTabChange: (value) {},
               iconSize: 20,
               rippleColor: Colors.yellow,
-              tabBackgroundColor: Color.fromARGB(255, 231, 220, 116),
               activeColor: const Color.fromARGB(255, 0, 0, 0),
               backgroundColor: Color.fromARGB(248, 116, 188, 236),
               gap: 15,

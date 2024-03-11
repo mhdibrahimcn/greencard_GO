@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:green/screens/Homescreen/qrBottomSheetScreen/qrBottomSheetScreen.dart';
 
 class floatingActionInNav extends StatelessWidget {
   const floatingActionInNav({super.key});
@@ -20,11 +21,10 @@ class floatingActionInNav extends StatelessWidget {
                 return ClipRRect(
                   borderRadius: BorderRadius.circular(30),
                   child: Container(
-                    color: Colors.greenAccent,
-                    height: 500,
-                    width: 380,
-                    child: Text('hello'),
-                  ),
+                      color: Colors.blue[100],
+                      height: 500,
+                      width: 370,
+                      child: qrBottomSheetScreen()),
                 );
               },
             );

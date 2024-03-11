@@ -10,10 +10,10 @@ class ticketWidget extends StatelessWidget {
     return Center(
         child: TicketWidget(
       color: Color.fromARGB(248, 116, 188, 236),
-      width: 330,
-      height: 200,
+      width: 350,
+      height: 220,
+      padding: EdgeInsets.all(9),
       isCornerRounded: true,
-      padding: EdgeInsets.all(20),
       child: Ticketscreen(),
     ));
   }

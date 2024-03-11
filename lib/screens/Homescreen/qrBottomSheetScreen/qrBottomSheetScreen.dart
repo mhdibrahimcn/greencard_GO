@@ -6,10 +6,30 @@ class qrBottomSheetScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return QrImageView(
-      data: '1234567890',
-      version: QrVersions.auto,
-      size: 200.0,
+    return SizedBox(
+      height: 400,
+      width: 400,
+      child: Column(
+        children: [
+          Row(
+            children: [
+              CircleAvatar(
+                child: Icon(Icons.person),
+              ),
+              Text('Nikil prakash')
+            ],
+          ),
+          QrImageView(
+            data: '1234567890',
+            version: QrVersions.auto,
+            size: 230.0,
+            eyeStyle: QrEyeStyle(
+              color: Colors.black,
+              eyeShape: QrEyeShape.square,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

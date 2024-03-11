@@ -9,29 +9,48 @@ class Ticketscreen extends StatelessWidget {
     return Container(
       width: 330,
       height: 400,
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 30),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Kunnuvazhy',
-                  style: TextStyle(
-                    fontSize: 22,
-                  ),
-                ),
-                Text(
-                  'Aluva',
-                  style: TextStyle(
-                    fontSize: 22,
-                  ),
-                )
-              ],
+      child: Padding(
+        padding: const EdgeInsets.only(top: 10, left: 20, bottom: 10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Aluva',
+              style: TextStyle(
+                fontSize: 22,
+              ),
             ),
-          )
-        ],
+            Expanded(
+              child: Column(
+                children: [
+                  ...List.generate(
+                      2,
+                      (index) => Icon(
+                            Icons.arrow_drop_down_circle_sharp,
+                            size: 20,
+                          )),
+                  Text(
+                    "To",
+                    style: TextStyle(fontSize: 23),
+                  ),
+                  ...List.generate(
+                      2,
+                      (index) => Icon(
+                            Icons.arrow_drop_down_circle_sharp,
+                            size: 20,
+                          )),
+                ],
+              ),
+            ),
+            Text(
+              'Kalamssery',
+              style: TextStyle(
+                fontSize: 22,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:green/screens/Bottomnavigation/FloatingAction/FloatingActionInNav.dart';
 import 'package:green/screens/Bottomnavigation/bottomnavigation.dart';
-import 'package:green/screens/Homescreen/Profilescreen/profilescreen.dart';
+import 'package:green/screens/Homescreen/Profilescreen/profileScreen.dart';
 import 'package:green/screens/Homescreen/TicketScreen/remaningScreenInTicket.dart';
 import 'package:green/screens/SystemNavbarConfig/Systemnavbarconfig.dart';
 
