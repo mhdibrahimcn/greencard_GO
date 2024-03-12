@@ -12,7 +12,7 @@ class travelUpDownStatusWidget extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            width: 160,
+            width: 155,
             height: 80,
             child: LiquidLinearProgressIndicator(
                 value: 0.1, // Defaults to 0.5.
@@ -31,7 +31,7 @@ class travelUpDownStatusWidget extends StatelessWidget {
             height: 10,
           ),
           Container(
-            width: 160,
+            width: 155,
             height: 80,
             child: LiquidLinearProgressIndicator(
                 value: 0.9, // Defaults to 0.5.

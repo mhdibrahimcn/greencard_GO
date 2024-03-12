@@ -1,5 +1,7 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class Ticketscreen extends StatelessWidget {
   const Ticketscreen({super.key});
@@ -7,51 +9,81 @@ class Ticketscreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 330,
-      height: 400,
-      child: Padding(
-        padding: const EdgeInsets.only(top: 10, left: 20, bottom: 10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Aluva',
-              style: TextStyle(
-                fontSize: 22,
-              ),
-            ),
-            Expanded(
-              child: Column(
+        width: 330,
+        height: 400,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 10, left: 20, bottom: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ...List.generate(
-                      2,
-                      (index) => Icon(
-                            Icons.arrow_drop_down_circle_sharp,
-                            size: 20,
-                          )),
-                  Text(
-                    "To",
-                    style: TextStyle(fontSize: 23),
+                  Row(
+                    children: [
+                      Text(
+                        'Aluva',
+                        style: GoogleFonts.inter(
+                            textStyle: TextStyle(fontSize: 23)),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 4),
+                        child: Text(
+                          'In',
+                          style: GoogleFonts.inter(
+                              textStyle: TextStyle(
+                                  fontSize: 14, color: Colors.black54)),
+                        ),
+                      ),
+                    ],
                   ),
-                  ...List.generate(
-                      2,
-                      (index) => Icon(
-                            Icons.arrow_drop_down_circle_sharp,
-                            size: 20,
-                          )),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 17),
+                    child: Column(
+                      children: [
+                        ...List.generate(
+                            2,
+                            (index) => Icon(
+                                  Icons.arrow_drop_down_circle_sharp,
+                                  size: 20,
+                                )),
+                        Text(
+                          "To",
+                          style: GoogleFonts.inter(
+                              textStyle: TextStyle(fontSize: 20)),
+                        ),
+                        ...List.generate(
+                            2,
+                            (index) => Icon(
+                                  Icons.arrow_drop_down_circle_sharp,
+                                  size: 20,
+                                )),
+                      ],
+                    ),
+                  ),
+                  Text(
+                    'Kalamssery',
+                    style:
+                        GoogleFonts.inter(textStyle: TextStyle(fontSize: 23)),
+                  ),
                 ],
               ),
-            ),
-            Text(
-              'Kalamssery',
-              style: TextStyle(
-                fontSize: 22,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  QrImageView(
+                    data: '1234567890',
+                    version: QrVersions.auto,
+                    size: 50.0,
+                    eyeStyle: QrEyeStyle(
+                      color: Colors.black,
+                      eyeShape: QrEyeShape.square,
+                    ),
+                  ),
+                ],
               ),
-            )
-          ],
-        ),
-      ),
-    );
+            ],
+          ),
+        ));
   }
 }
