@@ -1,19 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 
+// ignore: must_be_immutable
 class dayProgressbarWidget extends StatelessWidget {
   dayProgressbarWidget({super.key});
   ValueNotifier<double> progressNotifier = ValueNotifier(68);
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(30.0),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(30),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(30),
+      child: Padding(
+        padding: const EdgeInsets.all(30.0),
         child: Container(
+          decoration: BoxDecoration(
+              color: Color.fromRGBO(52, 100, 230, 1),
+              borderRadius: BorderRadius.circular(30),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  spreadRadius: 3,
+                  blurRadius: 6,
+                  offset: Offset(0, 5),
+                )
+              ]),
           width: 160,
           height: 170,
-          color: Colors.blue[200],
           child: SimpleCircularProgressBar(
               size: 120,
               progressStrokeWidth: 17,
@@ -25,10 +36,11 @@ class dayProgressbarWidget extends StatelessWidget {
               animationDuration: 6,
               progressColors: const [
                 Colors.redAccent,
-                Colors.orangeAccent,
-                Colors.amberAccent,
-                Colors.green,
-                Colors.cyan,
+                Colors.white,
+                Colors.white,
+                Colors.white,
+                Colors.white,
+                Colors.white,
               ],
               backColor: Color.fromARGB(255, 135, 147, 151),
               onGetText: (double value) {

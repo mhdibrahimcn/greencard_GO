@@ -49,7 +49,7 @@ class remaningScreenInTicket extends StatelessWidget {
                 return ClipRRect(
                   borderRadius: BorderRadius.circular(30),
                   child: Container(
-                    color: Colors.greenAccent,
+                    color: Colors.white,
                     height: 500,
                     width: 380,
                     child: Text('hello'),

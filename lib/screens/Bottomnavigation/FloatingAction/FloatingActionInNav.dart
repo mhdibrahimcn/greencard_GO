@@ -21,7 +21,17 @@ class floatingActionInNav extends StatelessWidget {
                 return ClipRRect(
                   borderRadius: BorderRadius.circular(30),
                   child: Container(
-                      color: Colors.blue[100],
+                      decoration: BoxDecoration(
+                          color: Color.fromRGBO(52, 100, 230, 1),
+                          borderRadius: BorderRadius.circular(30),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              spreadRadius: 10,
+                              blurRadius: 10,
+                              offset: Offset(10, 10),
+                            )
+                          ]),
                       height: 500,
                       width: 370,
                       child: qrBottomSheetScreen()),

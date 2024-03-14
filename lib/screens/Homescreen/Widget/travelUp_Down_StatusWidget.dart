@@ -12,15 +12,24 @@ class travelUpDownStatusWidget extends StatelessWidget {
       child: Column(
         children: [
           Container(
+            decoration: BoxDecoration(boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                spreadRadius: 0,
+                blurRadius: 6,
+                offset: Offset(0, 2),
+              )
+            ]),
             width: 155,
             height: 80,
             child: LiquidLinearProgressIndicator(
                 value: 0.1, // Defaults to 0.5.
-                valueColor: AlwaysStoppedAnimation(Colors
-                    .blue), // Defaults to the current Theme's accentColor.
+                valueColor: AlwaysStoppedAnimation(
+                  Color.fromRGBO(52, 100, 230, 1),
+                ), // Defaults to the current Theme's accentColor.
                 backgroundColor: Colors
                     .white, // Defaults to the current Theme's backgroundColor.
-                borderColor: Colors.blue[200],
+                borderColor: Color.fromRGBO(52, 100, 230, 1),
                 borderWidth: 6,
                 borderRadius: 30.0,
                 direction: Axis
@@ -31,15 +40,24 @@ class travelUpDownStatusWidget extends StatelessWidget {
             height: 10,
           ),
           Container(
+            decoration: BoxDecoration(boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                spreadRadius: 3,
+                blurRadius: 6,
+                offset: Offset(0, 5),
+              )
+            ]),
             width: 155,
             height: 80,
             child: LiquidLinearProgressIndicator(
                 value: 0.9, // Defaults to 0.5.
-                valueColor: AlwaysStoppedAnimation(Colors
-                    .blue), // Defaults to the current Theme's accentColor.
+                valueColor: AlwaysStoppedAnimation(
+                  Color.fromRGBO(52, 100, 230, 1),
+                ), // Defaults to the current Theme's accentColor.
                 backgroundColor: Colors
                     .white, // Defaults to the current Theme's backgroundColor.
-                borderColor: Colors.blue[200],
+                borderColor: Color.fromRGBO(52, 100, 230, 1),
                 borderWidth: 6.0,
                 borderRadius: 30.0,
                 direction: Axis

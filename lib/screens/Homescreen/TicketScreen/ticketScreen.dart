@@ -24,7 +24,10 @@ class Ticketscreen extends StatelessWidget {
                       Text(
                         'Aluva',
                         style: GoogleFonts.inter(
-                            textStyle: TextStyle(fontSize: 23)),
+                            textStyle: TextStyle(
+                                fontSize: 23,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold)),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 4),
@@ -32,13 +35,15 @@ class Ticketscreen extends StatelessWidget {
                           'In',
                           style: GoogleFonts.inter(
                               textStyle: TextStyle(
-                                  fontSize: 14, color: Colors.black54)),
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold)),
                         ),
                       ),
                     ],
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 17),
+                    padding: const EdgeInsets.only(left: 17, top: 10),
                     child: Column(
                       children: [
                         ...List.generate(
@@ -46,25 +51,36 @@ class Ticketscreen extends StatelessWidget {
                             (index) => Icon(
                                   Icons.arrow_drop_down_circle_sharp,
                                   size: 20,
+                                  color: Colors.white60,
                                 )),
                         Text(
                           "To",
                           style: GoogleFonts.inter(
-                              textStyle: TextStyle(fontSize: 20)),
+                              textStyle: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold)),
                         ),
                         ...List.generate(
                             2,
                             (index) => Icon(
                                   Icons.arrow_drop_down_circle_sharp,
                                   size: 20,
+                                  color: Colors.white60,
                                 )),
                       ],
                     ),
                   ),
+                  SizedBox(
+                    height: 5,
+                  ),
                   Text(
-                    'Kalamssery',
-                    style:
-                        GoogleFonts.inter(textStyle: TextStyle(fontSize: 23)),
+                    'Kalamassery',
+                    style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                            fontSize: 23,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold)),
                   ),
                 ],
               ),

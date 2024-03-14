@@ -16,7 +16,7 @@ class stdHomescreen extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemNavbarconfig().SystemNavconfig(Color.fromARGB(255, 255, 255, 255));
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 238, 254, 255),
+      backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
       extendBody: true,
       floatingActionButton: floatingActionInNav(),

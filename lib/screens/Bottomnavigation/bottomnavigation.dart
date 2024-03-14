@@ -15,9 +15,11 @@ class bottomNavigation extends StatelessWidget {
               selectedIndex: 0,
               onTabChange: (value) {},
               iconSize: 20,
-              rippleColor: Colors.yellow,
-              activeColor: const Color.fromARGB(255, 0, 0, 0),
-              backgroundColor: Color.fromARGB(248, 116, 188, 236),
+              haptic: true,
+              rippleColor: Color.fromRGBO(100, 141, 252, 1),
+              activeColor: Colors.white,
+              color: Color.fromRGBO(8, 14, 31, 1),
+              backgroundColor: Color.fromRGBO(52, 100, 230, 1),
               gap: 15,
               tabs: [
                 GButton(
