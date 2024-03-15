@@ -15,29 +15,7 @@ class floatingActionInNav extends StatelessWidget {
           hoverColor: Colors.blue,
           backgroundColor: Color.fromARGB(255, 255, 255, 255),
           onPressed: () {
-            showBottomSheet(
-              context: context,
-              builder: (context1) {
-                return ClipRRect(
-                  borderRadius: BorderRadius.circular(30),
-                  child: Container(
-                      decoration: BoxDecoration(
-                          color: Color.fromRGBO(79, 146, 155, 1),
-                          borderRadius: BorderRadius.circular(30),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(1),
-                              spreadRadius: 10,
-                              blurRadius: 30,
-                              offset: Offset(0, 10),
-                            )
-                          ]),
-                      height: 500,
-                      width: 370,
-                      child: qrBottomSheetScreen()),
-                );
-              },
-            );
+            bottomSheet(context);
           },
           child: const Icon(
             Icons.qr_code,
@@ -45,6 +23,32 @@ class floatingActionInNav extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  static bottomSheet(BuildContext context) async {
+    showBottomSheet(
+      context: context,
+      builder: (context1) {
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(30),
+          child: Container(
+              decoration: BoxDecoration(
+                  color: Color.fromRGBO(79, 146, 155, 1),
+                  borderRadius: BorderRadius.circular(30),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(1),
+                      spreadRadius: 10,
+                      blurRadius: 30,
+                      offset: Offset(0, 10),
+                    )
+                  ]),
+              height: 500,
+              width: 370,
+              child: qrBottomSheetScreen()),
+        );
+      },
     );
   }
 }

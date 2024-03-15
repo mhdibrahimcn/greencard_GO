@@ -1,6 +1,8 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:green/screens/Bottomnavigation/FloatingAction/FloatingActionInNav.dart';
+import 'package:green/screens/Homescreen/qrBottomSheetScreen/qrBottomSheetScreen.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class Ticketscreen extends StatelessWidget {
@@ -35,7 +37,7 @@ class Ticketscreen extends StatelessWidget {
                           'In',
                           style: GoogleFonts.inter(
                               textStyle: TextStyle(
-                                  fontSize: 14,
+                                  fontSize: 12,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold)),
                         ),
@@ -74,28 +76,75 @@ class Ticketscreen extends StatelessWidget {
                   SizedBox(
                     height: 5,
                   ),
-                  Text(
-                    'Kalamassery',
-                    style: GoogleFonts.inter(
-                        textStyle: TextStyle(
-                            fontSize: 23,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold)),
+                  Row(
+                    children: [
+                      Text(
+                        'Kalamassery',
+                        style: GoogleFonts.inter(
+                            textStyle: TextStyle(
+                                fontSize: 23,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold)),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 4),
+                        child: Text(
+                          'Out',
+                          style: GoogleFonts.inter(
+                              textStyle: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold)),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  QrImageView(
-                    data: '1234567890',
-                    version: QrVersions.auto,
-                    size: 50.0,
-                    eyeStyle: QrEyeStyle(
-                      color: Colors.black,
-                      eyeShape: QrEyeShape.square,
-                    ),
+                  SizedBox(
+                    height: 12,
                   ),
+                  Text(
+                    '26 th january',
+                    style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                            fontSize: 17,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold)),
+                  ),
+                  ...List.generate(
+                      2,
+                      (index) => Icon(
+                            Icons.arrow_drop_down_circle_sharp,
+                            size: 20,
+                            color: Colors.white60,
+                          )),
+                  Text(
+                    '02 th Feb',
+                    style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                            fontSize: 17,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold)),
+                  ),
+                  SizedBox(
+                    height: 6,
+                  ),
+                  TextButton(
+                    onPressed: () => floatingActionInNav.bottomSheet(context),
+                    child: QrImageView(
+                      data: '1234567890',
+                      version: QrVersions.auto,
+                      size: 70.0,
+                      eyeStyle: QrEyeStyle(
+                        color: Colors.black,
+                        eyeShape: QrEyeShape.square,
+                      ),
+                    ),
+                  )
                 ],
               ),
             ],
