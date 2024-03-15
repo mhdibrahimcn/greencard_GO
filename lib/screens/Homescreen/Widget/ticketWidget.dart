@@ -11,14 +11,17 @@ class ticketWidget extends StatelessWidget {
         child: Container(
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(
-          color: Colors.black.withOpacity(0.1),
-          spreadRadius: 3,
-          blurRadius: 6,
-          offset: Offset(0, 5),
+          color: Colors.black.withOpacity(0.5),
+          spreadRadius: 0.6,
+          blurRadius: 20,
+          offset: Offset(
+            14,
+            7,
+          ),
         )
       ]),
       child: TicketWidget(
-        color: Color.fromRGBO(52, 100, 230, 1),
+        color: Color.fromRGBO(114, 192, 202, 1),
         width: 350,
         height: 227,
         padding: EdgeInsets.all(7),

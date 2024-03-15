@@ -41,24 +41,6 @@ class remaningScreenInTicket extends StatelessWidget {
           travelUpDownStatusWidget(),
         ],
       ),
-      ElevatedButton(
-          onPressed: () {
-            showBottomSheet(
-              context: context,
-              builder: (context) {
-                return ClipRRect(
-                  borderRadius: BorderRadius.circular(30),
-                  child: Container(
-                    color: Colors.white,
-                    height: 500,
-                    width: 380,
-                    child: Text('hello'),
-                  ),
-                );
-              },
-            );
-          },
-          child: Text('clickme'))
     ]);
   }
 }

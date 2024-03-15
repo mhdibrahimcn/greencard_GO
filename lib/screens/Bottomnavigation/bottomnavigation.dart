@@ -3,8 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class bottomNavigation extends StatelessWidget {
-  const bottomNavigation({super.key});
+  bottomNavigation({super.key});
 
+  static ValueNotifier<int> selectedIndex = ValueNotifier(0);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -12,14 +13,16 @@ class bottomNavigation extends StatelessWidget {
       child: ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(70)),
           child: GNav(
-              selectedIndex: 0,
-              onTabChange: (value) {},
+              selectedIndex: selectedIndex.value,
+              onTabChange: (value) {
+                selectedIndex.value = value;
+              },
               iconSize: 20,
               haptic: true,
-              rippleColor: Color.fromRGBO(100, 141, 252, 1),
+              rippleColor: Color.fromRGBO(96, 149, 156, 1),
               activeColor: Colors.white,
               color: Color.fromRGBO(8, 14, 31, 1),
-              backgroundColor: Color.fromRGBO(52, 100, 230, 1),
+              backgroundColor: Color.fromRGBO(114, 192, 202, 1),
               gap: 15,
               tabs: [
                 GButton(

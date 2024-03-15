@@ -13,14 +13,17 @@ class dayProgressbarWidget extends StatelessWidget {
         padding: const EdgeInsets.all(30.0),
         child: Container(
           decoration: BoxDecoration(
-              color: Color.fromRGBO(52, 100, 230, 1),
+              color: Color.fromRGBO(114, 192, 202, 1),
               borderRadius: BorderRadius.circular(30),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  spreadRadius: 3,
-                  blurRadius: 6,
-                  offset: Offset(0, 5),
+                  color: Colors.black.withOpacity(0.5),
+                  spreadRadius: 0.6,
+                  blurRadius: 20,
+                  offset: Offset(
+                    14,
+                    7,
+                  ),
                 )
               ]),
           width: 160,

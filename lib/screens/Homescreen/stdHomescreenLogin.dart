@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:green/screens/Bottomnavigation/FloatingAction/FloatingActionInNav.dart';
 import 'package:green/screens/Bottomnavigation/bottomnavigation.dart';
+import 'package:green/screens/Homescreen/HistoryScreen/historyScreen.dart';
+import 'package:green/screens/Homescreen/PaymentScreen/paymentScreen.dart';
 import 'package:green/screens/Homescreen/Profilescreen/profileScreen.dart';
 import 'package:green/screens/Homescreen/TicketScreen/remaningScreenInTicket.dart';
 import 'package:green/screens/SystemNavbarConfig/Systemnavbarconfig.dart';
@@ -10,6 +12,8 @@ class stdHomescreen extends StatelessWidget {
 
   final pages = const [
     remaningScreenInTicket(),
+    paymentScreen(),
+    historyScreen(),
     profileScreen(),
   ];
   @override
@@ -22,7 +26,14 @@ class stdHomescreen extends StatelessWidget {
       floatingActionButton: floatingActionInNav(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: bottomNavigation(),
-      body: SafeArea(child: pages[0]),
+      body: SafeArea(
+        child: ValueListenableBuilder(
+          valueListenable: bottomNavigation.selectedIndex,
+          builder: (BuildContext context, int newvalue, _) {
+            return pages[newvalue];
+          },
+        ),
+      ),
     );
   }
 }

@@ -15,9 +15,12 @@ class travelUpDownStatusWidget extends StatelessWidget {
             decoration: BoxDecoration(boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.1),
-                spreadRadius: 0,
-                blurRadius: 6,
-                offset: Offset(0, 2),
+                spreadRadius: 0.2,
+                blurRadius: 50,
+                offset: Offset(
+                  -13,
+                  0,
+                ),
               )
             ]),
             width: 155,
@@ -25,12 +28,12 @@ class travelUpDownStatusWidget extends StatelessWidget {
             child: LiquidLinearProgressIndicator(
                 value: 0.1, // Defaults to 0.5.
                 valueColor: AlwaysStoppedAnimation(
-                  Color.fromRGBO(52, 100, 230, 1),
+                  Color.fromRGBO(114, 192, 202, 1),
                 ), // Defaults to the current Theme's accentColor.
                 backgroundColor: Colors
                     .white, // Defaults to the current Theme's backgroundColor.
-                borderColor: Color.fromRGBO(52, 100, 230, 1),
-                borderWidth: 6,
+                borderColor: Color.fromRGBO(114, 192, 202, 1),
+                borderWidth: 3,
                 borderRadius: 30.0,
                 direction: Axis
                     .vertical, // The direction the liquid moves (Axis.vertical = bottom to top, Axis.horizontal = left to right). Defaults to Axis.horizontal.
@@ -43,9 +46,12 @@ class travelUpDownStatusWidget extends StatelessWidget {
             decoration: BoxDecoration(boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.1),
-                spreadRadius: 3,
-                blurRadius: 6,
-                offset: Offset(0, 5),
+                spreadRadius: 0.6,
+                blurRadius: 20,
+                offset: Offset(
+                  14,
+                  7,
+                ),
               )
             ]),
             width: 155,
@@ -53,12 +59,12 @@ class travelUpDownStatusWidget extends StatelessWidget {
             child: LiquidLinearProgressIndicator(
                 value: 0.9, // Defaults to 0.5.
                 valueColor: AlwaysStoppedAnimation(
-                  Color.fromRGBO(52, 100, 230, 1),
+                  Color.fromRGBO(114, 192, 202, 1),
                 ), // Defaults to the current Theme's accentColor.
                 backgroundColor: Colors
                     .white, // Defaults to the current Theme's backgroundColor.
-                borderColor: Color.fromRGBO(52, 100, 230, 1),
-                borderWidth: 6.0,
+                borderColor: Color.fromRGBO(114, 192, 202, 1),
+                borderWidth: 3.0,
                 borderRadius: 30.0,
                 direction: Axis
                     .vertical, // The direction the liquid moves (Axis.vertical = bottom to top, Axis.horizontal = left to right). Defaults to Axis.horizontal.

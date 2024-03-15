@@ -13,23 +13,23 @@ class floatingActionInNav extends StatelessWidget {
         height: 60,
         child: FloatingActionButton(
           hoverColor: Colors.blue,
-          backgroundColor: Color.fromARGB(255, 255, 239, 239),
+          backgroundColor: Color.fromARGB(255, 255, 255, 255),
           onPressed: () {
             showBottomSheet(
               context: context,
-              builder: (context) {
+              builder: (context1) {
                 return ClipRRect(
                   borderRadius: BorderRadius.circular(30),
                   child: Container(
                       decoration: BoxDecoration(
-                          color: Color.fromRGBO(52, 100, 230, 1),
+                          color: Color.fromRGBO(79, 146, 155, 1),
                           borderRadius: BorderRadius.circular(30),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
+                              color: Colors.black.withOpacity(1),
                               spreadRadius: 10,
-                              blurRadius: 10,
-                              offset: Offset(10, 10),
+                              blurRadius: 30,
+                              offset: Offset(0, 10),
                             )
                           ]),
                       height: 500,
@@ -39,7 +39,10 @@ class floatingActionInNav extends StatelessWidget {
               },
             );
           },
-          child: const Icon(Icons.qr_code),
+          child: const Icon(
+            Icons.qr_code,
+            color: Color.fromRGBO(84, 143, 151, 1),
+          ),
         ),
       ),
     );

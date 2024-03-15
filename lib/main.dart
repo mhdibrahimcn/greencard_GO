@@ -17,7 +17,10 @@ class Myapp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemNavbarconfig().SystemNavconfig(Color.fromARGB(116, 190, 239, 255));
     return MaterialApp(
-      theme: ThemeData(primaryColor: Color.fromARGB(255, 145, 199, 148)),
+      theme: ThemeData(
+        // ignore: deprecated_member_use
+        primaryColor: Color.fromRGBO(114, 192, 202, 1),
+      ),
       debugShowCheckedModeBanner: false,
       home: stdRegistrationScreen(),
       routes: {
