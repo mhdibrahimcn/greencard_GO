@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:green/screens/Homescreen/Profilescreen/appbar/appbar.dart';
 
 class profileScreen extends StatelessWidget {
   const profileScreen({super.key});
@@ -9,13 +10,17 @@ class profileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        appbar(),
-        Padding(
-          padding: const EdgeInsets.only(top: 50),
-          child: CircleAvatar(
-            radius: 70,
-            child: Icon(Icons.person),
-          ),
+        appbar.appBar('profile'),
+        Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 50, left: 20),
+              child: CircleAvatar(
+                radius: 60,
+                child: Icon(Icons.person),
+              ),
+            ),
+          ],
         ),
         formdetails(Icon(Icons.person_2), 8, 18, "Name:", "Nikil prakash"),
         formdetails(Icon(Icons.phone), 8, 16, "Ph No  :", "9497484988"),
@@ -67,39 +72,6 @@ class profileScreen extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget appbar() {
-    return Container(
-      height: 100,
-      width: 400,
-      decoration: BoxDecoration(
-          color: Color.fromRGBO(114, 192, 202, 1),
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(30),
-              bottomRight: Radius.circular(30)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.3),
-              spreadRadius: 0.6,
-              blurRadius: 20,
-              offset: Offset(
-                14,
-                7,
-              ),
-            )
-          ]),
-      child: Center(
-        child: Text(
-          'Profile',
-          style: GoogleFonts.inter(
-              textStyle: TextStyle(
-                  fontSize: 23,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold)),
-        ),
       ),
     );
   }

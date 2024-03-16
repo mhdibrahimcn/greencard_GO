@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class SystemNavbarconfig {
-  void SystemNavconfig(Color navColor) {
+  void SystemNavconfig(Color statusColor) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      systemNavigationBarColor: navColor,
+      systemNavigationBarColor: Colors.transparent,
       systemNavigationBarIconBrightness: Brightness.dark,
-      statusBarColor: Color.fromRGBO(114, 192, 202, 1),
+      statusBarColor: statusColor,
     ));
   }
 }

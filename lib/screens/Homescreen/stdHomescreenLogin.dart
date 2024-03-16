@@ -18,7 +18,7 @@ class stdHomescreen extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    SystemNavbarconfig().SystemNavconfig(Color.fromARGB(255, 255, 255, 255));
+    SystemNavbarconfig().SystemNavconfig(Color.fromRGBO(114, 192, 202, 1));
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
@@ -26,13 +26,11 @@ class stdHomescreen extends StatelessWidget {
       floatingActionButton: floatingActionInNav(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: bottomNavigation(),
-      body: SafeArea(
-        child: ValueListenableBuilder(
-          valueListenable: bottomNavigation.selectedIndex,
-          builder: (BuildContext context, int newvalue, _) {
-            return pages[newvalue];
-          },
-        ),
+      body: ValueListenableBuilder(
+        valueListenable: bottomNavigation.selectedIndex,
+        builder: (BuildContext context, int newvalue, _) {
+          return pages[newvalue];
+        },
       ),
     );
   }

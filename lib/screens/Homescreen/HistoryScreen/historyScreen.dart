@@ -5,6 +5,29 @@ class historyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text("history");
+    return Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: ListView.separated(
+          itemBuilder: (context, index) {
+            return SizedBox(
+              height: 84,
+              child: Card(
+                color: Color.fromARGB(255, 238, 209, 243),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                elevation: 5,
+                child: ListTile(
+                  trailing: Text("heloo"),
+                ),
+              ),
+            );
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return SizedBox(
+              height: 20,
+            );
+          },
+          itemCount: 20),
+    );
   }
 }

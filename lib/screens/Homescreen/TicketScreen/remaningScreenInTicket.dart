@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:green/screens/Homescreen/Widget/dayProgressbarWidget.dart';
 import 'package:green/screens/Homescreen/Widget/ticketWidget.dart';
@@ -10,20 +11,26 @@ class remaningScreenInTicket extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       SizedBox(
-        height: 10,
+        height: 40,
       ),
       Padding(
         padding: const EdgeInsets.all(25.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              'Hi User!',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            FadeInLeft(
+              duration: Duration(milliseconds: 700),
+              child: Text(
+                'Hi User!',
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              ),
             ),
-            CircleAvatar(
-              radius: 25,
-              child: Icon(Icons.person),
+            FadeInRight(
+              duration: Duration(milliseconds: 700),
+              child: CircleAvatar(
+                radius: 25,
+                child: Icon(Icons.person),
+              ),
             )
           ],
         ),
@@ -31,14 +38,18 @@ class remaningScreenInTicket extends StatelessWidget {
       SizedBox(
         height: 40,
       ),
-      ticketWidget(),
+      FadeInLeft(duration: Duration(milliseconds: 700), child: ticketWidget()),
       SizedBox(
         height: 20,
       ),
       Row(
         children: [
-          dayProgressbarWidget(),
-          travelUpDownStatusWidget(),
+          FadeInUp(
+              duration: Duration(milliseconds: 700),
+              child: dayProgressbarWidget()),
+          FadeInUp(
+              duration: Duration(milliseconds: 700),
+              child: travelUpDownStatusWidget()),
         ],
       ),
     ]);

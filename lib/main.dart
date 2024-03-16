@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:green/screens/Homescreen/stdHomescreenLogin.dart';
 import 'package:green/screens/Login/stdLoginScreen.dart';
 import 'package:green/screens/Login/stdRegistrationScreen.dart';
+import 'package:green/screens/SignupScreen/SignupScreen.dart';
+import 'package:green/screens/SignupScreen/phone_email_verify.dart';
 import 'package:green/screens/SystemNavbarConfig/Systemnavbarconfig.dart';
 
 void main(List<String> args) {
@@ -27,6 +29,8 @@ class Myapp extends StatelessWidget {
         'stdRegistration': (context) => stdRegistrationScreen(),
         'stdLoginscreen': (context) => stdLoginScreen(),
         'stdHomeScreen': (context) => stdHomescreen(),
+        'SignUpScreen': (context) => signupScreen(),
+        "PhoneEmailVerifyScreen": (context) => phoneEmailVerifyScreen()
       },
     );
   }

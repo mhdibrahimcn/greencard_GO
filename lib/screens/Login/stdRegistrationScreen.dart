@@ -48,7 +48,8 @@ class stdRegistrationScreen extends StatelessWidget {
                 height: 350,
               ),
               ElevatedButton(
-                  onPressed: () => print('ad'),
+                  onPressed: () =>
+                      Navigator.of(context).pushNamed("SignUpScreen"),
                   child: Text(
                     'Sign In',
                     style: TextStyle(
