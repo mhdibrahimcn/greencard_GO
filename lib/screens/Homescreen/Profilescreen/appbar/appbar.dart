@@ -7,8 +7,8 @@ class appbar {
       height: 130,
       width: double.infinity,
       decoration: BoxDecoration(
-          color: Color.fromRGBO(114, 192, 202, 1),
-          borderRadius: BorderRadius.only(
+          color: const Color.fromRGBO(114, 192, 202, 1),
+          borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(30),
               bottomRight: Radius.circular(30)),
           boxShadow: [
@@ -16,21 +16,26 @@ class appbar {
               color: Colors.black.withOpacity(0.3),
               spreadRadius: 0.6,
               blurRadius: 20,
-              offset: Offset(
+              offset: const Offset(
                 14,
                 7,
               ),
             )
           ]),
-      child: Center(
-        child: Text(
-          label,
-          style: GoogleFonts.inter(
-              textStyle: TextStyle(
-                  fontSize: 23,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold)),
-        ),
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 60,
+          ),
+          Text(
+            label,
+            style: GoogleFonts.inter(
+                textStyle: const TextStyle(
+                    fontSize: 23,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold)),
+          ),
+        ],
       ),
     );
   }

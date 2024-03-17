@@ -12,18 +12,18 @@ class historyScreen extends StatelessWidget {
             return SizedBox(
               height: 84,
               child: Card(
-                color: Color.fromARGB(255, 238, 209, 243),
+                color: const Color.fromARGB(255, 238, 209, 243),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
                 elevation: 5,
-                child: ListTile(
+                child: const ListTile(
                   trailing: Text("heloo"),
                 ),
               ),
             );
           },
           separatorBuilder: (BuildContext context, int index) {
-            return SizedBox(
+            return const SizedBox(
               height: 20,
             );
           },

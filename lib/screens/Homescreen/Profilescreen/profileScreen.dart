@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:green/screens/Homescreen/Profilescreen/appbar/appbar.dart';
 
@@ -11,10 +10,10 @@ class profileScreen extends StatelessWidget {
     return Column(
       children: [
         appbar.appBar('profile'),
-        Row(
+        const Row(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 50, left: 20),
+              padding: EdgeInsets.only(top: 50, left: 20),
               child: CircleAvatar(
                 radius: 60,
                 child: Icon(Icons.person),
@@ -22,26 +21,26 @@ class profileScreen extends StatelessWidget {
             ),
           ],
         ),
-        formdetails(Icon(Icons.person_2), 8, 18, "Name:", "Nikil prakash"),
-        formdetails(Icon(Icons.phone), 8, 16, "Ph No  :", "9497484988"),
+        formdetails(const Icon(Icons.person_2), 8, 18, "Name:", "Nikil prakash"),
+        formdetails(const Icon(Icons.phone), 8, 16, "Ph No  :", "9497484988"),
         formdetails(
-            Icon(Icons.school), 8, 16, "Institution  :", "GPTC kalamassery"),
+            const Icon(Icons.school), 8, 16, "Institution  :", "GPTC kalamassery"),
         formdetails(
-          Icon(Icons.location_on),
+          const Icon(Icons.location_on),
           8,
           16,
           "Location :",
           "Skyline 13 b",
         ),
         formdetails(
-          Icon(Icons.email),
+          const Icon(Icons.email),
           8,
           16,
           "Email:",
           "abcd@gmail.com",
         ),
         formdetails(
-          Icon(Icons.card_membership_rounded),
+          const Icon(Icons.card_membership_rounded),
           8,
           16,
           "Adhar No:",
@@ -68,7 +67,7 @@ class profileScreen extends StatelessWidget {
               labeldetails,
               style: GoogleFonts.inter(
                   textStyle:
-                      TextStyle(fontSize: 17, fontWeight: FontWeight.w400)),
+                      const TextStyle(fontSize: 17, fontWeight: FontWeight.w400)),
             ),
           ),
         ],

@@ -21,7 +21,7 @@ class _stdLoginScreenState extends State<stdLoginScreen> {
         resizeToAvoidBottomInset: false,
         body: ClipRRect(
           child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/welcome.jpg'),
                   fit: BoxFit.cover,
@@ -34,10 +34,10 @@ class _stdLoginScreenState extends State<stdLoginScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Column(children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 100,
                       ),
-                      Row(
+                      const Row(
                         children: [
                           Text(
                             "Let's go \n",
@@ -48,7 +48,7 @@ class _stdLoginScreenState extends State<stdLoginScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 90,
                       ),
                       TextFormField(
@@ -58,21 +58,19 @@ class _stdLoginScreenState extends State<stdLoginScreen> {
                           });
                         },
                         onTapOutside: (event) {
-                          if (event != null) {
-                            setState(() {
-                              _blurvalue = 0;
-                            });
-                          }
-                        },
+                          setState(() {
+                            _blurvalue = 0;
+                          });
+                                                },
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Colors.black45,
                               width: 2,
                             ),
                             borderRadius: BorderRadius.circular(20.0),
                           ),
-                          prefixIcon: Icon(Icons.email),
+                          prefixIcon: const Icon(Icons.email),
                           labelText: 'Email or Phone No',
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(27.0),
@@ -80,7 +78,7 @@ class _stdLoginScreenState extends State<stdLoginScreen> {
                           hintStyle: TextStyle(color: Colors.grey[100]),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       TextFormField(
@@ -90,22 +88,20 @@ class _stdLoginScreenState extends State<stdLoginScreen> {
                           });
                         },
                         onTapOutside: (event) {
-                          if (event != null) {
-                            setState(() {
-                              _blurvalue = 0;
-                            });
-                          }
-                        },
+                          setState(() {
+                            _blurvalue = 0;
+                          });
+                                                },
                         obscureText: _obscuretext,
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               width: 2,
                               color: Colors.black45,
                             ),
                             borderRadius: BorderRadius.circular(27.0),
                           ),
-                          prefixIcon: Icon(Icons.password),
+                          prefixIcon: const Icon(Icons.password),
                           suffixIcon: IconButton(
                             icon: Icon(
                               _passwordVisible
@@ -127,14 +123,14 @@ class _stdLoginScreenState extends State<stdLoginScreen> {
                         ),
                       ),
 
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
 
                       //text(Dont have an account)
                       Row(
                         children: [
-                          Text(
+                          const Text(
                             "Don't have an account?",
                             style: TextStyle(
                               fontSize: 15,
@@ -142,7 +138,7 @@ class _stdLoginScreenState extends State<stdLoginScreen> {
                           ),
                           TextButton(
                               onPressed: () => print('f'),
-                              child: Text(
+                              child: const Text(
                                 'Sign up',
                                 style: TextStyle(
                                   color: Color.fromARGB(255, 50, 104, 196),
@@ -157,20 +153,20 @@ class _stdLoginScreenState extends State<stdLoginScreen> {
                       ElevatedButton(
                           onPressed: () =>
                               Navigator.of(context).pushNamed('stdHomeScreen'),
-                          child: Text(
+                          style: ElevatedButton.styleFrom(
+                            minimumSize:
+                                const Size(340.0, 60.0), // set the desired size heret
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  11.0), // Adjust the border radius here
+                            ),
+                          ),
+                          child: const Text(
                             'Log In',
                             style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                                 color: Color.fromARGB(255, 139, 179, 228)),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            minimumSize:
-                                Size(340.0, 60.0), // set the desired size heret
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  11.0), // Adjust the border radius here
-                            ),
                           )),
                     ]),
                   ),

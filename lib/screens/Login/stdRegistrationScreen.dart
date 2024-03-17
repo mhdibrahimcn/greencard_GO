@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class stdRegistrationScreen extends StatelessWidget {
+  const stdRegistrationScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/welcome.jpg'),
             fit: BoxFit.cover,
@@ -16,10 +18,10 @@ class stdRegistrationScreen extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 150,
               ),
-              Row(
+              const Row(
                 children: [
                   Text(
                     'Welcome',
@@ -31,7 +33,7 @@ class stdRegistrationScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              Row(
+              const Row(
                 children: [
                   SizedBox(
                     width: 10,
@@ -39,52 +41,52 @@ class stdRegistrationScreen extends StatelessWidget {
                   Text(
                     'GreenCard GO',
                     style: TextStyle(
-                      color: const Color.fromARGB(255, 66, 63, 63),
+                      color: Color.fromARGB(255, 66, 63, 63),
                     ),
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 350,
               ),
               ElevatedButton(
                   onPressed: () =>
                       Navigator.of(context).pushNamed("SignUpScreen"),
-                  child: Text(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize:
+                        const Size(350.0, 60.0), // set the desired size heret
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                          11.0), // Adjust the border radius here
+                    ),
+                  ),
+                  child: const Text(
                     'Sign In',
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.black54),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    minimumSize:
-                        Size(350.0, 60.0), // set the desired size heret
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          11.0), // Adjust the border radius here
-                    ),
                   )),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               ElevatedButton(
                   onPressed: () =>
                       Navigator.of(context).pushNamed('stdLoginscreen'),
-                  child: Text(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize:
+                        const Size(350.0, 60.0), // set the desired size heret
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                          11.0), // Adjust the border radius here
+                    ),
+                  ),
+                  child: const Text(
                     'Log In',
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.black54),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    minimumSize:
-                        Size(350.0, 60.0), // set the desired size heret
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          11.0), // Adjust the border radius here
-                    ),
                   ))
             ],
           ),

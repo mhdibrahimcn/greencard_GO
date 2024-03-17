@@ -8,7 +8,7 @@ import 'package:green/screens/Homescreen/TicketScreen/remaningScreenInTicket.dar
 import 'package:green/screens/SystemNavbarConfig/Systemnavbarconfig.dart';
 
 class stdHomescreen extends StatelessWidget {
-  stdHomescreen({super.key});
+  const stdHomescreen({super.key});
 
   final pages = const [
     remaningScreenInTicket(),
@@ -18,14 +18,14 @@ class stdHomescreen extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    SystemNavbarconfig().SystemNavconfig(Color.fromRGBO(114, 192, 202, 1));
+    SystemNavbarconfig().SystemNavconfig(const Color.fromRGBO(114, 192, 202, 1));
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
       extendBody: true,
-      floatingActionButton: floatingActionInNav(),
+      floatingActionButton: const floatingActionInNav(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: bottomNavigation(),
+      bottomNavigationBar: const bottomNavigation(),
       body: ValueListenableBuilder(
         valueListenable: bottomNavigation.selectedIndex,
         builder: (BuildContext context, int newvalue, _) {

@@ -17,7 +17,7 @@ class travelUpDownStatusWidget extends StatelessWidget {
                 color: Colors.black.withOpacity(0.1),
                 spreadRadius: 0.2,
                 blurRadius: 50,
-                offset: Offset(
+                offset: const Offset(
                   -13,
                   0,
                 ),
@@ -27,19 +27,19 @@ class travelUpDownStatusWidget extends StatelessWidget {
             height: 80,
             child: LiquidLinearProgressIndicator(
                 value: 0.1, // Defaults to 0.5.
-                valueColor: AlwaysStoppedAnimation(
+                valueColor: const AlwaysStoppedAnimation(
                   Color.fromRGBO(114, 192, 202, 1),
                 ), // Defaults to the current Theme's accentColor.
                 backgroundColor: Colors
                     .white, // Defaults to the current Theme's backgroundColor.
-                borderColor: Color.fromRGBO(114, 192, 202, 1),
+                borderColor: const Color.fromRGBO(114, 192, 202, 1),
                 borderWidth: 3,
                 borderRadius: 30.0,
                 direction: Axis
                     .vertical, // The direction the liquid moves (Axis.vertical = bottom to top, Axis.horizontal = left to right). Defaults to Axis.horizontal.
-                center: Text('Down')),
+                center: const Text('Down')),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Container(
@@ -48,7 +48,7 @@ class travelUpDownStatusWidget extends StatelessWidget {
                 color: Colors.black.withOpacity(0.1),
                 spreadRadius: 0.6,
                 blurRadius: 20,
-                offset: Offset(
+                offset: const Offset(
                   14,
                   7,
                 ),
@@ -58,17 +58,17 @@ class travelUpDownStatusWidget extends StatelessWidget {
             height: 80,
             child: LiquidLinearProgressIndicator(
                 value: 0.9, // Defaults to 0.5.
-                valueColor: AlwaysStoppedAnimation(
+                valueColor: const AlwaysStoppedAnimation(
                   Color.fromRGBO(114, 192, 202, 1),
                 ), // Defaults to the current Theme's accentColor.
                 backgroundColor: Colors
                     .white, // Defaults to the current Theme's backgroundColor.
-                borderColor: Color.fromRGBO(114, 192, 202, 1),
+                borderColor: const Color.fromRGBO(114, 192, 202, 1),
                 borderWidth: 3.0,
                 borderRadius: 30.0,
                 direction: Axis
                     .vertical, // The direction the liquid moves (Axis.vertical = bottom to top, Axis.horizontal = left to right). Defaults to Axis.horizontal.
-                center: Text('UP')),
+                center: const Text('UP')),
           )
         ],
       ),

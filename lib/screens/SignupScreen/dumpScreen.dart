@@ -11,7 +11,7 @@ class dumpScreen extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: Container(
         width: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             gradient: LinearGradient(begin: Alignment.topCenter, colors: [
           Color.fromRGBO(114, 192, 202, 1),
           Color.fromRGBO(58, 225, 247, 1)
@@ -19,29 +19,29 @@ class dumpScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 60,
             ),
             Padding(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   FadeInUp(
-                      duration: Duration(milliseconds: 700),
-                      child: Text(
+                      duration: const Duration(milliseconds: 700),
+                      child: const Text(
                         "Login",
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 40,
                             fontWeight: FontWeight.bold),
                       )),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   FadeInUp(
-                      duration: Duration(milliseconds: 700),
-                      child: Text(
+                      duration: const Duration(milliseconds: 700),
+                      child: const Text(
                         "Welcome Back",
                         style: TextStyle(
                             color: Colors.white,
@@ -51,28 +51,28 @@ class dumpScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Expanded(
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(60),
                         topRight: Radius.circular(60))),
                 child: Padding(
-                  padding: EdgeInsets.all(30),
+                  padding: const EdgeInsets.all(30),
                   child: Column(
                     children: <Widget>[
-                      SizedBox(
+                      const SizedBox(
                         height: 90,
                       ),
                       FadeInUp(
-                          duration: Duration(milliseconds: 700),
+                          duration: const Duration(milliseconds: 700),
                           child: Container(
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
+                                boxShadow: const [
                                   BoxShadow(
                                       color: Color.fromRGBO(110, 182, 192, 1),
                                       blurRadius: 20,
@@ -81,12 +81,12 @@ class dumpScreen extends StatelessWidget {
                             child: Column(
                               children: <Widget>[
                                 Container(
-                                  padding: EdgeInsets.all(10),
+                                  padding: const EdgeInsets.all(10),
                                   decoration: BoxDecoration(
                                       border: Border(
                                           bottom: BorderSide(
                                               color: Colors.grey.shade200))),
-                                  child: TextField(
+                                  child: const TextField(
                                     decoration: InputDecoration(
                                         hintText: "Email or Phone number",
                                         hintStyle:
@@ -95,12 +95,12 @@ class dumpScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Container(
-                                  padding: EdgeInsets.all(10),
+                                  padding: const EdgeInsets.all(10),
                                   decoration: BoxDecoration(
                                       border: Border(
                                           bottom: BorderSide(
                                               color: Colors.grey.shade200))),
-                                  child: TextField(
+                                  child: const TextField(
                                     obscureText: true,
                                     decoration: InputDecoration(
                                         hintText: "Password",
@@ -112,20 +112,20 @@ class dumpScreen extends StatelessWidget {
                               ],
                             ),
                           )),
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                       FadeInUp(
-                          duration: Duration(milliseconds: 700),
-                          child: Text(
+                          duration: const Duration(milliseconds: 700),
+                          child: const Text(
                             "Forgot Password?",
                             style: TextStyle(color: Colors.grey),
                           )),
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                       FadeInUp(
-                          duration: Duration(milliseconds: 700),
+                          duration: const Duration(milliseconds: 700),
                           child: MaterialButton(
                             onPressed: () {},
                             height: 50,
@@ -136,7 +136,7 @@ class dumpScreen extends StatelessWidget {
                             ),
                             // decoration: BoxDecoration(
                             // ),
-                            child: Center(
+                            child: const Center(
                               child: Text(
                                 "Login",
                                 style: TextStyle(
@@ -145,7 +145,7 @@ class dumpScreen extends StatelessWidget {
                               ),
                             ),
                           )),
-                      SizedBox(
+                      const SizedBox(
                         height: 50,
                       ),
                     ],

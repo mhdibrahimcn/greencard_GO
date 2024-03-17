@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:green/screens/Homescreen/stdHomescreenLogin.dart';
 import 'package:green/screens/Login/stdLoginScreen.dart';
 import 'package:green/screens/Login/stdRegistrationScreen.dart';
+import 'package:green/screens/SignupScreen/DestinationinfoScreen.dart';
 import 'package:green/screens/SignupScreen/SignupScreen.dart';
 import 'package:green/screens/SignupScreen/phone_email_verify.dart';
 import 'package:green/screens/SystemNavbarConfig/Systemnavbarconfig.dart';
 
 void main(List<String> args) {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(Myapp());
+  runApp(const Myapp());
 }
 
 class Myapp extends StatelessWidget {
@@ -17,20 +17,23 @@ class Myapp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemNavbarconfig().SystemNavconfig(Color.fromARGB(116, 190, 239, 255));
+    SystemNavbarconfig()
+        .SystemNavconfig(const Color.fromARGB(116, 190, 239, 255));
     return MaterialApp(
       theme: ThemeData(
-        // ignore: deprecated_member_use
-        primaryColor: Color.fromRGBO(114, 192, 202, 1),
-      ),
+          primaryColor: const Color.fromRGBO(114, 192, 202, 1),
+          colorScheme: ColorScheme.light(
+            primary: Color.fromARGB(255, 97, 169, 179),
+          )),
       debugShowCheckedModeBanner: false,
-      home: stdRegistrationScreen(),
+      home: const stdRegistrationScreen(),
       routes: {
-        'stdRegistration': (context) => stdRegistrationScreen(),
-        'stdLoginscreen': (context) => stdLoginScreen(),
-        'stdHomeScreen': (context) => stdHomescreen(),
-        'SignUpScreen': (context) => signupScreen(),
-        "PhoneEmailVerifyScreen": (context) => phoneEmailVerifyScreen()
+        'stdRegistration': (context) => const stdRegistrationScreen(),
+        'stdLoginscreen': (context) => const stdLoginScreen(),
+        'stdHomeScreen': (context) => const stdHomescreen(),
+        'SignUpScreen': (context) => const signupScreen(),
+        "PhoneEmailVerifyScreen": (context) => const phoneEmailVerifyScreen(),
+        "DestinationinfoScreen": (context) => destinationInfoScreen()
       },
     );
   }

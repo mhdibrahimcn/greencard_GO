@@ -13,14 +13,14 @@ class dayProgressbarWidget extends StatelessWidget {
         padding: const EdgeInsets.all(30.0),
         child: Container(
           decoration: BoxDecoration(
-              color: Color.fromRGBO(114, 192, 202, 1),
+              color: const Color.fromRGBO(114, 192, 202, 1),
               borderRadius: BorderRadius.circular(30),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.5),
                   spreadRadius: 0.6,
                   blurRadius: 20,
-                  offset: Offset(
+                  offset: const Offset(
                     14,
                     7,
                   ),
@@ -45,7 +45,7 @@ class dayProgressbarWidget extends StatelessWidget {
                 Colors.white,
                 Colors.white,
               ],
-              backColor: Color.fromARGB(255, 135, 147, 151),
+              backColor: const Color.fromARGB(255, 135, 147, 151),
               onGetText: (double value) {
                 return Text(
                   '${value.toInt()}',

@@ -13,7 +13,7 @@ class floatingActionInNav extends StatelessWidget {
         height: 60,
         child: FloatingActionButton(
           hoverColor: Colors.blue,
-          backgroundColor: Color.fromARGB(255, 255, 255, 255),
+          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           onPressed: () {
             bottomSheet(context);
           },
@@ -34,19 +34,19 @@ class floatingActionInNav extends StatelessWidget {
           borderRadius: BorderRadius.circular(30),
           child: Container(
               decoration: BoxDecoration(
-                  color: Color.fromRGBO(79, 146, 155, 1),
+                  color: const Color.fromRGBO(79, 146, 155, 1),
                   borderRadius: BorderRadius.circular(30),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(1),
                       spreadRadius: 10,
                       blurRadius: 30,
-                      offset: Offset(0, 10),
+                      offset: const Offset(0, 10),
                     )
                   ]),
               height: 500,
               width: 370,
-              child: qrBottomSheetScreen()),
+              child: const qrBottomSheetScreen()),
         );
       },
     );

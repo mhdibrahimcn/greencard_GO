@@ -1,10 +1,10 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart';
 import 'package:green/constants/Mycolors.dart';
 import 'package:green/screens/Homescreen/Profilescreen/appbar/appbar.dart';
 import 'package:green/screens/SystemNavbarConfig/Systemnavbarconfig.dart';
+import 'package:lottie/lottie.dart';
 
 class signupScreen extends StatelessWidget {
   const signupScreen({super.key});
@@ -17,28 +17,30 @@ class signupScreen extends StatelessWidget {
         child: Column(
           children: [
             appbar.appBar("Create Account"),
-            SizedBox(
-              height: 60,
+            const SizedBox(
+              height: 20,
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Image(
-                  image: AssetImage("assets/students_image.jpg"),
-                  fit: BoxFit.contain),
+              padding: const EdgeInsets.all(4.0),
+              child: LottieBuilder.asset(
+                "assets/student.json",
+                width: 300,
+                height: 300,
+              ),
             ),
-            SizedBox(
-              height: 40,
+            const SizedBox(
+              height: 15,
             ),
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: TextFormField(
                 decoration: InputDecoration(
                     hintText: "Enter Full Name.....",
-                    hintStyle: TextStyle(color: Colors.white),
-                    label: Text(
+                    hintStyle: const TextStyle(color: Colors.white),
+                    label: const Text(
                       "Full Name",
                     ),
-                    prefixIcon: Icon(EvaIcons.person),
+                    prefixIcon: const Icon(EvaIcons.person),
                     filled: true,
                     fillColor: Mycolors.material_dark,
                     enabledBorder: OutlineInputBorder(
@@ -54,11 +56,11 @@ class signupScreen extends StatelessWidget {
               child: TextFormField(
                 decoration: InputDecoration(
                     hintText: "Enter Institution.....",
-                    hintStyle: TextStyle(color: Colors.white),
-                    label: Text(
+                    hintStyle: const TextStyle(color: Colors.white),
+                    label: const Text(
                       "Institution",
                     ),
-                    prefixIcon: Icon(Icons.school),
+                    prefixIcon: const Icon(Icons.school),
                     filled: true,
                     fillColor: Mycolors.material_dark,
                     enabledBorder: OutlineInputBorder(
@@ -69,8 +71,38 @@ class signupScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30))),
               ),
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    width: 120,
+                    child: TextFormField(
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [LengthLimitingTextInputFormatter(3)],
+                      decoration: InputDecoration(
+                          hintText: "Age",
+                          hintStyle: const TextStyle(color: Colors.white),
+                          label: const Text(
+                            "Age",
+                          ),
+                          prefixIcon: const Icon(Icons.school),
+                          filled: true,
+                          fillColor: Mycolors.material_dark,
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.circular(20)),
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.circular(20))),
+                    ),
+                  ),
+                ),
+              ],
+            ),
             Padding(
-              padding: const EdgeInsets.only(top: 25.0, right: 8),
+              padding: const EdgeInsets.only(top: 0.0, right: 8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -79,11 +111,12 @@ class signupScreen extends StatelessWidget {
                     height: 60,
                     decoration: BoxDecoration(
                         color: Mycolors.materialColor,
-                        borderRadius: BorderRadius.all(Radius.circular(14))),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(14))),
                     child: IconButton(
                         onPressed: () => Navigator.of(context)
                             .pushNamed('PhoneEmailVerifyScreen'),
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.navigate_next_rounded,
                           color: Colors.white,
                         )),

@@ -10,7 +10,7 @@ class remaningScreenInTicket extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      SizedBox(
+      const SizedBox(
         height: 40,
       ),
       Padding(
@@ -19,15 +19,15 @@ class remaningScreenInTicket extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             FadeInLeft(
-              duration: Duration(milliseconds: 700),
-              child: Text(
+              duration: const Duration(milliseconds: 700),
+              child: const Text(
                 'Hi User!',
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
             ),
             FadeInRight(
-              duration: Duration(milliseconds: 700),
-              child: CircleAvatar(
+              duration: const Duration(milliseconds: 700),
+              child: const CircleAvatar(
                 radius: 25,
                 child: Icon(Icons.person),
               ),
@@ -35,21 +35,21 @@ class remaningScreenInTicket extends StatelessWidget {
           ],
         ),
       ),
-      SizedBox(
+      const SizedBox(
         height: 40,
       ),
-      FadeInLeft(duration: Duration(milliseconds: 700), child: ticketWidget()),
-      SizedBox(
+      FadeInLeft(duration: const Duration(milliseconds: 700), child: const ticketWidget()),
+      const SizedBox(
         height: 20,
       ),
       Row(
         children: [
           FadeInUp(
-              duration: Duration(milliseconds: 700),
+              duration: const Duration(milliseconds: 700),
               child: dayProgressbarWidget()),
           FadeInUp(
-              duration: Duration(milliseconds: 700),
-              child: travelUpDownStatusWidget()),
+              duration: const Duration(milliseconds: 700),
+              child: const travelUpDownStatusWidget()),
         ],
       ),
     ]);
