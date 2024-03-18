@@ -87,7 +87,7 @@ class signupScreen extends StatelessWidget {
                           label: const Text(
                             "Age",
                           ),
-                          prefixIcon: const Icon(Icons.school),
+                          prefixIcon: const Icon(Icons.person),
                           filled: true,
                           fillColor: Mycolors.material_dark,
                           enabledBorder: OutlineInputBorder(

@@ -25,7 +25,7 @@ class appbar {
       child: Column(
         children: [
           const SizedBox(
-            height: 60,
+            height: 70,
           ),
           Text(
             label,

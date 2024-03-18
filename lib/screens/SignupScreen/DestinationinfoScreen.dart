@@ -11,6 +11,7 @@ class destinationInfoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -120,7 +121,7 @@ class destinationInfoScreen extends StatelessWidget {
                           _monthSelectionNotifier.setSelectedMonth(value!);
                         },
                       ),
-                      Text('2 Months'),
+                      Text('3 Months'),
                     ],
                   ),
                 );
@@ -140,7 +141,7 @@ class destinationInfoScreen extends StatelessWidget {
                             const BorderRadius.all(Radius.circular(14))),
                     child: IconButton(
                         onPressed: () => Navigator.of(context)
-                            .pushNamed('PhoneEmailVerifyScreen'),
+                            .pushNamed('idVerificationScreen'),
                         icon: const Icon(
                           Icons.navigate_next_rounded,
                           color: Colors.white,

@@ -9,6 +9,7 @@ class dumpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      extendBody: true,
       body: Container(
         width: double.infinity,
         decoration: const BoxDecoration(

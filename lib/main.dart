@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:green/screens/Homescreen/stdHomescreenLogin.dart';
 import 'package:green/screens/Login/stdLoginScreen.dart';
 import 'package:green/screens/Login/stdRegistrationScreen.dart';
+import 'package:green/screens/SignupScreen/AddressVerficationScreen.dart';
 import 'package:green/screens/SignupScreen/DestinationinfoScreen.dart';
 import 'package:green/screens/SignupScreen/SignupScreen.dart';
+import 'package:green/screens/SignupScreen/idVerificationScreen.dart';
 import 'package:green/screens/SignupScreen/phone_email_verify.dart';
 import 'package:green/screens/SystemNavbarConfig/Systemnavbarconfig.dart';
 
@@ -33,7 +35,10 @@ class Myapp extends StatelessWidget {
         'stdHomeScreen': (context) => const stdHomescreen(),
         'SignUpScreen': (context) => const signupScreen(),
         "PhoneEmailVerifyScreen": (context) => const phoneEmailVerifyScreen(),
-        "DestinationinfoScreen": (context) => destinationInfoScreen()
+        "DestinationinfoScreen": (context) => destinationInfoScreen(),
+        "idVerificationScreen": (context) => const idVerificationScreen(),
+        "AddressVerficationScreen": (context) =>
+            const addressVerifficationScreen(),
       },
     );
   }
