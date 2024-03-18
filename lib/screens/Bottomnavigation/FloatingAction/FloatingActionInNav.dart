@@ -29,24 +29,28 @@ class floatingActionInNav extends StatelessWidget {
   static bottomSheet(BuildContext context) async {
     showBottomSheet(
       context: context,
+      backgroundColor:
+          Colors.transparent, // Set background color to transparent
       builder: (context1) {
         return ClipRRect(
           borderRadius: BorderRadius.circular(30),
           child: Container(
-              decoration: BoxDecoration(
-                  color: const Color.fromRGBO(79, 146, 155, 1),
-                  borderRadius: BorderRadius.circular(30),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(1),
-                      spreadRadius: 10,
-                      blurRadius: 30,
-                      offset: const Offset(0, 10),
-                    )
-                  ]),
-              height: 500,
-              width: 370,
-              child: const qrBottomSheetScreen()),
+            decoration: BoxDecoration(
+              color: const Color.fromRGBO(79, 146, 155, 1),
+              borderRadius: BorderRadius.circular(30),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(1),
+                  spreadRadius: 10,
+                  blurRadius: 30,
+                  offset: const Offset(0, 10),
+                )
+              ],
+            ),
+            height: 500,
+            width: 370,
+            child: const qrBottomSheetScreen(),
+          ),
         );
       },
     );

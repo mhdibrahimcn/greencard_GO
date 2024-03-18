@@ -18,7 +18,8 @@ class stdHomescreen extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    SystemNavbarconfig().SystemNavconfig(const Color.fromRGBO(114, 192, 202, 1));
+    SystemNavbarconfig()
+        .SystemNavconfig(const Color.fromRGBO(114, 192, 202, 1));
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
