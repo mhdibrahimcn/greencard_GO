@@ -1,8 +1,8 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:green/constants/Mycolors.dart';
 import 'package:green/screens/Homescreen/Profilescreen/appbar/appbar.dart';
+import 'package:green/screens/SignupScreen/widget/datepicker.dart';
 import 'package:green/screens/SystemNavbarConfig/Systemnavbarconfig.dart';
 import 'package:lottie/lottie.dart';
 
@@ -71,38 +71,9 @@ class signupScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30))),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    width: 120,
-                    child: TextFormField(
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [LengthLimitingTextInputFormatter(3)],
-                      decoration: InputDecoration(
-                          hintText: "Age",
-                          hintStyle: const TextStyle(color: Colors.white),
-                          label: const Text(
-                            "Age",
-                          ),
-                          prefixIcon: const Icon(Icons.person),
-                          filled: true,
-                          fillColor: Mycolors.material_dark,
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(20)),
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(20))),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            MyDatePicker(),
             Padding(
-              padding: const EdgeInsets.only(top: 0.0, right: 8),
+              padding: const EdgeInsets.only(top: 17.0, right: 8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [

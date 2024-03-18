@@ -1,11 +1,13 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:green/constants/Mycolors.dart';
 import 'package:green/screens/Homescreen/Profilescreen/appbar/appbar.dart';
 import 'package:lottie/lottie.dart';
 
-class phoneEmailVerifyScreen extends StatelessWidget {
-  const phoneEmailVerifyScreen({super.key});
+class passwordCreationScreen extends StatelessWidget {
+  const passwordCreationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,50 +15,33 @@ class phoneEmailVerifyScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            appbar.appBar("Contact Verification"),
+            appbar.appBar("Password"),
             const SizedBox(
-              height: 40,
+              height: 20,
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(4.0),
               child: LottieBuilder.asset(
-                "assets/email.json",
+                "assets/password.json",
                 width: 300,
                 height: 300,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: TextFormField(
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                    hintText: "Name of the Gaurdian",
-                    hintStyle: const TextStyle(color: Colors.white),
-                    label: const Text(
-                      "Gaurdian Name",
-                    ),
-                    prefixIcon: const Icon(EvaIcons.person),
-                    filled: true,
-                    fillColor: Mycolors.material_dark,
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(20)),
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(30))),
-              ),
+            const SizedBox(
+              height: 15,
             ),
             Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: const EdgeInsets.all(8.0),
               child: TextFormField(
-                keyboardType: TextInputType.emailAddress,
+                obscureText: true,
                 decoration: InputDecoration(
-                    hintText: "abdcd@gmail.com",
+                    hintText: "Enter Password",
                     hintStyle: const TextStyle(color: Colors.white),
                     label: const Text(
-                      "Email",
+                      "Password",
                     ),
-                    prefixIcon: const Icon(EvaIcons.email),
+                    suffixIcon: Icon(Icons.visibility),
+                    prefixIcon: const Icon(Icons.password),
                     filled: true,
                     fillColor: Mycolors.material_dark,
                     enabledBorder: OutlineInputBorder(
@@ -70,14 +55,14 @@ class phoneEmailVerifyScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
-                keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                    hintText: "Enter The Phone Number",
+                    hintText: "Confirm Password.....",
                     hintStyle: const TextStyle(color: Colors.white),
                     label: const Text(
-                      "Ph",
+                      "Confirm Password",
                     ),
-                    prefixIcon: const Icon(Icons.phone),
+                    suffixIcon: Icon(Icons.visibility),
+                    prefixIcon: const Icon(Icons.password),
                     filled: true,
                     fillColor: Mycolors.material_dark,
                     enabledBorder: OutlineInputBorder(
@@ -89,23 +74,27 @@ class phoneEmailVerifyScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 15.0, right: 8),
+              padding: const EdgeInsets.only(top: 10.0, right: 8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Container(
-                    width: 60,
+                    width: 160,
                     height: 60,
                     decoration: BoxDecoration(
                         color: Mycolors.materialColor,
                         borderRadius:
                             const BorderRadius.all(Radius.circular(14))),
-                    child: IconButton(
-                        onPressed: () => Navigator.of(context)
-                            .pushNamed('DestinationinfoScreen'),
-                        icon: const Icon(
-                          Icons.navigate_next_rounded,
-                          color: Colors.white,
+                    child: TextButton(
+                        onPressed: () =>
+                            Navigator.of(context).pushNamed('stdHomeScreen'),
+                        child: Text(
+                          'Create Account',
+                          style: GoogleFonts.inter(
+                              textStyle: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold)),
                         )),
                   )
                 ],

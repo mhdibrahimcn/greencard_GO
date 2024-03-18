@@ -38,7 +38,7 @@ class qrBottomSheetScreen extends StatelessWidget {
             padding: const EdgeInsets.all(12.0),
             child: Center(
               child: QrImageView(
-                data: '1234567890',
+                data: 'Azif',
                 version: QrVersions.auto,
                 size: 230.0,
                 // ignore: deprecated_member_use

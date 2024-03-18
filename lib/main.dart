@@ -4,6 +4,7 @@ import 'package:green/screens/Login/stdLoginScreen.dart';
 import 'package:green/screens/Login/stdRegistrationScreen.dart';
 import 'package:green/screens/SignupScreen/AddressVerficationScreen.dart';
 import 'package:green/screens/SignupScreen/DestinationinfoScreen.dart';
+import 'package:green/screens/SignupScreen/PasswordCreationScreen.dart';
 import 'package:green/screens/SignupScreen/SignupScreen.dart';
 import 'package:green/screens/SignupScreen/idVerificationScreen.dart';
 import 'package:green/screens/SignupScreen/phone_email_verify.dart';
@@ -39,6 +40,7 @@ class Myapp extends StatelessWidget {
         "idVerificationScreen": (context) => const idVerificationScreen(),
         "AddressVerficationScreen": (context) =>
             const addressVerifficationScreen(),
+        "PasswordCreationScreen": (context) => const passwordCreationScreen(),
       },
     );
   }

@@ -16,7 +16,7 @@ class idVerificationScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            appbar.appBar("Address"),
+            appbar.appBar("Documents"),
             const SizedBox(
               height: 30,
             ),
@@ -37,7 +37,7 @@ class idVerificationScreen extends StatelessWidget {
                     hintText: "xxxx  xxxx   xxxx",
                     hintStyle: const TextStyle(color: Colors.white),
                     label: const Text(
-                      "Adhar No",
+                      "Aadhar No",
                     ),
                     prefixIcon: const Icon(EvaIcons.creditCard),
                     filled: true,
