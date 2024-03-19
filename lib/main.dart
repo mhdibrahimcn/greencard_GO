@@ -9,9 +9,12 @@ import 'package:green/screens/SignupScreen/SignupScreen.dart';
 import 'package:green/screens/SignupScreen/idVerificationScreen.dart';
 import 'package:green/screens/SignupScreen/phone_email_verify.dart';
 import 'package:green/screens/SystemNavbarConfig/Systemnavbarconfig.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main(List<String> args) {
+void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+
   runApp(const Myapp());
 }
 
