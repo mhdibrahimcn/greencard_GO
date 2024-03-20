@@ -8,7 +8,7 @@ class MyDatePicker extends StatefulWidget {
 }
 
 class _MyDatePickerState extends State<MyDatePicker> {
-  TextEditingController _dateController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
   DateTime selectedDate = DateTime.now();
 
   Future<void> _selectDate(BuildContext context) async {
@@ -21,14 +21,14 @@ class _MyDatePickerState extends State<MyDatePicker> {
     if (picked != null && picked != selectedDate)
       setState(() {
         selectedDate = picked;
-        _dateController.text = picked.toString().split(' ')[0];
+        dateController.text = picked.toString().split(' ')[0];
       });
   }
 
   @override
   void initState() {
     super.initState();
-    _dateController.text = "Date Of Birth";
+    dateController.text = "Date Of Birth";
   }
 
   @override
@@ -36,7 +36,7 @@ class _MyDatePickerState extends State<MyDatePicker> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
-        controller: _dateController,
+        controller: dateController,
         readOnly: true,
         onTap: () => _selectDate(context),
         decoration: InputDecoration(
@@ -55,5 +55,9 @@ class _MyDatePickerState extends State<MyDatePicker> {
         ),
       ),
     );
+  }
+
+  String getSelectedDateText() {
+    return dateController.text;
   }
 }

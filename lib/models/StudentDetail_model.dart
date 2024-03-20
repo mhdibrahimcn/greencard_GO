@@ -22,7 +22,7 @@ class StudentsDetailModel {
   final String institution;
 
   @HiveField(3)
-  final DateTime dob;
+  final String dob;
 
   @HiveField(4)
   final String gurdianName;
@@ -31,38 +31,50 @@ class StudentsDetailModel {
   final String aadharNo;
 
   @HiveField(6)
-  final String startingDestination;
+  final String email;
 
   @HiveField(7)
-  final String endingDestination;
+  final int phoneNumber;
 
   @HiveField(8)
-  final periodtime period;
+  final String password;
 
   @HiveField(9)
-  final String deponame;
+  final String startingDestination;
 
   @HiveField(10)
-  final String distict;
+  final String endingDestination;
 
   @HiveField(11)
-  final String city;
+  final periodtime period;
 
   @HiveField(12)
+  final String deponame;
+
+  @HiveField(13)
+  final String distict;
+
+  @HiveField(14)
+  final String city;
+
+  @HiveField(15)
   final String pincode;
 
   StudentsDetailModel(
-      {required this.studentid,
-      required this.name,
-      required this.institution,
-      required this.dob,
-      required this.gurdianName,
-      required this.aadharNo,
-      required this.startingDestination,
-      required this.endingDestination,
-      required this.period,
-      required this.deponame,
-      required this.distict,
-      required this.city,
-      required this.pincode});
+      this.studentid,
+      this.name,
+      this.institution,
+      this.dob,
+      this.gurdianName,
+      this.aadharNo,
+      this.email,
+      this.phoneNumber,
+      this.password,
+      this.startingDestination,
+      this.endingDestination,
+      this.period,
+      this.deponame,
+      this.distict,
+      this.city,
+      this.pincode);
 }

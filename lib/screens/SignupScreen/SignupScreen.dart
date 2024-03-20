@@ -2,12 +2,15 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:green/constants/Mycolors.dart';
 import 'package:green/screens/Homescreen/Profilescreen/appbar/appbar.dart';
-import 'package:green/screens/SignupScreen/widget/datepicker.dart';
+import 'package:green/screens/SignupScreen/widget/MyDatePicker.dart';
 import 'package:green/screens/SystemNavbarConfig/Systemnavbarconfig.dart';
 import 'package:lottie/lottie.dart';
 
 class signupScreen extends StatelessWidget {
-  const signupScreen({super.key});
+  signupScreen({super.key});
+
+  final _namecontroller = TextEditingController();
+  final _institutioncontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +37,7 @@ class signupScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: TextFormField(
+                controller: _namecontroller,
                 decoration: InputDecoration(
                     hintText: "Enter Full Name.....",
                     hintStyle: const TextStyle(color: Colors.white),
@@ -54,6 +58,7 @@ class signupScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
+                controller: _institutioncontroller,
                 decoration: InputDecoration(
                     hintText: "Enter Institution.....",
                     hintStyle: const TextStyle(color: Colors.white),
@@ -99,5 +104,26 @@ class signupScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> addPersonalDetails() async {
+    final fullname = _namecontroller.text;
+    final institutionName = _institutioncontroller.text;
+  MyDatePicker datePicker = MyDatePicker(); // Create an instance of MyDatePicker
+
+    // Now you can access the getSelectedDateText function
+    String selectedDate = datePicker.getSelectedDateText();
+
+
+
+    if (fullname == null) {
+      return;
+    }
+       if (institutionName == null) {
+      return;
+    }
+    if () {
+      
+    }
   }
 }

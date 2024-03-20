@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:green/models/StudentDetail_model.dart';
 import 'package:green/screens/Homescreen/stdHomescreenLogin.dart';
 import 'package:green/screens/Login/stdLoginScreen.dart';
 import 'package:green/screens/Login/stdRegistrationScreen.dart';
@@ -14,7 +15,9 @@ import 'package:hive_flutter/hive_flutter.dart';
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-
+  if (!Hive.isAdapterRegistered(StudentsDetailModelAdapter().typeId)) {
+    Hive.registerAdapter(StudentsDetailModelAdapter());
+  }
   runApp(const Myapp());
 }
 
@@ -37,7 +40,7 @@ class Myapp extends StatelessWidget {
         'stdRegistration': (context) => const stdRegistrationScreen(),
         'stdLoginscreen': (context) => const stdLoginScreen(),
         'stdHomeScreen': (context) => const stdHomescreen(),
-        'SignUpScreen': (context) => const signupScreen(),
+        'SignUpScreen': (context) => signupScreen(),
         "PhoneEmailVerifyScreen": (context) => const phoneEmailVerifyScreen(),
         "DestinationinfoScreen": (context) => destinationInfoScreen(),
         "idVerificationScreen": (context) => const idVerificationScreen(),

@@ -17,26 +17,29 @@ class StudentsDetailModelAdapter extends TypeAdapter<StudentsDetailModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return StudentsDetailModel(
-      studentid: fields[0] as String,
-      name: fields[1] as String,
-      institution: fields[2] as String,
-      dob: fields[3] as DateTime,
-      gurdianName: fields[4] as String,
-      aadharNo: fields[5] as String,
-      startingDestination: fields[6] as String,
-      endingDestination: fields[7] as String,
-      period: fields[8] as periodtime,
-      deponame: fields[9] as String,
-      distict: fields[10] as String,
-      city: fields[11] as String,
-      pincode: fields[12] as String,
+      fields[0] as String,
+      fields[1] as String,
+      fields[2] as String,
+      fields[3] as dynamic,
+      fields[4] as String,
+      fields[5] as String,
+      fields[6] as String,
+      fields[7] as int,
+      fields[8] as String,
+      fields[9] as String,
+      fields[10] as String,
+      fields[11] as periodtime,
+      fields[12] as String,
+      fields[13] as String,
+      fields[14] as String,
+      fields[15] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, StudentsDetailModel obj) {
     writer
-      ..writeByte(13)
+      ..writeByte(16)
       ..writeByte(0)
       ..write(obj.studentid)
       ..writeByte(1)
@@ -50,18 +53,24 @@ class StudentsDetailModelAdapter extends TypeAdapter<StudentsDetailModel> {
       ..writeByte(5)
       ..write(obj.aadharNo)
       ..writeByte(6)
-      ..write(obj.startingDestination)
+      ..write(obj.email)
       ..writeByte(7)
-      ..write(obj.endingDestination)
+      ..write(obj.phoneNumber)
       ..writeByte(8)
-      ..write(obj.period)
+      ..write(obj.password)
       ..writeByte(9)
-      ..write(obj.deponame)
+      ..write(obj.startingDestination)
       ..writeByte(10)
-      ..write(obj.distict)
+      ..write(obj.endingDestination)
       ..writeByte(11)
-      ..write(obj.city)
+      ..write(obj.period)
       ..writeByte(12)
+      ..write(obj.deponame)
+      ..writeByte(13)
+      ..write(obj.distict)
+      ..writeByte(14)
+      ..write(obj.city)
+      ..writeByte(15)
       ..write(obj.pincode);
   }
 
