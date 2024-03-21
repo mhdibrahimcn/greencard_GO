@@ -2,10 +2,14 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:green/constants/Mycolors.dart';
 import 'package:green/screens/Homescreen/Profilescreen/appbar/appbar.dart';
+import 'package:green/screens/SignupScreen/studentDetailclass.dart';
 import 'package:lottie/lottie.dart';
 
 class phoneEmailVerifyScreen extends StatelessWidget {
-  const phoneEmailVerifyScreen({super.key});
+  phoneEmailVerifyScreen({super.key});
+  final gaurdinNameController = TextEditingController();
+  final emailController = TextEditingController();
+  final phoneNumberController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +32,7 @@ class phoneEmailVerifyScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: TextFormField(
+                controller: gaurdinNameController,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                     hintText: "Name of the Gaurdian",
@@ -49,6 +54,7 @@ class phoneEmailVerifyScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: TextFormField(
+                controller: emailController,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                     hintText: "abdcd@gmail.com",
@@ -70,6 +76,7 @@ class phoneEmailVerifyScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
+                controller: phoneNumberController,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                     hintText: "Enter The Phone Number",
@@ -101,8 +108,11 @@ class phoneEmailVerifyScreen extends StatelessWidget {
                         borderRadius:
                             const BorderRadius.all(Radius.circular(14))),
                     child: IconButton(
-                        onPressed: () => Navigator.of(context)
-                            .pushNamed('DestinationinfoScreen'),
+                        onPressed: () {
+                          addContactDetails();
+                          Navigator.of(context)
+                              .pushNamed('DestinationinfoScreen');
+                        },
                         icon: const Icon(
                           Icons.navigate_next_rounded,
                           color: Colors.white,
@@ -115,5 +125,26 @@ class phoneEmailVerifyScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> addContactDetails() async {
+    final gaurdianName = gaurdinNameController.text;
+    final email = emailController.text;
+    final phoneNostr = phoneNumberController.text;
+    if (gaurdianName == null) {
+      return;
+    }
+    if (phoneNostr == null) {
+      return;
+    }
+    if (email == null) {
+      return;
+    }
+    final phoneNo = int.tryParse(phoneNostr);
+
+    StudentDetail studentDetail = new StudentDetail();
+    studentDetail.gurdianName = gaurdianName;
+    studentDetail.email = email;
+    studentDetail.phoneNumber = phoneNo!;
   }
 }

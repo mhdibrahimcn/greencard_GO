@@ -22,7 +22,7 @@ class StudentsDetailModelAdapter extends TypeAdapter<StudentsDetailModel> {
       fields[2] as String,
       fields[3] as String,
       fields[4] as String,
-      fields[5] as String,
+      fields[5] as int,
       fields[6] as String,
       fields[7] as int,
       fields[8] as String,

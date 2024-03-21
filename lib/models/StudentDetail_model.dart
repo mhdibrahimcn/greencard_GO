@@ -28,7 +28,7 @@ class StudentsDetailModel {
   final String gurdianName;
 
   @HiveField(5)
-  final String aadharNo;
+  final int aadharNo;
 
   @HiveField(6)
   final String email;

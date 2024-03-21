@@ -4,11 +4,12 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:green/constants/Mycolors.dart';
 import 'package:green/screens/Homescreen/Profilescreen/appbar/appbar.dart';
+import 'package:green/screens/SignupScreen/studentDetailclass.dart';
 import 'package:lottie/lottie.dart';
 
 class idVerificationScreen extends StatelessWidget {
-  const idVerificationScreen({super.key});
-
+  idVerificationScreen({super.key});
+  final aadharIdContoller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,6 +32,7 @@ class idVerificationScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
+                controller: aadharIdContoller,
                 keyboardType: TextInputType.number,
                 inputFormatters: [LengthLimitingTextInputFormatter(12)],
                 decoration: InputDecoration(
@@ -77,5 +79,15 @@ class idVerificationScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> addIdDetails() async {
+    final aadharidstr = aadharIdContoller.text;
+    if (aadharidstr == null) {
+      return;
+    }
+    final aadharid = int.tryParse(aadharidstr);
+    StudentDetail studentDetail = new StudentDetail();
+    studentDetail.aadharNo = aadharid!;
   }
 }

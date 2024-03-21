@@ -7,7 +7,11 @@ import 'package:green/screens/Homescreen/Profilescreen/appbar/appbar.dart';
 import 'package:lottie/lottie.dart';
 
 class addressVerifficationScreen extends StatelessWidget {
-  const addressVerifficationScreen({super.key});
+  addressVerifficationScreen({super.key});
+  final depoNameContoller = TextEditingController();
+  final districtContoller = TextEditingController();
+  final cityContoller = TextEditingController();
+  final pincodedContoller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +36,7 @@ class addressVerifficationScreen extends StatelessWidget {
               padding:
                   const EdgeInsets.only(top: 0, right: 8, left: 8, bottom: 8),
               child: TextFormField(
+                controller: depoNameContoller,
                 decoration: InputDecoration(
                     hintText: "Enter Depo.....",
                     hintStyle: const TextStyle(color: Colors.white),
@@ -52,6 +57,7 @@ class addressVerifficationScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
+                controller: districtContoller,
                 decoration: InputDecoration(
                     hintText: "District.....",
                     hintStyle: const TextStyle(color: Colors.white),
@@ -72,6 +78,7 @@ class addressVerifficationScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
+                controller: cityContoller,
                 decoration: InputDecoration(
                     hintText: "City",
                     hintStyle: const TextStyle(color: Colors.white),
@@ -92,7 +99,8 @@ class addressVerifficationScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
-                inputFormatters: [LengthLimitingTextInputFormatter(10)],
+                controller: pincodedContoller,
+                inputFormatters: [LengthLimitingTextInputFormatter(6)],
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                     hintText: "Pincode",

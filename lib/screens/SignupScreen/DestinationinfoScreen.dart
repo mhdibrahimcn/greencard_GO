@@ -1,13 +1,21 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:green/constants/Mycolors.dart';
 import 'package:green/screens/Homescreen/Profilescreen/appbar/appbar.dart';
+import 'package:green/screens/SignupScreen/studentDetailclass.dart';
 import 'package:lottie/lottie.dart';
 
 class destinationInfoScreen extends StatelessWidget {
   destinationInfoScreen({super.key});
   final MonthSelectionNotifier _monthSelectionNotifier =
       MonthSelectionNotifier(1);
+
+  final startingDestinationController = TextEditingController();
+  final endingDestinationController = TextEditingController();
+  int monthSelect = 1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,6 +49,7 @@ class destinationInfoScreen extends StatelessWidget {
                   SizedBox(
                     width: 160,
                     child: TextFormField(
+                      controller: startingDestinationController,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                           hintText: "Starting",
@@ -68,6 +77,7 @@ class destinationInfoScreen extends StatelessWidget {
                   SizedBox(
                     width: 160,
                     child: TextFormField(
+                      controller: endingDestinationController,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                           hintText: "Ending",
@@ -111,6 +121,7 @@ class destinationInfoScreen extends StatelessWidget {
                         groupValue: selectedMonth,
                         onChanged: (int? value) {
                           _monthSelectionNotifier.setSelectedMonth(value!);
+                          monthSelect = value;
                         },
                       ),
                       Text('1 Month'),
@@ -119,6 +130,7 @@ class destinationInfoScreen extends StatelessWidget {
                         groupValue: selectedMonth,
                         onChanged: (int? value) {
                           _monthSelectionNotifier.setSelectedMonth(value!);
+                          monthSelect = value;
                         },
                       ),
                       Text('3 Months'),
@@ -140,8 +152,11 @@ class destinationInfoScreen extends StatelessWidget {
                         borderRadius:
                             const BorderRadius.all(Radius.circular(14))),
                     child: IconButton(
-                        onPressed: () => Navigator.of(context)
-                            .pushNamed('idVerificationScreen'),
+                        onPressed: () {
+                          addDestinationDetails();
+                          Navigator.of(context)
+                              .pushNamed('idVerificationScreen');
+                        },
                         icon: const Icon(
                           Icons.navigate_next_rounded,
                           color: Colors.white,
@@ -154,6 +169,24 @@ class destinationInfoScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> addDestinationDetails() async {
+    final StartingDestination = startingDestinationController.text;
+    final EndingDestination = startingDestinationController.text;
+    final month;
+    if (StartingDestination == null || EndingDestination == null) {
+      return;
+    }
+    if (monthSelect == 1) {
+      month = "1 Month";
+    } else {
+      month = "3 Months";
+    }
+    StudentDetail studentDetail = new StudentDetail();
+    studentDetail.startingDestination = StartingDestination;
+    studentDetail.endingDestination = EndingDestination;
+    studentDetail.period = month;
   }
 }
 

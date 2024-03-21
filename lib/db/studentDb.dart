@@ -8,6 +8,12 @@ abstract class studentDbFunctions {
 }
 
 class studentDb extends studentDbFunctions {
+  studentDb._internal();
+  static studentDb instance = studentDb._internal();
+  factory studentDb() {
+    return instance;
+  }
+
   @override
   Future<void> insertStudentDetails(StudentsDetailModel value) async {
     final student_db = await Hive.openBox(STUDENT_DB_NAME);

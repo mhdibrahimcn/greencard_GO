@@ -1,16 +1,36 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:green/constants/Mycolors.dart';
+import 'package:green/db/studentDb.dart';
+import 'package:green/models/StudentDetail_model.dart';
 import 'package:green/screens/Homescreen/Profilescreen/appbar/appbar.dart';
-import 'package:green/screens/SignupScreen/widget/MyDatePicker.dart';
+import 'package:green/screens/SignupScreen/studentDetailclass.dart';
+
 import 'package:green/screens/SystemNavbarConfig/Systemnavbarconfig.dart';
 import 'package:lottie/lottie.dart';
+import 'package:uuid/uuid.dart';
 
-class signupScreen extends StatelessWidget {
+class signupScreen extends StatefulWidget {
   signupScreen({super.key});
 
+  @override
+  State<signupScreen> createState() => _signupScreenState();
+}
+
+class _signupScreenState extends State<signupScreen> {
   final _namecontroller = TextEditingController();
+
   final _institutioncontroller = TextEditingController();
+
+  TextEditingController dateController = TextEditingController();
+
+  DateTime selectedDate = DateTime.now();
+
+  @override
+  void initState() {
+    super.initState();
+    dateController.text = "Date Of Birth";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +39,7 @@ class signupScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            appbar.appBar("Create Account"),
+            appbar.appBar("Personal details "),
             const SizedBox(
               height: 20,
             ),
@@ -76,7 +96,28 @@ class signupScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30))),
               ),
             ),
-            MyDatePicker(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                controller: dateController,
+                readOnly: true,
+                onTap: () => _selectDate(context),
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Mycolors.material_dark,
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(20)),
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(30)),
+                  prefixIcon: IconButton(
+                    onPressed: () => _selectDate(context),
+                    icon: Icon(Icons.date_range),
+                  ),
+                ),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 17.0, right: 8),
               child: Row(
@@ -90,8 +131,11 @@ class signupScreen extends StatelessWidget {
                         borderRadius:
                             const BorderRadius.all(Radius.circular(14))),
                     child: IconButton(
-                        onPressed: () => Navigator.of(context)
-                            .pushNamed('PhoneEmailVerifyScreen'),
+                        onPressed: () {
+                          addPersonalDetails();
+                          Navigator.of(context)
+                              .pushNamed('PhoneEmailVerifyScreen');
+                        },
                         icon: const Icon(
                           Icons.navigate_next_rounded,
                           color: Colors.white,
@@ -106,24 +150,39 @@ class signupScreen extends StatelessWidget {
     );
   }
 
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    );
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+        dateController.text = picked.toString().split(' ')[0];
+      });
+  }
+
   Future<void> addPersonalDetails() async {
     final fullname = _namecontroller.text;
     final institutionName = _institutioncontroller.text;
-  MyDatePicker datePicker = MyDatePicker(); // Create an instance of MyDatePicker
-
-    // Now you can access the getSelectedDateText function
-    String selectedDate = datePicker.getSelectedDateText();
-
-
-
+    final dob = dateController.text;
+    var uuid = Uuid();
+    String stdId = uuid.v4();
     if (fullname == null) {
       return;
     }
-       if (institutionName == null) {
+    if (institutionName == null) {
       return;
     }
-    if () {
-      
+    if (dob == null) {
+      return;
     }
+    StudentDetail studentDetail = new StudentDetail();
+    studentDetail.studentid = stdId;
+    studentDetail.name = fullname;
+    studentDetail.institution = institutionName;
+    studentDetail.dob = dob;
   }
 }
