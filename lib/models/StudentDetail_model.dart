@@ -7,13 +7,13 @@ class StudentsDetailModel {
   final String studentid;
 
   @HiveField(1)
-  final String? name;
+  final String name;
 
   @HiveField(2)
-  final String? institution;
+  final String institution;
 
   @HiveField(3)
-  final String? dob;
+  final String dob;
 
   @HiveField(4)
   final String gurdianName;
@@ -51,6 +51,12 @@ class StudentsDetailModel {
   @HiveField(15)
   final int pincode;
 
+  @HiveField(16)
+  final String ticketStartingDate;
+
+  @HiveField(17)
+  final String ticketEndingDate;
+
   StudentsDetailModel(
       this.studentid,
       this.name,
@@ -67,5 +73,7 @@ class StudentsDetailModel {
       this.deponame,
       this.distict,
       this.city,
-      this.pincode);
+      this.pincode,
+      this.ticketStartingDate,
+      this.ticketEndingDate);
 }

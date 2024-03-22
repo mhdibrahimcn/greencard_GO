@@ -18,9 +18,9 @@ class StudentsDetailModelAdapter extends TypeAdapter<StudentsDetailModel> {
     };
     return StudentsDetailModel(
       fields[0] as String,
-      fields[1] as String?,
-      fields[2] as String?,
-      fields[3] as String?,
+      fields[1] as String,
+      fields[2] as String,
+      fields[3] as String,
       fields[4] as String,
       fields[5] as int,
       fields[6] as String,
@@ -33,13 +33,15 @@ class StudentsDetailModelAdapter extends TypeAdapter<StudentsDetailModel> {
       fields[13] as String,
       fields[14] as String,
       fields[15] as int,
+      fields[16] as String,
+      fields[17] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, StudentsDetailModel obj) {
     writer
-      ..writeByte(16)
+      ..writeByte(18)
       ..writeByte(0)
       ..write(obj.studentid)
       ..writeByte(1)
@@ -71,7 +73,11 @@ class StudentsDetailModelAdapter extends TypeAdapter<StudentsDetailModel> {
       ..writeByte(14)
       ..write(obj.city)
       ..writeByte(15)
-      ..write(obj.pincode);
+      ..write(obj.pincode)
+      ..writeByte(16)
+      ..write(obj.ticketStartingDate)
+      ..writeByte(17)
+      ..write(obj.ticketEndingDate);
   }
 
   @override

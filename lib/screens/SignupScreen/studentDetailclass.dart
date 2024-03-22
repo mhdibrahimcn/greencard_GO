@@ -15,6 +15,8 @@ class StudentDetail {
   late String distict;
   late String city;
   late int pincode;
+  late String ticketStartingDate;
+  late String ticketEndingDate;
 
   StudentDetail._internal();
   static StudentDetail instance = StudentDetail._internal();
@@ -39,5 +41,7 @@ class StudentDetail {
     distict = detail.distict;
     city = detail.city;
     pincode = detail.pincode;
+    ticketStartingDate = detail.ticketStartingDate;
+    ticketEndingDate = detail.ticketEndingDate;
   }
 }

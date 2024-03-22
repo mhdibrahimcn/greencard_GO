@@ -24,6 +24,7 @@ class studentDb extends studentDbFunctions {
   @override
   Future<List<StudentsDetailModel>> getStudentDetails() async {
     final student_db = await Hive.openBox<StudentsDetailModel>(STUDENT_DB_NAME);
+
     return student_db.values.toList();
   }
 }

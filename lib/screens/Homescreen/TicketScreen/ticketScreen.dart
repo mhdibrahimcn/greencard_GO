@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:green/db/studentDb.dart';
 import 'package:green/models/StudentDetail_model.dart';
 import 'package:green/screens/Bottomnavigation/FloatingAction/FloatingActionInNav.dart';
-import 'package:hive/hive.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class Ticketscreen extends StatelessWidget {
@@ -135,7 +134,7 @@ class Ticketscreen extends StatelessWidget {
                         height: 12,
                       ),
                       Text(
-                        '26 th january',
+                        student.ticketStartingDate,
                         style: GoogleFonts.inter(
                           textStyle: const TextStyle(
                             fontSize: 17,
@@ -153,7 +152,7 @@ class Ticketscreen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '02 th Feb',
+                        student.ticketEndingDate,
                         style: GoogleFonts.inter(
                           textStyle: const TextStyle(
                             fontSize: 17,
@@ -169,7 +168,7 @@ class Ticketscreen extends StatelessWidget {
                         onPressed: () =>
                             floatingActionInNav.bottomSheet(context),
                         child: QrImageView(
-                          data: '1234567890',
+                          data: student.studentid,
                           version: QrVersions.auto,
                           size: 70.0,
                           eyeStyle: const QrEyeStyle(

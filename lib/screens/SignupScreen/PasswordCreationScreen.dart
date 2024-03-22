@@ -8,6 +8,7 @@ import 'package:green/models/StudentDetail_model.dart';
 import 'package:green/screens/Homescreen/Profilescreen/appbar/appbar.dart';
 import 'package:green/screens/SignupScreen/SignupScreen.dart';
 import 'package:green/screens/SignupScreen/studentDetailclass.dart';
+import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 
 final _formkey = GlobalKey<FormState>();
@@ -134,6 +135,7 @@ class passwordCreationScreen extends StatelessWidget {
                           onPressed: () {
                             if (_formkey.currentState!.validate()) {
                               Setpassword();
+
                               Navigator.of(context).pushNamed('stdHomeScreen');
                             }
                           },
@@ -158,9 +160,20 @@ class passwordCreationScreen extends StatelessWidget {
 
   Future<void> Setpassword() async {
     final password = passwordController.text;
-
+    DateTime date = DateTime.now();
+    final ticketStartingDate = formatDate(date);
+    DateTime true_date;
     StudentDetail studentDetail = new StudentDetail();
+    if (studentDetail.period == "1 Month") {
+      true_date = date.add(Duration(days: 30));
+    } else {
+      true_date = date.add(Duration(days: 90));
+    }
+    final ticketEndingDate = formatDate(true_date);
     studentDetail.password = password;
+    studentDetail.ticketStartingDate = ticketStartingDate;
+    studentDetail.ticketEndingDate = ticketEndingDate;
+
     final StudentDetailmodel = StudentsDetailModel(
         studentDetail.studentid,
         studentDetail.name,
@@ -177,7 +190,35 @@ class passwordCreationScreen extends StatelessWidget {
         studentDetail.deponame,
         studentDetail.distict,
         studentDetail.city,
-        studentDetail.pincode);
+        studentDetail.pincode,
+        studentDetail.ticketStartingDate,
+        studentDetail.ticketEndingDate);
     studentDb.instance.insertStudentDetails(StudentDetailmodel);
+    print(StudentDetailmodel);
+  }
+
+  String _getDaySuffix(int day) {
+    if (day >= 11 && day <= 13) {
+      return 'th';
+    }
+    switch (day % 10) {
+      case 1:
+        return 'st';
+      case 2:
+        return 'nd';
+      case 3:
+        return 'rd';
+      default:
+        return 'th';
+    }
+  }
+
+  String formatDate(DateTime date) {
+    String formattedDate = DateFormat('dd MMMM yyyy').format(date);
+    String daySuffix = _getDaySuffix(date.day);
+    return formattedDate.replaceFirstMapped(
+      RegExp(r'(\d+)'),
+      (match) => "${match.group(1)}$daySuffix",
+    );
   }
 }
