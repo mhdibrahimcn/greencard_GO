@@ -1,28 +1,19 @@
 import 'package:hive_flutter/hive_flutter.dart';
 part 'StudentDetail_model.g.dart';
 
-@HiveType(typeId: 2)
-enum periodtime {
-  @HiveField(0)
-  onemonth,
-
-  @HiveField(1)
-  threemonths,
-}
-
 @HiveType(typeId: 1)
 class StudentsDetailModel {
   @HiveField(0)
   final String studentid;
 
   @HiveField(1)
-  final String name;
+  final String? name;
 
   @HiveField(2)
-  final String institution;
+  final String? institution;
 
   @HiveField(3)
-  final String dob;
+  final String? dob;
 
   @HiveField(4)
   final String gurdianName;
@@ -46,7 +37,7 @@ class StudentsDetailModel {
   final String endingDestination;
 
   @HiveField(11)
-  final periodtime period;
+  final String period;
 
   @HiveField(12)
   final String deponame;
@@ -58,7 +49,7 @@ class StudentsDetailModel {
   final String city;
 
   @HiveField(15)
-  final String pincode;
+  final int pincode;
 
   StudentsDetailModel(
       this.studentid,

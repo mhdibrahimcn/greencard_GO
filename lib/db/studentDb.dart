@@ -5,6 +5,7 @@ const STUDENT_DB_NAME = "student-database";
 
 abstract class studentDbFunctions {
   Future<void> insertStudentDetails(StudentsDetailModel value);
+  Future<List<StudentsDetailModel>> getStudentDetails();
 }
 
 class studentDb extends studentDbFunctions {
@@ -18,5 +19,11 @@ class studentDb extends studentDbFunctions {
   Future<void> insertStudentDetails(StudentsDetailModel value) async {
     final student_db = await Hive.openBox(STUDENT_DB_NAME);
     student_db.put(value.studentid, value);
+  }
+
+  @override
+  Future<List<StudentsDetailModel>> getStudentDetails() async {
+    final student_db = await Hive.openBox<StudentsDetailModel>(STUDENT_DB_NAME);
+    return student_db.values.toList();
   }
 }

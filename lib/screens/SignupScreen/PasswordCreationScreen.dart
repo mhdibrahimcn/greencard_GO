@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:green/constants/Mycolors.dart';
+import 'package:green/db/studentDb.dart';
+import 'package:green/models/StudentDetail_model.dart';
 import 'package:green/screens/Homescreen/Profilescreen/appbar/appbar.dart';
 import 'package:green/screens/SignupScreen/SignupScreen.dart';
 import 'package:green/screens/SignupScreen/studentDetailclass.dart';
@@ -159,5 +161,23 @@ class passwordCreationScreen extends StatelessWidget {
 
     StudentDetail studentDetail = new StudentDetail();
     studentDetail.password = password;
+    final StudentDetailmodel = StudentsDetailModel(
+        studentDetail.studentid,
+        studentDetail.name,
+        studentDetail.institution,
+        studentDetail.dob,
+        studentDetail.gurdianName,
+        studentDetail.aadharNo,
+        studentDetail.email,
+        studentDetail.phoneNumber,
+        studentDetail.password,
+        studentDetail.startingDestination,
+        studentDetail.endingDestination,
+        studentDetail.period,
+        studentDetail.deponame,
+        studentDetail.distict,
+        studentDetail.city,
+        studentDetail.pincode);
+    studentDb.instance.insertStudentDetails(StudentDetailmodel);
   }
 }

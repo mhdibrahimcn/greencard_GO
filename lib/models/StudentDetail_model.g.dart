@@ -18,9 +18,9 @@ class StudentsDetailModelAdapter extends TypeAdapter<StudentsDetailModel> {
     };
     return StudentsDetailModel(
       fields[0] as String,
-      fields[1] as String,
-      fields[2] as String,
-      fields[3] as String,
+      fields[1] as String?,
+      fields[2] as String?,
+      fields[3] as String?,
       fields[4] as String,
       fields[5] as int,
       fields[6] as String,
@@ -28,11 +28,11 @@ class StudentsDetailModelAdapter extends TypeAdapter<StudentsDetailModel> {
       fields[8] as String,
       fields[9] as String,
       fields[10] as String,
-      fields[11] as periodtime,
+      fields[11] as String,
       fields[12] as String,
       fields[13] as String,
       fields[14] as String,
-      fields[15] as String,
+      fields[15] as int,
     );
   }
 
@@ -81,45 +81,6 @@ class StudentsDetailModelAdapter extends TypeAdapter<StudentsDetailModel> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is StudentsDetailModelAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
-}
-
-class periodtimeAdapter extends TypeAdapter<periodtime> {
-  @override
-  final int typeId = 2;
-
-  @override
-  periodtime read(BinaryReader reader) {
-    switch (reader.readByte()) {
-      case 0:
-        return periodtime.onemonth;
-      case 1:
-        return periodtime.threemonths;
-      default:
-        return periodtime.onemonth;
-    }
-  }
-
-  @override
-  void write(BinaryWriter writer, periodtime obj) {
-    switch (obj) {
-      case periodtime.onemonth:
-        writer.writeByte(0);
-        break;
-      case periodtime.threemonths:
-        writer.writeByte(1);
-        break;
-    }
-  }
-
-  @override
-  int get hashCode => typeId.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is periodtimeAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
