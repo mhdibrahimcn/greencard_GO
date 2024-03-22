@@ -10,6 +10,8 @@ import 'package:green/screens/SystemNavbarConfig/Systemnavbarconfig.dart';
 import 'package:lottie/lottie.dart';
 import 'package:uuid/uuid.dart';
 
+final _formkey = GlobalKey<FormState>();
+
 class signupScreen extends StatefulWidget {
   signupScreen({super.key});
 
@@ -37,34 +39,83 @@ class _signupScreenState extends State<signupScreen> {
     SystemNavbarconfig().SystemNavconfig(Mycolors.materialColor);
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            appbar.appBar("Personal details "),
-            const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: LottieBuilder.asset(
-                "assets/student.json",
-                width: 300,
-                height: 300,
+        child: Form(
+          key: _formkey,
+          child: Column(
+            children: [
+              appbar.appBar("Personal details "),
+              const SizedBox(
+                height: 20,
               ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: TextFormField(
-                controller: _namecontroller,
-                decoration: InputDecoration(
-                    hintText: "Enter Full Name.....",
-                    hintStyle: const TextStyle(color: Colors.white),
-                    label: const Text(
-                      "Full Name",
-                    ),
-                    prefixIcon: const Icon(EvaIcons.person),
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: LottieBuilder.asset(
+                  "assets/student.json",
+                  width: 300,
+                  height: 300,
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: TextFormField(
+                  controller: _namecontroller,
+                  validator: (value) =>
+                      value!.isEmpty ? "please enter Full Name" : null,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  decoration: InputDecoration(
+                      hintText: "Enter Full Name.....",
+                      hintStyle: const TextStyle(color: Colors.white),
+                      label: const Text(
+                        "Full Name",
+                      ),
+                      prefixIcon: const Icon(EvaIcons.person),
+                      filled: true,
+                      fillColor: Mycolors.material_dark,
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(20)),
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(30))),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  controller: _institutioncontroller,
+                  validator: (value) =>
+                      value!.isEmpty ? "please enter the Institurion" : null,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  decoration: InputDecoration(
+                      hintText: "Enter Institution.....",
+                      hintStyle: const TextStyle(color: Colors.white),
+                      label: const Text(
+                        "Institution",
+                      ),
+                      prefixIcon: const Icon(Icons.school),
+                      filled: true,
+                      fillColor: Mycolors.material_dark,
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(20)),
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(30))),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  controller: dateController,
+                  readOnly: true,
+                  validator: (value) =>
+                      value!.isEmpty ? "please Select the Date" : null,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  onTap: () => _selectDate(context),
+                  decoration: InputDecoration(
                     filled: true,
                     fillColor: Mycolors.material_dark,
                     enabledBorder: OutlineInputBorder(
@@ -72,79 +123,45 @@ class _signupScreenState extends State<signupScreen> {
                         borderRadius: BorderRadius.circular(20)),
                     border: OutlineInputBorder(
                         borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(30))),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: _institutioncontroller,
-                decoration: InputDecoration(
-                    hintText: "Enter Institution.....",
-                    hintStyle: const TextStyle(color: Colors.white),
-                    label: const Text(
-                      "Institution",
+                        borderRadius: BorderRadius.circular(30)),
+                    prefixIcon: IconButton(
+                      onPressed: () => _selectDate(context),
+                      icon: Icon(Icons.date_range),
                     ),
-                    prefixIcon: const Icon(Icons.school),
-                    filled: true,
-                    fillColor: Mycolors.material_dark,
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(20)),
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(30))),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: dateController,
-                readOnly: true,
-                onTap: () => _selectDate(context),
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Mycolors.material_dark,
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(20)),
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(30)),
-                  prefixIcon: IconButton(
-                    onPressed: () => _selectDate(context),
-                    icon: Icon(Icons.date_range),
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 17.0, right: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Container(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                        color: Mycolors.materialColor,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(14))),
-                    child: IconButton(
-                        onPressed: () {
-                          addPersonalDetails();
-                          Navigator.of(context)
-                              .pushNamed('PhoneEmailVerifyScreen');
-                        },
-                        icon: const Icon(
-                          Icons.navigate_next_rounded,
-                          color: Colors.white,
-                        )),
-                  )
-                ],
-              ),
-            )
-          ],
+              Padding(
+                padding: const EdgeInsets.only(top: 17.0, right: 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                          color: Mycolors.materialColor,
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(14))),
+                      child: IconButton(
+                          onPressed: () {
+                            if (_formkey.currentState!.validate()) {
+                              addPersonalDetails();
+
+                              Navigator.of(context)
+                                  .pushNamed('PhoneEmailVerifyScreen');
+                            }
+                          },
+                          icon: const Icon(
+                            Icons.navigate_next_rounded,
+                            color: Colors.white,
+                          )),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -170,15 +187,6 @@ class _signupScreenState extends State<signupScreen> {
     final dob = dateController.text;
     var uuid = Uuid();
     String stdId = uuid.v4();
-    if (fullname == null) {
-      return;
-    }
-    if (institutionName == null) {
-      return;
-    }
-    if (dob == null) {
-      return;
-    }
     StudentDetail studentDetail = new StudentDetail();
     studentDetail.studentid = stdId;
     studentDetail.name = fullname;

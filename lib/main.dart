@@ -43,10 +43,9 @@ class Myapp extends StatelessWidget {
         'SignUpScreen': (context) => signupScreen(),
         "PhoneEmailVerifyScreen": (context) => phoneEmailVerifyScreen(),
         "DestinationinfoScreen": (context) => destinationInfoScreen(),
-        "idVerificationScreen": (context) => const idVerificationScreen(),
-        "AddressVerficationScreen": (context) =>
-            const addressVerifficationScreen(),
-        "PasswordCreationScreen": (context) => const passwordCreationScreen(),
+        "idVerificationScreen": (context) => idVerificationScreen(),
+        "AddressVerficationScreen": (context) => addressVerifficationScreen(),
+        "PasswordCreationScreen": (context) => passwordCreationScreen(),
       },
     );
   }
