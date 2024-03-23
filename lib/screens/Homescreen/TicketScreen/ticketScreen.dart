@@ -28,9 +28,9 @@ class Ticketscreen extends StatelessWidget {
             width: 330,
             height: 400,
             child: Padding(
-              padding: const EdgeInsets.only(top: 10, left: 20, bottom: 10),
+              padding: const EdgeInsets.only(top: 10, bottom: 10, right: 10),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -144,7 +144,7 @@ class Ticketscreen extends StatelessWidget {
                         ),
                       ),
                       ...List.generate(
-                        2,
+                        1,
                         (index) => const Icon(
                           Icons.arrow_drop_down_circle_sharp,
                           size: 20,
@@ -162,7 +162,7 @@ class Ticketscreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(
-                        height: 6,
+                        height: 26,
                       ),
                       TextButton(
                         onPressed: () =>

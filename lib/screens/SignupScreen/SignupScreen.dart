@@ -185,12 +185,25 @@ class _signupScreenState extends State<signupScreen> {
     final fullname = _namecontroller.text;
     final institutionName = _institutioncontroller.text;
     final dob = dateController.text;
-    var uuid = Uuid();
-    String stdId = uuid.v4();
+    String stdId = generateCustomUUID();
     StudentDetail studentDetail = new StudentDetail();
     studentDetail.studentid = stdId;
     studentDetail.name = fullname;
     studentDetail.institution = institutionName;
     studentDetail.dob = dob;
   }
+}
+
+String generateCustomUUID() {
+  var uuid = Uuid();
+  // Generate a random UUID
+  String randomUUID = uuid.v4();
+
+  // Extract the last 5 digits from the UUID
+  String lastFiveDigits = randomUUID.substring(randomUUID.length - 5);
+
+  // Concatenate "40" with the last 5 digits to form the custom UUID
+  String customUUID = "40" + lastFiveDigits;
+
+  return customUUID;
 }

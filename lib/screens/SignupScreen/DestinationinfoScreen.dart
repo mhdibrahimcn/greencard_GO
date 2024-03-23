@@ -187,7 +187,7 @@ class destinationInfoScreen extends StatelessWidget {
 
   Future<void> addDestinationDetails() async {
     final StartingDestination = startingDestinationController.text;
-    final EndingDestination = startingDestinationController.text;
+    final EndingDestination = endingDestinationController.text;
     final month;
     if (monthSelect == 1) {
       month = "1 Month";

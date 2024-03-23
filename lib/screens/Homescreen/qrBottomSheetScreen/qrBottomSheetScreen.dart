@@ -88,7 +88,7 @@ class qrBottomSheetScreen extends StatelessWidget {
                                   fontWeight: FontWeight.w500)),
                         ),
                         ...List.generate(
-                            4,
+                            3,
                             (index) => const Icon(
                                   Icons.arrow_drop_down_circle_sharp,
                                   size: 19,
