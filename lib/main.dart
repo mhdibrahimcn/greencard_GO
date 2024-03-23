@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:green/models/StudentDetail_model.dart';
+import 'package:green/screens/ConductorScreen/homescreen/conductorHomescreen.dart';
+import 'package:green/screens/ConductorScreen/loginpage/conductorLoginScreen.dart';
 import 'package:green/screens/Homescreen/stdHomescreenLogin.dart';
 import 'package:green/screens/Login/stdLoginScreen.dart';
 import 'package:green/screens/Login/stdRegistrationScreen.dart';
@@ -10,6 +12,7 @@ import 'package:green/screens/SignupScreen/SignupScreen.dart';
 import 'package:green/screens/SignupScreen/idVerificationScreen.dart';
 import 'package:green/screens/SignupScreen/phone_email_verify.dart';
 import 'package:green/screens/SystemNavbarConfig/Systemnavbarconfig.dart';
+import 'package:green/screens/modechoosingScreen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 void main(List<String> args) async {
@@ -35,7 +38,7 @@ class Myapp extends StatelessWidget {
             primary: Color.fromARGB(255, 97, 169, 179),
           )),
       debugShowCheckedModeBanner: false,
-      home: const stdRegistrationScreen(),
+      home: const modeChoosingScreen(),
       routes: {
         'stdRegistration': (context) => const stdRegistrationScreen(),
         'stdLoginscreen': (context) => const stdLoginScreen(),
@@ -46,6 +49,9 @@ class Myapp extends StatelessWidget {
         "idVerificationScreen": (context) => idVerificationScreen(),
         "AddressVerficationScreen": (context) => addressVerifficationScreen(),
         "PasswordCreationScreen": (context) => passwordCreationScreen(),
+        "modeChoosingScreen": (context) => modeChoosingScreen(),
+        "conductorLoginScreen": (context) => ConductorLoginScreen(),
+        "conductorHomeScreen": (context) => conductorHomeScreen()
       },
     );
   }
