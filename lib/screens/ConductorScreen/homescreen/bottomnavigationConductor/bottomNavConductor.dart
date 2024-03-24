@@ -16,17 +16,22 @@ class bottomNavConductor extends StatelessWidget {
           onTabChange: (value) {
             selectedIndex.value = value;
           },
-          iconSize: 27,
+          iconSize: 23,
+          style: GnavStyle.google,
           haptic: true,
           rippleColor: const Color.fromRGBO(96, 149, 156, 1),
           activeColor: Colors.white,
           color: const Color.fromRGBO(8, 14, 31, 1),
           backgroundColor: const Color.fromRGBO(114, 192, 202, 1),
-          gap: 3,
+          gap: 0,
           tabs: const [
             GButton(
               icon: Icons.home,
               text: 'Home',
+            ),
+            GButton(
+              icon: Icons.qr_code_scanner,
+              text: 'Scanner',
             ),
             GButton(
               icon: Icons.person,

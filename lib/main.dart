@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:green/models/StudentDetail_model.dart';
+import 'package:green/models/StudentTravelHistory_model.dart';
+import 'package:green/screens/ConductorScreen/homescreen/StudentDetailsScreen.dart';
 import 'package:green/screens/ConductorScreen/homescreen/conductorHomescreen.dart';
 import 'package:green/screens/ConductorScreen/loginpage/conductorLoginScreen.dart';
 import 'package:green/screens/Homescreen/stdHomescreenLogin.dart';
@@ -20,6 +22,9 @@ void main(List<String> args) async {
   await Hive.initFlutter();
   if (!Hive.isAdapterRegistered(StudentsDetailModelAdapter().typeId)) {
     Hive.registerAdapter(StudentsDetailModelAdapter());
+  }
+  if (!Hive.isAdapterRegistered(StudentTravelHistorymodelAdapter().typeId)) {
+    Hive.registerAdapter(StudentTravelHistorymodelAdapter());
   }
   runApp(const Myapp());
 }
@@ -51,7 +56,7 @@ class Myapp extends StatelessWidget {
         "PasswordCreationScreen": (context) => passwordCreationScreen(),
         "modeChoosingScreen": (context) => modeChoosingScreen(),
         "conductorLoginScreen": (context) => ConductorLoginScreen(),
-        "conductorHomeScreen": (context) => conductorHomeScreen()
+        "conductorHomeScreen": (context) => conductorHomeScreen(),
       },
     );
   }

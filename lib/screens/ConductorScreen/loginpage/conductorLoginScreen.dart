@@ -193,17 +193,3 @@ class ConductorLoginScreen extends StatelessWidget {
     );
   }
 }
-
-class ConductorHomeScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Conductor Home'),
-      ),
-      body: Center(
-        child: Text('Welcome to Conductor Home Screen'),
-      ),
-    );
-  }
-}
