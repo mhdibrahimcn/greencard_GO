@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:green/db/stdTravelHistoryDB.dart';
 import 'package:green/screens/ConductorScreen/homescreen/bottomnavigationConductor/bottomNavConductor.dart';
 import 'package:green/screens/ConductorScreen/homescreen/conductorHomePage.dart';
 import 'package:green/screens/ConductorScreen/homescreen/qrScannerScreen.dart';
 
 class conductorHomeScreen extends StatelessWidget {
   conductorHomeScreen({super.key});
-  final pages = [const conductorHomePage(), QRScannerScreen()];
+  final pages = [conductorHomePage(), QRScannerScreen()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

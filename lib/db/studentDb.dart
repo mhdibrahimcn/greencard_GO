@@ -6,6 +6,7 @@ const STUDENT_DB_NAME = "student-database";
 abstract class studentDbFunctions {
   Future<void> insertStudentDetails(StudentsDetailModel value);
   Future<List<StudentsDetailModel>> getStudentDetails();
+  Future<void> closeStdDb();
 }
 
 class studentDb extends studentDbFunctions {
@@ -26,5 +27,23 @@ class studentDb extends studentDbFunctions {
     final student_db = await Hive.openBox<StudentsDetailModel>(STUDENT_DB_NAME);
 
     return student_db.values.toList();
+  }
+
+  @override
+  Future<void> closeStdDb() async {
+    final student_db = await Hive.openBox(STUDENT_DB_NAME);
+    student_db.close();
+  }
+  // Add this method to your studentDb class
+
+  Future<bool> checkCredentials(String email, String password) async {
+    final studentDetails = await getStudentDetails();
+    // Check if there is a matching entry in the database
+    for (var detail in studentDetails) {
+      if (detail.email == email && detail.password == password) {
+        return true; // Credentials are valid
+      }
+    }
+    return false; // Credentials are invalid
   }
 }

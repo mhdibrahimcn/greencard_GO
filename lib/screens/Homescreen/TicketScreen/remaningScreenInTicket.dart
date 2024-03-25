@@ -5,7 +5,6 @@ import 'package:green/models/StudentDetail_model.dart';
 import 'package:green/screens/Homescreen/Widget/dayProgressbarWidget.dart';
 import 'package:green/screens/Homescreen/Widget/ticketWidget.dart';
 import 'package:green/screens/Homescreen/Widget/travelUp_Down_StatusWidget.dart';
-import 'package:intl/intl.dart';
 
 class remaningScreenInTicket extends StatelessWidget {
   const remaningScreenInTicket({super.key});
@@ -63,13 +62,13 @@ class remaningScreenInTicket extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: 40,
+                      height: 60,
                     ),
                     FadeInLeft(
                         duration: const Duration(milliseconds: 700),
                         child: const ticketWidget()),
                     const SizedBox(
-                      height: 20,
+                      height: 30,
                     ),
                     Row(
                       children: [
@@ -82,7 +81,7 @@ class remaningScreenInTicket extends StatelessWidget {
                             )),
                         FadeInUp(
                             duration: const Duration(milliseconds: 700),
-                            child: const travelUpDownStatusWidget()),
+                            child: travelUpDownStatusWidget()),
                       ],
                     ),
                   ]),
@@ -103,18 +102,18 @@ DateTime parseDateString(String dateString) {
 
   // Map month names to their respective numerical value
   Map<String, int> monthsMap = {
-    'January': 1,
-    'February': 2,
+    'Jan': 1,
+    'Feb': 2,
     'March': 3,
     'April': 4,
     'May': 5,
     'June': 6,
     'July': 7,
-    'August': 8,
-    'September': 9,
-    'October': 10,
-    'November': 11,
-    'December': 12
+    'Aug': 8,
+    'Sept': 9,
+    'Oct': 10,
+    'Nov': 11,
+    'Dec': 12
   };
 
   // Get the numerical value of the month

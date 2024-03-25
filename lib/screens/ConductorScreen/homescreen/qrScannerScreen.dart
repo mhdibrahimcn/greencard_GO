@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:flutter/widgets.dart';
 import 'package:green/db/studentDb.dart';
 import 'package:green/screens/ConductorScreen/homescreen/StudentDetailsScreen.dart';
 import 'package:green/screens/ConductorScreen/homescreen/bottomnavigationConductor/bottomNavConductor.dart';
@@ -73,7 +74,9 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
             style: TextStyle(fontSize: 18),
           ),
           SizedBox(height: 20),
-          Expanded(
+          SizedBox(
+            height: 400,
+            width: 400,
             child: _cameraController!.value.isInitialized
                 ? QRView(
                     key: _qrKey,
@@ -106,6 +109,7 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
       // Perform a loop for checking student IDs from the database
       final studentDetails = await studentDb().getStudentDetails();
       for (var student in studentDetails) {
+        print(scanData.code);
         if (student.studentid == scanData.code) {
           bottomNavConductor.selectedIndex.value = 0;
           Navigator.push(

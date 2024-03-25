@@ -71,8 +71,8 @@ class stdRegistrationScreen extends StatelessWidget {
                 height: 20,
               ),
               ElevatedButton(
-                  onPressed: () =>
-                      Navigator.of(context).pushNamed('stdLoginscreen'),
+                  onPressed: () => Navigator.of(context)
+                      .pushReplacementNamed('stdLoginscreen'),
                   style: ElevatedButton.styleFrom(
                     minimumSize:
                         const Size(350.0, 60.0), // set the desired size heret

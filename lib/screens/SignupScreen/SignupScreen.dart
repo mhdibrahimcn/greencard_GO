@@ -4,6 +4,7 @@ import 'package:green/constants/Mycolors.dart';
 import 'package:green/db/studentDb.dart';
 import 'package:green/models/StudentDetail_model.dart';
 import 'package:green/screens/Homescreen/Profilescreen/appbar/appbar.dart';
+import 'package:green/screens/SignupScreen/CapiialiseFirstLetter.dart';
 import 'package:green/screens/SignupScreen/studentDetailclass.dart';
 
 import 'package:green/screens/SystemNavbarConfig/Systemnavbarconfig.dart';
@@ -61,6 +62,7 @@ class _signupScreenState extends State<signupScreen> {
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: TextFormField(
+                  inputFormatters: [CapitalizeFirstLetterFormatter()],
                   controller: _namecontroller,
                   validator: (value) =>
                       value!.isEmpty ? "please enter Full Name" : null,
@@ -86,6 +88,7 @@ class _signupScreenState extends State<signupScreen> {
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   controller: _institutioncontroller,
+                  inputFormatters: [CapitalizeFirstLetterFormatter()],
                   validator: (value) =>
                       value!.isEmpty ? "please enter the Institurion" : null,
                   autovalidateMode: AutovalidateMode.onUserInteraction,

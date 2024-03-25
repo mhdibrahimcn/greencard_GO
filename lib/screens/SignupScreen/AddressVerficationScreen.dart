@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:green/constants/Mycolors.dart';
 import 'package:green/screens/Homescreen/Profilescreen/appbar/appbar.dart';
+import 'package:green/screens/SignupScreen/CapiialiseFirstLetter.dart';
 import 'package:green/screens/SignupScreen/studentDetailclass.dart';
 import 'package:lottie/lottie.dart';
 
@@ -40,6 +41,7 @@ class addressVerifficationScreen extends StatelessWidget {
                     const EdgeInsets.only(top: 0, right: 8, left: 8, bottom: 8),
                 child: TextFormField(
                   controller: depoNameContoller,
+                  inputFormatters: [CapitalizeFirstLetterFormatter()],
                   validator: (value) =>
                       value!.isEmpty ? "please enter the Depo" : null,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -64,6 +66,7 @@ class addressVerifficationScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   controller: districtContoller,
+                  inputFormatters: [CapitalizeFirstLetterFormatter()],
                   validator: (value) =>
                       value!.isEmpty ? "please enter the District" : null,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -88,6 +91,7 @@ class addressVerifficationScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   controller: cityContoller,
+                  inputFormatters: [CapitalizeFirstLetterFormatter()],
                   validator: (value) =>
                       value!.isEmpty ? "please enter the City" : null,
                   autovalidateMode: AutovalidateMode.onUserInteraction,

@@ -100,7 +100,10 @@ class _StudentSubmitScreenState extends State<StudentSubmitScreen> {
           height: 60,
           width: 180,
           child: TextButton(
-            onPressed: () {},
+            onPressed: () {
+              submit();
+              Navigator.of(context).pop();
+            },
             child: Text(
               "Submit",
               style: GoogleFonts.inter(
@@ -136,22 +139,25 @@ class _StudentSubmitScreenState extends State<StudentSubmitScreen> {
         travelId: travelId,
         travelStatus: travelStatus,
         travelDate: currentDate);
-    stdTravelHistoryDb.instance.insertStdTravelDetails(studentHistoryModel);
+    print(studentHistoryModel);
+    StdTravelHistoryDb.instance.insertStdTravelDetails(studentHistoryModel);
+
+    // Show toast notification for successful submission
   }
-}
 
-String generateCustomID() {
-  // Get current date and time
-  DateTime now = DateTime.now();
+  String generateCustomID() {
+    // Get current date and time
+    DateTime now = DateTime.now();
 
-  // Format date and time
-  String formattedDate = DateFormat('yyyyMMddHHmmss').format(now);
+    // Format date and time
+    String formattedDate = DateFormat('yyyyMMddHHmmss').format(now);
 
-  // Extract last 6 digits from formatted date and time
-  String lastSixDigits = formattedDate.substring(formattedDate.length - 6);
+    // Extract last 6 digits from formatted date and time
+    String lastSixDigits = formattedDate.substring(formattedDate.length - 6);
 
-  // Convert last 6 digits to integer
-  int id = int.parse(lastSixDigits);
+    // Convert last 6 digits to integer
+    int id = int.parse(lastSixDigits);
 
-  return id.toString(); // Return as string
+    return id.toString(); // Return as string
+  }
 }

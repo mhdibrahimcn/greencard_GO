@@ -135,8 +135,10 @@ class passwordCreationScreen extends StatelessWidget {
                           onPressed: () {
                             if (_formkey.currentState!.validate()) {
                               Setpassword();
-
-                              Navigator.of(context).pushNamed('stdHomeScreen');
+                              studentDb.instance.closeStdDb();
+                              Navigator.of(context)
+                                  .restorablePushReplacementNamed(
+                                      'stdLoginscreen');
                             }
                           },
                           child: Text(
@@ -194,7 +196,6 @@ class passwordCreationScreen extends StatelessWidget {
         studentDetail.ticketStartingDate,
         studentDetail.ticketEndingDate);
     studentDb.instance.insertStudentDetails(StudentDetailmodel);
-    print(StudentDetailmodel);
   }
 
   String _getDaySuffix(int day) {

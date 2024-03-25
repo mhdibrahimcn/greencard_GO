@@ -138,7 +138,7 @@ class StudentDetailsScreen extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            "Institution Name : ${student.institution}",
+                            "Institution: ${student.institution}",
                             style: GoogleFonts.inter(
                               textStyle: const TextStyle(
                                 fontSize: 17,

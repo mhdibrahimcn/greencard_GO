@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:green/db/studentDb.dart';
 import 'package:green/models/StudentDetail_model.dart';
@@ -28,9 +29,9 @@ class Ticketscreen extends StatelessWidget {
             width: 330,
             height: 400,
             child: Padding(
-              padding: const EdgeInsets.only(top: 10, bottom: 10, right: 10),
+              padding: const EdgeInsets.only(top: 10, bottom: 10),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:green/constants/Mycolors.dart';
 import 'package:green/screens/Homescreen/Profilescreen/appbar/appbar.dart';
+import 'package:green/screens/SignupScreen/CapiialiseFirstLetter.dart';
 import 'package:green/screens/SignupScreen/studentDetailclass.dart';
 import 'package:lottie/lottie.dart';
 
@@ -55,7 +56,8 @@ class destinationInfoScreen extends StatelessWidget {
                       width: 160,
                       child: TextFormField(
                         controller: startingDestinationController,
-                        keyboardType: TextInputType.emailAddress,
+                        inputFormatters: [CapitalizeFirstLetterFormatter()],
+                        keyboardType: TextInputType.text,
                         validator: (value) =>
                             value!.isEmpty ? "Required Field!!" : null,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -86,7 +88,8 @@ class destinationInfoScreen extends StatelessWidget {
                       width: 160,
                       child: TextFormField(
                         controller: endingDestinationController,
-                        keyboardType: TextInputType.emailAddress,
+                        keyboardType: TextInputType.text,
+                        inputFormatters: [CapitalizeFirstLetterFormatter()],
                         validator: (value) =>
                             value!.isEmpty ? "Required Field!!" : null,
                         autovalidateMode: AutovalidateMode.onUserInteraction,

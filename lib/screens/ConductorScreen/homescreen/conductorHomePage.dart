@@ -3,13 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:green/constants/Mycolors.dart';
+import 'package:green/db/studentDb.dart';
+import 'package:green/screens/ConductorScreen/homescreen/StudentDetailsScreen.dart';
 import 'package:green/screens/ConductorScreen/homescreen/bottomnavigationConductor/bottomNavConductor.dart';
 import 'package:green/screens/ConductorScreen/homescreen/qrScannerScreen.dart';
 import 'package:ticket_widget/ticket_widget.dart';
 
-class conductorHomePage extends StatelessWidget {
-  const conductorHomePage({super.key});
+final _formkey = GlobalKey<FormState>();
 
+class conductorHomePage extends StatelessWidget {
+  conductorHomePage({super.key});
+  final studentIdController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -153,58 +157,89 @@ class conductorHomePage extends StatelessWidget {
               ],
               color: Mycolors.materialColor,
             ),
-            child: Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  SizedBox(
-                    width: 250,
-                    child: TextFormField(
-                      inputFormatters: [LengthLimitingTextInputFormatter(5)],
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                          hintText: "Enter Student ID",
-                          filled: true,
-                          fillColor: Color.fromARGB(255, 112, 185, 195),
-                          hintStyle: const TextStyle(color: Colors.white),
-                          label: const Text(
-                            "Student ID",
-                          ),
-                          prefixIcon: const Icon(Icons.location_history_sharp),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
-                              borderRadius: BorderRadius.circular(20)),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                          )),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 60,
-                    height: 60,
-                    child: TextButton(
-                      onPressed: () {
-                        bottomNavConductor.selectedIndex.value = 1;
-                      },
-                      child: Icon(Icons.qr_code_scanner),
-                      style: ButtonStyle(
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  20), // Adjust the value to get a squircle shape
+            child: Form(
+              key: _formkey,
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SizedBox(
+                      width: 250,
+                      child: TextFormField(
+                        controller: studentIdController,
+                        inputFormatters: [LengthLimitingTextInputFormatter(8)],
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                            hintText: "Enter Student ID",
+                            filled: true,
+                            fillColor: Color.fromARGB(255, 112, 185, 195),
+                            hintStyle: const TextStyle(color: Colors.white),
+                            label: const Text(
+                              "Student ID",
                             ),
-                          ),
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.white)),
+                            prefixIcon:
+                                const Icon(Icons.location_history_sharp),
+                            suffixIcon: TextButton(
+                              onPressed: () {
+                                studentIdSubmit(context);
+                              },
+                              child: Icon(
+                                Icons.send,
+                                color: Colors.white,
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                                borderRadius: BorderRadius.circular(20)),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            )),
+                      ),
                     ),
-                  )
-                ],
+                    SizedBox(
+                      width: 60,
+                      height: 60,
+                      child: TextButton(
+                        onPressed: () {
+                          bottomNavConductor.selectedIndex.value = 1;
+                        },
+                        child: Icon(Icons.qr_code_scanner),
+                        style: ButtonStyle(
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                    20), // Adjust the value to get a squircle shape
+                              ),
+                            ),
+                            backgroundColor:
+                                MaterialStateProperty.all<Color>(Colors.white)),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           )
         ],
       ),
     );
+  }
+
+  studentIdSubmit(context) async {
+    final studentId = studentIdController.text;
+    final studentDetails = await studentDb().getStudentDetails();
+
+    if (_formkey.currentState!.validate()) {
+      for (var student in studentDetails) {
+        if (student.studentid == studentId) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      StudentDetailsScreen(student: student)));
+        }
+      }
+    }
   }
 }

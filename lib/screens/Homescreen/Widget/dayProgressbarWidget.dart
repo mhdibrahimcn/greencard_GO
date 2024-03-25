@@ -23,7 +23,7 @@ class _DayProgressbarWidgetState extends State<DayProgressbarWidget> {
   void initState() {
     super.initState();
     _maxValue = widget.maxValue;
-    _progressValue = _maxValue; // Initialize progress value to maximum
+    _progressValue = _calculateProgressValue(); // Calculate initial progress
     _timer = Timer.periodic(Duration(days: 1), _updateTimer);
   }
 
@@ -35,22 +35,22 @@ class _DayProgressbarWidgetState extends State<DayProgressbarWidget> {
 
   void _updateTimer(Timer timer) {
     setState(() {
-      _maxValue -= 1;
+      _progressValue = _calculateProgressValue(); // Update progress value
     });
   }
 
-  void _updateProgressValue() {
-    setState(() {
-      _progressValue -= 1;
-      if (_progressValue < 0) {
-        _progressValue = 0;
-      }
-    });
+  double _calculateProgressValue() {
+    final currentDate = DateTime.now();
+    final difference = currentDate.difference(widget.initialDate).inDays;
+    double progress = widget.maxValue - difference + 1;
+    if (progress < 0) {
+      progress = 0;
+    }
+    return progress;
   }
 
   @override
   Widget build(BuildContext context) {
-    _updateProgressValue(); // Update progress value when building widget
     return ClipRRect(
       borderRadius: BorderRadius.circular(30),
       child: Padding(
@@ -73,37 +73,32 @@ class _DayProgressbarWidgetState extends State<DayProgressbarWidget> {
           ),
           width: 160,
           height: 170,
-          child: ValueListenableBuilder<double>(
-            valueListenable: ValueNotifier(_progressValue),
-            builder: (context, value, child) {
-              return SimpleCircularProgressBar(
-                size: 120,
-                progressStrokeWidth: 17,
-                backStrokeWidth: 18,
-                fullProgressColor: Colors.green,
-                mergeMode: true,
-                valueNotifier: ValueNotifier(value),
-                maxValue: _maxValue,
-                animationDuration: 6,
-                progressColors: const [
-                  Colors.redAccent,
-                  Colors.white,
-                  Colors.white,
-                  Colors.white,
-                  Colors.white,
-                  Colors.white,
-                ],
-                backColor: const Color.fromARGB(255, 135, 147, 151),
-                onGetText: (double value) {
-                  return Text(
-                    '${value.toInt()}',
-                    style: const TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  );
-                },
+          child: SimpleCircularProgressBar(
+            size: 120,
+            progressStrokeWidth: 17,
+            backStrokeWidth: 18,
+            fullProgressColor: Colors.green,
+            mergeMode: true,
+            valueNotifier: ValueNotifier(_progressValue),
+            maxValue: widget.maxValue,
+            animationDuration: 6,
+            progressColors: const [
+              Colors.redAccent,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+            ],
+            backColor: const Color.fromARGB(255, 135, 147, 151),
+            onGetText: (double value) {
+              return Text(
+                '${value.toInt()}',
+                style: const TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               );
             },
           ),
