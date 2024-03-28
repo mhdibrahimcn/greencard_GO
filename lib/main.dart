@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:green/models/StudentDetail_model.dart';
 import 'package:green/models/StudentTravelHistory_model.dart';
@@ -20,6 +21,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await Hive.initFlutter();
   if (!Hive.isAdapterRegistered(StudentsDetailModelAdapter().typeId)) {
     Hive.registerAdapter(StudentsDetailModelAdapter());
