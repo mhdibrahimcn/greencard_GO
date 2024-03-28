@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "555861738615",
+    "project_id": "greencardgo-a7699",
+    "storage_bucket": "greencardgo-a7699.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:555861738615:android:3f630b29198193e33c7272",
+        "android_client_info": {
+          "package_name": "com.example.green"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChftjR-jM4ww31s8DFZ_BcBF9ojjlM2rM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

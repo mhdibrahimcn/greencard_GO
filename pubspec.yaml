@@ -11,10 +11,10 @@ dependencies:
   build_runner: ^2.4.8
   camera: ^0.10.5+9
   eva_icons_flutter: ^3.1.0
-
+  firebase_core: ^2.27.2
   flutter:
     sdk: flutter
-  
+  flutter_native_splash: ^2.4.0
   google_fonts: ^6.2.1
   google_nav_bar: ^5.0.6
   hive: ^2.2.3
@@ -25,6 +25,7 @@ dependencies:
   lottie: ^3.1.0
   qr_code_scanner: ^1.0.1
   qr_flutter: ^4.1.0
+  shared_preferences_android: ^2.2.1
   simple_circular_progress_bar: ^1.0.2
   simple_progress_indicators: ^0.2.0
   syncfusion_flutter_gauges: ^25.1.35

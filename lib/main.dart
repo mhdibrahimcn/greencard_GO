@@ -15,6 +15,7 @@ import 'package:green/screens/SignupScreen/idVerificationScreen.dart';
 import 'package:green/screens/SignupScreen/phone_email_verify.dart';
 import 'package:green/screens/SystemNavbarConfig/Systemnavbarconfig.dart';
 import 'package:green/screens/modechoosingScreen.dart';
+import 'package:green/screens/splashscreen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 void main(List<String> args) async {
@@ -43,7 +44,7 @@ class Myapp extends StatelessWidget {
             primary: Color.fromARGB(255, 97, 169, 179),
           )),
       debugShowCheckedModeBanner: false,
-      home: const modeChoosingScreen(),
+      home: const SplashScreen(),
       routes: {
         'stdRegistration': (context) => const stdRegistrationScreen(),
         'stdLoginscreen': (context) => const stdLoginScreen(),
