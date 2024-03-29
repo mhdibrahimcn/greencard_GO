@@ -1,8 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:green/db/stdTravelHistoryDB.dart';
-import 'package:green/models/StudentDetail_model.dart';
-import 'package:green/db/studentDb.dart';
+
 import 'package:green/models/StudentTravelHistory_model.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'liquidcrystal/liquidcrysral.dart';

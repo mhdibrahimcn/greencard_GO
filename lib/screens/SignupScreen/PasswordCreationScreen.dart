@@ -1,10 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:green/constants/Mycolors.dart';
-import 'package:green/db/studentDb.dart';
-import 'package:green/models/StudentDetail_model.dart';
+
 import 'package:green/screens/Homescreen/Profilescreen/appbar/appbar.dart';
 import 'package:green/screens/SignupScreen/SignupScreen.dart';
 import 'package:green/screens/SignupScreen/studentDetailclass.dart';
@@ -135,7 +135,7 @@ class passwordCreationScreen extends StatelessWidget {
                           onPressed: () {
                             if (_formkey.currentState!.validate()) {
                               Setpassword();
-                              studentDb.instance.closeStdDb();
+
                               Navigator.of(context)
                                   .restorablePushReplacementNamed(
                                       'stdLoginscreen');
@@ -175,51 +175,55 @@ class passwordCreationScreen extends StatelessWidget {
     studentDetail.password = password;
     studentDetail.ticketStartingDate = ticketStartingDate;
     studentDetail.ticketEndingDate = ticketEndingDate;
+    final studentdetails = {
+      "Student Id": studentDetail.studentid,
+      "Name": studentDetail.name,
+      "Institution": studentDetail.institution,
+      "Dob": studentDetail.dob,
+      "Guardian_Name": studentDetail.gurdianName,
+      "Aadhar_no": studentDetail.aadharNo,
+      "Email": studentDetail.email,
+      "PhoneNumber": studentDetail.phoneNumber,
+      "Password": studentDetail.password,
+      "Starting_Destination": studentDetail.startingDestination,
+      "Ending_Destination": studentDetail.endingDestination,
+      "Period": studentDetail.period,
+      "Depo_name": studentDetail.deponame,
+      "District": studentDetail.distict,
+      "City": studentDetail.city,
+      "Pincode": studentDetail.pincode,
+      "TicketStartingDate": studentDetail.ticketStartingDate,
+      "TicketEndingDate": studentDetail.ticketEndingDate
+    };
 
-    final StudentDetailmodel = StudentsDetailModel(
-        studentDetail.studentid,
-        studentDetail.name,
-        studentDetail.institution,
-        studentDetail.dob,
-        studentDetail.gurdianName,
-        studentDetail.aadharNo,
-        studentDetail.email,
-        studentDetail.phoneNumber,
-        studentDetail.password,
-        studentDetail.startingDestination,
-        studentDetail.endingDestination,
-        studentDetail.period,
-        studentDetail.deponame,
-        studentDetail.distict,
-        studentDetail.city,
-        studentDetail.pincode,
-        studentDetail.ticketStartingDate,
-        studentDetail.ticketEndingDate);
-    studentDb.instance.insertStudentDetails(StudentDetailmodel);
+    CollectionReference studentCollection =
+        FirebaseFirestore.instance.collection('studentDetails');
+
+    studentCollection.add(studentdetails);
   }
+}
 
-  String _getDaySuffix(int day) {
-    if (day >= 11 && day <= 13) {
+String _getDaySuffix(int day) {
+  if (day >= 11 && day <= 13) {
+    return 'th';
+  }
+  switch (day % 10) {
+    case 1:
+      return 'st';
+    case 2:
+      return 'nd';
+    case 3:
+      return 'rd';
+    default:
       return 'th';
-    }
-    switch (day % 10) {
-      case 1:
-        return 'st';
-      case 2:
-        return 'nd';
-      case 3:
-        return 'rd';
-      default:
-        return 'th';
-    }
   }
+}
 
-  String formatDate(DateTime date) {
-    String formattedDate = DateFormat('dd MMMM yyyy').format(date);
-    String daySuffix = _getDaySuffix(date.day);
-    return formattedDate.replaceFirstMapped(
-      RegExp(r'(\d+)'),
-      (match) => "${match.group(1)}$daySuffix",
-    );
-  }
+String formatDate(DateTime date) {
+  String formattedDate = DateFormat('dd MMMM yyyy').format(date);
+  String daySuffix = _getDaySuffix(date.day);
+  return formattedDate.replaceFirstMapped(
+    RegExp(r'(\d+)'),
+    (match) => "${match.group(1)}$daySuffix",
+  );
 }

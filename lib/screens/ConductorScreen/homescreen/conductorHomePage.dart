@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:green/constants/Mycolors.dart';
-import 'package:green/db/studentDb.dart';
+
 import 'package:green/screens/ConductorScreen/homescreen/StudentDetailsScreen.dart';
 import 'package:green/screens/ConductorScreen/homescreen/bottomnavigationConductor/bottomNavConductor.dart';
 import 'package:green/screens/ConductorScreen/homescreen/qrScannerScreen.dart';
@@ -181,7 +181,7 @@ class conductorHomePage extends StatelessWidget {
                                 const Icon(Icons.location_history_sharp),
                             suffixIcon: TextButton(
                               onPressed: () {
-                                studentIdSubmit(context);
+                                // studentIdSubmit(context);
                               },
                               child: Icon(
                                 Icons.send,
@@ -226,20 +226,20 @@ class conductorHomePage extends StatelessWidget {
     );
   }
 
-  studentIdSubmit(context) async {
-    final studentId = studentIdController.text;
-    final studentDetails = await studentDb().getStudentDetails();
+  // studentIdSubmit(context) async {
+  //   final studentId = studentIdController.text;
+  //   final studentDetails = await studentDb().getStudentDetails();
 
-    if (_formkey.currentState!.validate()) {
-      for (var student in studentDetails) {
-        if (student.studentid == studentId) {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      StudentDetailsScreen(student: student)));
-        }
-      }
-    }
-  }
+  //   if (_formkey.currentState!.validate()) {
+  //     for (var student in studentDetails) {
+  //       if (student.studentid == studentId) {
+  //         Navigator.push(
+  //             context,
+  //             MaterialPageRoute(
+  //                 builder: (context) =>
+  //                     StudentDetailsScreen(student: student)));
+  //       }
+  //     }
+  //   }
+  // }
 }

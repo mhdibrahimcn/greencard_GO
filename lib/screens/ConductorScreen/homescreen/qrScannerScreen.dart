@@ -1,12 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/widgets.dart';
-import 'package:green/db/studentDb.dart';
 import 'package:green/screens/ConductorScreen/homescreen/StudentDetailsScreen.dart';
 import 'package:green/screens/ConductorScreen/homescreen/bottomnavigationConductor/bottomNavConductor.dart';
 import 'package:green/screens/ConductorScreen/homescreen/conductorHomePage.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:green/models/StudentDetail_model.dart';
 
 class QRScannerScreen extends StatefulWidget {
   @override
@@ -105,27 +104,60 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
       if (_isNavigating) return; // Check if already navigating
 
       _isNavigating = true; // Set navigating flag
+      final studentCollection =
+          FirebaseFirestore.instance.collection('studentDetails');
+      final querySnapshot = await studentCollection.get();
 
-      // Perform a loop for checking student IDs from the database
-      final studentDetails = await studentDb().getStudentDetails();
-      for (var student in studentDetails) {
-        print(scanData.code);
-        if (student.studentid == scanData.code) {
-          bottomNavConductor.selectedIndex.value = 0;
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => StudentDetailsScreen(student: student),
-            ),
-          ).then((_) {
-            _isNavigating =
-                false; // Reset navigating flag when navigation is complete
-          });
-          // Navigate to the student details screen passing the student object
-          print("success");
-          break; // Exit loop after navigation
+      if (querySnapshot.docs.isNotEmpty) {
+        for (int i = 0; i < querySnapshot.docs.length; i++) {
+          var studentData = querySnapshot.docs[i].data();
+          if (studentData['Student Id'] == scanData.code) {
+            // Found the student matching the ticket ID
+            var student = Student(
+                name: studentData['Name'],
+                studentid: studentData['Student Id'],
+                institution: studentData['Institution'],
+                startingDestination: studentData['Starting_Destination'],
+                endingDestination: studentData["Ending_Destination"],
+                ticketStartingDate: studentData["TicketStartingDate"],
+                ticketEndingDate: studentData["TicketEndingDate"]);
+            bottomNavConductor.selectedIndex.value = 0;
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => StudentDetailsScreen(student: student),
+              ),
+            ).then((_) {
+              _isNavigating =
+                  false; // Reset navigating flag when navigation is complete
+            });
+            print("Success");
+            return; // Exit the loop once the student is found
+          }
         }
+        print("Student not found");
+      } else {
+        print("No students found for the given ticket ID");
       }
     });
   }
+}
+
+class Student {
+  final String name;
+  final String studentid;
+  final String institution;
+  final String startingDestination;
+  final String endingDestination;
+  final String ticketStartingDate;
+  final String ticketEndingDate;
+
+  Student(
+      {required this.name,
+      required this.studentid,
+      required this.institution,
+      required this.startingDestination,
+      required this.endingDestination,
+      required this.ticketStartingDate,
+      required this.ticketEndingDate});
 }

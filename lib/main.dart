@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:green/models/StudentDetail_model.dart';
 import 'package:green/models/StudentTravelHistory_model.dart';
 import 'package:green/screens/ConductorScreen/homescreen/StudentDetailsScreen.dart';
 import 'package:green/screens/ConductorScreen/homescreen/conductorHomescreen.dart';
@@ -23,9 +22,7 @@ void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await Hive.initFlutter();
-  if (!Hive.isAdapterRegistered(StudentsDetailModelAdapter().typeId)) {
-    Hive.registerAdapter(StudentsDetailModelAdapter());
-  }
+
   if (!Hive.isAdapterRegistered(StudentTravelHistorymodelAdapter().typeId)) {
     Hive.registerAdapter(StudentTravelHistorymodelAdapter());
   }
@@ -46,7 +43,7 @@ class Myapp extends StatelessWidget {
             primary: Color.fromARGB(255, 97, 169, 179),
           )),
       debugShowCheckedModeBanner: false,
-      home: const SplashScreen(),
+      home: const modeChoosingScreen(),
       routes: {
         'stdRegistration': (context) => const stdRegistrationScreen(),
         'stdLoginscreen': (context) => const stdLoginScreen(),

@@ -43,6 +43,7 @@ class _DayProgressbarWidgetState extends State<DayProgressbarWidget> {
     final currentDate = DateTime.now();
     final difference = currentDate.difference(widget.initialDate).inDays;
     double progress = widget.maxValue - difference + 1;
+
     if (progress < 0) {
       progress = 0;
     }
@@ -77,11 +78,11 @@ class _DayProgressbarWidgetState extends State<DayProgressbarWidget> {
             size: 120,
             progressStrokeWidth: 17,
             backStrokeWidth: 18,
-            fullProgressColor: Colors.green,
+            fullProgressColor: Colors.white,
             mergeMode: true,
             valueNotifier: ValueNotifier(_progressValue),
             maxValue: widget.maxValue,
-            animationDuration: 6,
+            animationDuration: 4,
             progressColors: const [
               Colors.redAccent,
               Colors.white,

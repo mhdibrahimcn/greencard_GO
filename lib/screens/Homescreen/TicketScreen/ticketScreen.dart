@@ -1,9 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:green/db/studentDb.dart';
-import 'package:green/models/StudentDetail_model.dart';
+
 import 'package:green/screens/Bottomnavigation/FloatingAction/FloatingActionInNav.dart';
+import 'package:green/screens/Login/stdLoginScreen.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class Ticketscreen extends StatelessWidget {
@@ -11,20 +12,15 @@ class Ticketscreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future<List<StudentsDetailModel>> newlist() async {
-      return await studentDb.instance.getStudentDetails();
-    }
-
-    return FutureBuilder<List<StudentsDetailModel>>(
-      future: newlist(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator(); // Or any other loading indicator
-        } else if (snapshot.hasError) {
-          return Text('Error: ${snapshot.error}');
-        } else {
-          final student =
-              snapshot.data![0]; // Accessing the first item in the list
+    CollectionReference studentCollection =
+        FirebaseFirestore.instance.collection('studentDetails');
+    StudentUtils index = StudentUtils();
+    return StreamBuilder(
+      stream: studentCollection.snapshots(),
+      builder: (context, AsyncSnapshot snapshot) {
+        if (snapshot.hasData) {
+          final DocumentSnapshot student =
+              snapshot.data.docs[index.studentIndex];
           return SizedBox(
             width: 330,
             height: 400,
@@ -39,7 +35,7 @@ class Ticketscreen extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            student.startingDestination,
+                            student["Starting_Destination"],
                             style: GoogleFonts.inter(
                               textStyle: const TextStyle(
                                 fontSize: 23,
@@ -102,7 +98,7 @@ class Ticketscreen extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            student.endingDestination,
+                            student["Ending_Destination"],
                             style: GoogleFonts.inter(
                               textStyle: const TextStyle(
                                 fontSize: 23,
@@ -135,7 +131,7 @@ class Ticketscreen extends StatelessWidget {
                         height: 12,
                       ),
                       Text(
-                        student.ticketStartingDate,
+                        student["TicketStartingDate"],
                         style: GoogleFonts.inter(
                           textStyle: const TextStyle(
                             fontSize: 17,
@@ -153,7 +149,7 @@ class Ticketscreen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        student.ticketEndingDate,
+                        student["TicketEndingDate"],
                         style: GoogleFonts.inter(
                           textStyle: const TextStyle(
                             fontSize: 17,
@@ -169,7 +165,7 @@ class Ticketscreen extends StatelessWidget {
                         onPressed: () =>
                             floatingActionInNav.bottomSheet(context),
                         child: QrImageView(
-                          data: student.studentid,
+                          data: student["Student Id"],
                           version: QrVersions.auto,
                           size: 70.0,
                           eyeStyle: const QrEyeStyle(
@@ -184,7 +180,10 @@ class Ticketscreen extends StatelessWidget {
               ),
             ),
           );
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
         }
+        return Center(child: Text("No data"));
       },
     );
   }

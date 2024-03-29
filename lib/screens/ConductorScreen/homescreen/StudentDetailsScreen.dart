@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:green/models/StudentDetail_model.dart';
+
+import 'package:green/screens/ConductorScreen/homescreen/qrScannerScreen.dart';
 import 'package:green/screens/ConductorScreen/homescreen/studentsubmitscreen.dart';
 import 'package:green/screens/Homescreen/Profilescreen/appbar/appbar.dart';
 import 'package:ticket_widget/ticket_widget.dart';
 
 class StudentDetailsScreen extends StatelessWidget {
-  final StudentsDetailModel student;
+  final Student student;
 
   const StudentDetailsScreen({Key? key, required this.student})
       : super(key: key);
@@ -68,7 +69,7 @@ class StudentDetailsScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          "Aluva",
+                          student.startingDestination,
                           style: GoogleFonts.inter(
                             textStyle: const TextStyle(
                               fontSize: 20,
@@ -88,7 +89,7 @@ class StudentDetailsScreen extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "Kalamassery",
+                          student.endingDestination,
                           style: GoogleFonts.inter(
                             textStyle: const TextStyle(
                               fontSize: 20,

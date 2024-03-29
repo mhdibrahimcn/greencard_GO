@@ -1,10 +1,9 @@
-// Modify your stdLoginScreen class
-
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:green/db/studentDb.dart';
-import 'package:green/models/StudentDetail_model.dart';
+
+import 'package:green/screens/ConductorScreen/homescreen/qrScannerScreen.dart';
 // Import your database functions
 
 class stdLoginScreen extends StatefulWidget {
@@ -21,7 +20,6 @@ class _stdLoginScreenState extends State<stdLoginScreen> {
   final usernammeController = TextEditingController();
   final passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -194,26 +192,51 @@ class _stdLoginScreenState extends State<stdLoginScreen> {
     );
   }
 
-  void _login(BuildContext context) async {
+  Future<void> _login(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
-      // Validate succeeded, now check credentials against the database
       final email = usernammeController.text.trim();
       final password = passwordController.text.trim();
 
-      // Call the function to check credentials from the database
-      final isValid =
-          await studentDb.instance.checkCredentials(email, password);
+      try {
+        final studentCollection =
+            FirebaseFirestore.instance.collection('studentDetails');
+        final querySnapshot = await studentCollection.get();
 
-      if (isValid) {
-        // Navigate to the next screen if credentials are valid
-        Navigator.of(context).pushReplacementNamed('stdHomeScreen');
-      } else {
-        // Show error message if credentials are invalid
+        if (querySnapshot.docs.isNotEmpty) {
+          for (int i = 0; i < querySnapshot.docs.length; i++) {
+            var studentData = querySnapshot.docs[i].data();
+            if (studentData['Email'] == email &&
+                studentData['Password'] == password) {
+              print(studentData['Email']);
+              print("helooooooooooofdvgof$i");
+              StudentUtils.instance.studentIndex = i;
+              Navigator.of(context).pushReplacementNamed('stdHomeScreen');
+            }
+          }
+        } else {
+          // Show error message if login fails
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text('Login Failed'),
+              content: Text('Invalid email or password. Please try again.'),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: Text('OK'),
+                ),
+              ],
+            ),
+          );
+        }
+      } catch (e) {
+        print('Error: $e');
+        // Show error message if an exception occurs
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text('Invalid Credentials'),
-            content: Text('Please enter valid email and password.'),
+            title: Text('Error'),
+            content: Text('An error occurred. Please try again later.'),
             actions: [
               TextButton(
                 onPressed: () => Navigator.of(context).pop(),
@@ -224,5 +247,18 @@ class _stdLoginScreenState extends State<stdLoginScreen> {
         );
       }
     }
+  }
+}
+
+class StudentUtils {
+  late int studentIndex;
+
+  StudentUtils._internal();
+  static StudentUtils instance = StudentUtils._internal();
+  factory StudentUtils() {
+    return instance;
+  }
+  void updateFormValues(StudentUtils detail) {
+    studentIndex = detail.studentIndex;
   }
 }

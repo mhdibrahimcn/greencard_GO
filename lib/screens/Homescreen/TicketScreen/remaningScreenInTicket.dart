@@ -1,10 +1,10 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:green/models/StudentDetail_model.dart';
 import 'package:green/screens/Homescreen/Widget/dayProgressbarWidget.dart';
 import 'package:green/screens/Homescreen/Widget/ticketWidget.dart';
 import 'package:green/screens/Homescreen/Widget/travelUp_Down_StatusWidget.dart';
+import 'package:green/screens/Login/stdLoginScreen.dart';
 import 'package:ticket_widget/ticket_widget.dart';
 
 class remaningScreenInTicket extends StatelessWidget {
@@ -14,12 +14,13 @@ class remaningScreenInTicket extends StatelessWidget {
   Widget build(BuildContext context) {
     CollectionReference studentCollection =
         FirebaseFirestore.instance.collection('studentDetails');
-
+    StudentUtils index = StudentUtils();
     return StreamBuilder(
       stream: studentCollection.snapshots(),
       builder: (context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
-          final DocumentSnapshot student = snapshot.data.docs[0];
+          final DocumentSnapshot student =
+              snapshot.data.docs[index.studentIndex];
           return GestureDetector(
             onTap: () {
               if (ModalRoute.of(context)?.isCurrent == true) {
