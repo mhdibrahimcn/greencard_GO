@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:green/screens/ConductorScreen/homescreen/qrScannerScreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 // Import your database functions
 
 class stdLoginScreen extends StatefulWidget {
@@ -207,8 +208,9 @@ class _stdLoginScreenState extends State<stdLoginScreen> {
             var studentData = querySnapshot.docs[i].data();
             if (studentData['Email'] == email &&
                 studentData['Password'] == password) {
-              print(studentData['Email']);
-              print("helooooooooooofdvgof$i");
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.setBool('isLoggedIn', true); // Set login status
+              prefs.setInt('studentIndex', i); // Set studentIndex
               StudentUtils.instance.studentIndex = i;
               Navigator.of(context).pushReplacementNamed('stdHomeScreen');
             }

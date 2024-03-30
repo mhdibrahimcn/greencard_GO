@@ -16,12 +16,12 @@ class idVerificationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
+      appBar: CustomAppBar(label: "Id verification"),
       body: SingleChildScrollView(
         child: Form(
           key: _formkey,
           child: Column(
             children: [
-              appbar.appBar("Documents"),
               const SizedBox(
                 height: 30,
               ),

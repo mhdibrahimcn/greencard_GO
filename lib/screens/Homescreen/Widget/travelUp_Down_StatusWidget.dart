@@ -1,9 +1,10 @@
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:green/db/stdTravelHistoryDB.dart';
 
-import 'package:green/models/StudentTravelHistory_model.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:green/screens/Homescreen/TicketScreen/remaningScreenInTicket.dart';
+import 'package:green/screens/Homescreen/qrBottomSheetScreen/qrBottomSheetScreen.dart';
+
 import 'liquidcrystal/liquidcrysral.dart';
 
 class travelUpDownStatusWidget extends StatefulWidget {
@@ -15,7 +16,7 @@ class travelUpDownStatusWidget extends StatefulWidget {
 }
 
 class _travelUpDownStatusWidgetState extends State<travelUpDownStatusWidget> {
-  String _travelStatus = ''; // Variable to store travel status
+  late String _travelStatus; // Variable to store travel status
   double _upValue = 0.1; // Default value for 'Up' status
   double _downValue = 0.1; // Default value for 'Down' status
   late Timer _timer;
@@ -39,7 +40,6 @@ class _travelUpDownStatusWidgetState extends State<travelUpDownStatusWidget> {
       setState(() {
         _currentDate = DateTime.now();
       });
-      _resetValues();
     });
 
     // Reset values at the start of the app if the day has already passed
@@ -62,32 +62,42 @@ class _travelUpDownStatusWidgetState extends State<travelUpDownStatusWidget> {
   }
 
   Future<void> _fetchTravelStatus() async {
-    // Fetch student details from database
-    final List<StudentTravelHistory_model> students =
-        await StdTravelHistoryDb.instance.getStdTravelDetails();
+    CollectionReference studentTravelCollection =
+        FirebaseFirestore.instance.collection('Student_Travel');
 
-    // Assuming there's only one student in the database for simplicity
-    if (students.isNotEmpty) {
-      final student = students.last;
-      // Assuming travel status is stored in the student details model
-      setState(() {
-        _travelStatus = student.travelStatus;
-      });
+    String studentId = StudentIdStorage.getStudentId();
+
+    QuerySnapshot querySnapshot = await studentTravelCollection
+        .doc(studentId)
+        .collection("Travel_History")
+        .orderBy('travel_date', descending: true)
+        .limit(2) // Limiting to fetch the latest two travel statuses
+        .get();
+
+    // Reset values initially
+    _resetValues();
+
+    // Iterate over fetched documents
+    for (var document in querySnapshot.docs) {
+      var travelStatus = document['travel_status'] as String?;
+      if (travelStatus == 'Up') {
+        _upValue = 0.8; // Max value for 'Up' status
+      } else if (travelStatus == 'Down') {
+        _downValue = 0.8; // Max value for 'Down' status
+      }
     }
+
+    // Update both progress values if both statuses are present
+    if (_upValue == 0.8 && _downValue == 0.8) {
+      _upValue = 0.8;
+      _downValue = 0.8;
+    }
+
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_travelStatus == 'Up') {
-      print(_travelStatus);
-      _upValue = 0.8; // Max value for 'Up' status
-      // Min value for 'Down' status
-    } else if (_travelStatus == 'Down') {
-      print(_travelStatus);
-      // Min value for 'Up' status
-      _downValue = 0.8; // Max value for 'Down' status
-    }
-
     return ClipRRect(
       borderRadius: BorderRadius.circular(30),
       child: Column(

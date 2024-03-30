@@ -19,12 +19,12 @@ class addressVerifficationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
+      appBar: CustomAppBar(label: 'Address Varification'),
       body: SingleChildScrollView(
         child: Form(
           key: _formkey,
           child: Column(
             children: [
-              appbar.appBar("Address"),
               const SizedBox(
                 height: 10,
               ),

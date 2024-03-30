@@ -17,12 +17,12 @@ class phoneEmailVerifyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(label: "Contact Verification"),
       body: SingleChildScrollView(
         child: Form(
           key: _formkey,
           child: Column(
             children: [
-              appbar.appBar("Contact Verification"),
               const SizedBox(
                 height: 40,
               ),

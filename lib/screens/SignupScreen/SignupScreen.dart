@@ -38,12 +38,12 @@ class _signupScreenState extends State<signupScreen> {
   Widget build(BuildContext context) {
     SystemNavbarconfig().SystemNavconfig(Mycolors.materialColor);
     return Scaffold(
+      appBar: CustomAppBar(label: "Personal Detail"),
       body: SingleChildScrollView(
         child: Form(
           key: _formkey,
           child: Column(
             children: [
-              appbar.appBar("Personal details "),
               const SizedBox(
                 height: 20,
               ),

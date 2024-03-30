@@ -1,13 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:green/constants/Mycolors.dart';
-import 'package:green/db/stdTravelHistoryDB.dart';
 
-import 'package:green/models/StudentTravelHistory_model.dart';
+import 'package:green/screens/ConductorScreen/homescreen/qrScannerScreen.dart';
 import 'package:intl/intl.dart';
 
 class StudentSubmitScreen extends StatefulWidget {
+  final Student student;
+  const StudentSubmitScreen({Key? key, required this.student})
+      : super(key: key);
+
   @override
   _StudentSubmitScreenState createState() => _StudentSubmitScreenState();
 }
@@ -131,33 +135,15 @@ class _StudentSubmitScreenState extends State<StudentSubmitScreen> {
   }
 
   submit() async {
-    String travelId = generateCustomID();
     final currentDate = DateTime.now();
     final travelStatus = selectedButton;
+    String studentId = widget.student.studentid;
+    CollectionReference studentCollection =
+        FirebaseFirestore.instance.collection('Student_Travel');
 
-    final studentHistoryModel = StudentTravelHistory_model(
-        travelId: travelId,
-        travelStatus: travelStatus,
-        travelDate: currentDate);
-    print(studentHistoryModel);
-    StdTravelHistoryDb.instance.insertStdTravelDetails(studentHistoryModel);
-
-    // Show toast notification for successful submission
-  }
-
-  String generateCustomID() {
-    // Get current date and time
-    DateTime now = DateTime.now();
-
-    // Format date and time
-    String formattedDate = DateFormat('yyyyMMddHHmmss').format(now);
-
-    // Extract last 6 digits from formatted date and time
-    String lastSixDigits = formattedDate.substring(formattedDate.length - 6);
-
-    // Convert last 6 digits to integer
-    int id = int.parse(lastSixDigits);
-
-    return id.toString(); // Return as string
+    studentCollection.doc(studentId).collection("Travel_History").add({
+      'travel_date': Timestamp.fromDate(currentDate),
+      'travel_status': travelStatus,
+    }); // Show toast notification for successful submission
   }
 }

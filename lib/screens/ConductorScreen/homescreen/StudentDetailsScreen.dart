@@ -16,148 +16,148 @@ class StudentDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: CustomAppBar(label: "personal"),
         body: Column(children: [
-      appbar.appBar('Ticket ID ${student.studentid}'),
-      SizedBox(
-        height: 50,
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          CircleAvatar(
-            radius: 50,
-            child: Icon(Icons.person),
+          SizedBox(
+            height: 50,
           ),
-          Text(
-            student.name,
-            style: GoogleFonts.inter(
-              textStyle: const TextStyle(
-                fontSize: 20,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              CircleAvatar(
+                radius: 50,
+                child: Icon(Icons.person),
               ),
-            ),
-          ),
-        ],
-      ),
-      SizedBox(
-        height: 40,
-      ),
-      Center(
-          child: Container(
-              decoration: BoxDecoration(boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.5),
-                  spreadRadius: 0.6,
-                  blurRadius: 20,
-                  offset: const Offset(
-                    14,
-                    7,
+              Text(
+                student.name,
+                style: GoogleFonts.inter(
+                  textStyle: const TextStyle(
+                    fontSize: 20,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
                   ),
-                )
-              ]),
-              child: TicketWidget(
-                color: Color.fromRGBO(114, 192, 202, 1),
-                width: 350,
-                height: 227,
-                padding: EdgeInsets.all(7),
-                isCornerRounded: true,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Row(
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 40,
+          ),
+          Center(
+              child: Container(
+                  decoration: BoxDecoration(boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.5),
+                      spreadRadius: 0.6,
+                      blurRadius: 20,
+                      offset: const Offset(
+                        14,
+                        7,
+                      ),
+                    )
+                  ]),
+                  child: TicketWidget(
+                    color: Color.fromRGBO(114, 192, 202, 1),
+                    width: 350,
+                    height: 227,
+                    padding: EdgeInsets.all(7),
+                    isCornerRounded: true,
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text(
-                          student.startingDestination,
-                          style: GoogleFonts.inter(
-                            textStyle: const TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          "To",
-                          style: GoogleFonts.inter(
-                            textStyle: const TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          student.endingDestination,
-                          style: GoogleFonts.inter(
-                            textStyle: const TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Text(
-                          student.ticketStartingDate,
-                          style: GoogleFonts.inter(
-                            textStyle: const TextStyle(
-                              fontSize: 17,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          "Between",
-                          style: GoogleFonts.inter(
-                            textStyle: const TextStyle(
-                              fontSize: 17,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          student.ticketEndingDate,
-                          style: GoogleFonts.inter(
-                            textStyle: const TextStyle(
-                              fontSize: 17,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "Institution: ${student.institution}",
-                            style: GoogleFonts.inter(
-                              textStyle: const TextStyle(
-                                fontSize: 17,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              student.startingDestination,
+                              style: GoogleFonts.inter(
+                                textStyle: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
-                          ),
+                            Text(
+                              "To",
+                              style: GoogleFonts.inter(
+                                textStyle: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Text(
+                              student.endingDestination,
+                              style: GoogleFonts.inter(
+                                textStyle: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text(
+                              student.ticketStartingDate,
+                              style: GoogleFonts.inter(
+                                textStyle: const TextStyle(
+                                  fontSize: 17,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Text(
+                              "Between",
+                              style: GoogleFonts.inter(
+                                textStyle: const TextStyle(
+                                  fontSize: 17,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Text(
+                              student.ticketEndingDate,
+                              style: GoogleFonts.inter(
+                                textStyle: const TextStyle(
+                                  fontSize: 17,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                "Institution: ${student.institution}",
+                                style: GoogleFonts.inter(
+                                  textStyle: const TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
-                ),
-              ))),
-      SizedBox(
-        height: 50,
-      ),
-      StudentSubmitScreen(),
-    ]));
+                  ))),
+          SizedBox(
+            height: 50,
+          ),
+          StudentSubmitScreen(student: student),
+        ]));
   }
 }

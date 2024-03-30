@@ -42,8 +42,8 @@ class _DayProgressbarWidgetState extends State<DayProgressbarWidget> {
   double _calculateProgressValue() {
     final currentDate = DateTime.now();
     final difference = currentDate.difference(widget.initialDate).inDays;
-    double progress = widget.maxValue - difference + 1;
-
+    double progress = widget.maxValue - difference;
+    print(progress);
     if (progress < 0) {
       progress = 0;
     }

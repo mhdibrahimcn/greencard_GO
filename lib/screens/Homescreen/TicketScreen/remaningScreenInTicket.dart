@@ -5,7 +5,6 @@ import 'package:green/screens/Homescreen/Widget/dayProgressbarWidget.dart';
 import 'package:green/screens/Homescreen/Widget/ticketWidget.dart';
 import 'package:green/screens/Homescreen/Widget/travelUp_Down_StatusWidget.dart';
 import 'package:green/screens/Login/stdLoginScreen.dart';
-import 'package:ticket_widget/ticket_widget.dart';
 
 class remaningScreenInTicket extends StatelessWidget {
   const remaningScreenInTicket({Key? key});
@@ -21,6 +20,7 @@ class remaningScreenInTicket extends StatelessWidget {
         if (snapshot.hasData) {
           final DocumentSnapshot student =
               snapshot.data.docs[index.studentIndex];
+          StudentIdStorage.setStudentId(student['Student Id']);
           return GestureDetector(
             onTap: () {
               if (ModalRoute.of(context)?.isCurrent == true) {
@@ -123,10 +123,6 @@ DateTime parseDateString(String dateString) {
 }
 
 String capitalizeEveryWord(String text) {
-  if (text == null || text.isEmpty) {
-    return text;
-  }
-
   List<String> words = text.split(' ');
   List<String> capitalizedWords = [];
 
@@ -139,4 +135,16 @@ String capitalizeEveryWord(String text) {
   }
 
   return capitalizedWords.join(' ');
+}
+
+class StudentIdStorage {
+  static late String studentId;
+
+  static void setStudentId(String id) {
+    studentId = id;
+  }
+
+  static String getStudentId() {
+    return studentId;
+  }
 }

@@ -23,12 +23,12 @@ class passwordCreationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(label: "Password"),
       body: SingleChildScrollView(
         child: Form(
           key: _formkey,
           child: Column(
             children: [
-              appbar.appBar("Password"),
               const SizedBox(
                 height: 20,
               ),
@@ -203,6 +203,17 @@ class passwordCreationScreen extends StatelessWidget {
   }
 }
 
+String formatDate(DateTime date) {
+  String formattedDate = DateFormat('dd MMM yyyy').format(date);
+  String daySuffix = _getDaySuffix(date.day);
+  String monthAbbreviation = _getMonthAbbreviation(date.month);
+  return formattedDate.replaceFirstMapped(
+        RegExp(r'(\d+)'),
+        (match) => "${match.group(1)}$daySuffix",
+      ) +
+      " $monthAbbreviation ${date.year}";
+}
+
 String _getDaySuffix(int day) {
   if (day >= 11 && day <= 13) {
     return 'th';
@@ -219,11 +230,33 @@ String _getDaySuffix(int day) {
   }
 }
 
-String formatDate(DateTime date) {
-  String formattedDate = DateFormat('dd MMMM yyyy').format(date);
-  String daySuffix = _getDaySuffix(date.day);
-  return formattedDate.replaceFirstMapped(
-    RegExp(r'(\d+)'),
-    (match) => "${match.group(1)}$daySuffix",
-  );
+String _getMonthAbbreviation(int month) {
+  switch (month) {
+    case 1:
+      return 'Jan';
+    case 2:
+      return 'Feb';
+    case 3:
+      return 'Mar';
+    case 4:
+      return 'Apr';
+    case 5:
+      return 'May';
+    case 6:
+      return 'Jun';
+    case 7:
+      return 'Jul';
+    case 8:
+      return 'Aug';
+    case 9:
+      return 'Sep';
+    case 10:
+      return 'Oct';
+    case 11:
+      return 'Nov';
+    case 12:
+      return 'Dec';
+    default:
+      return '';
+  }
 }

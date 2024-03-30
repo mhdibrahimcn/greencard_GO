@@ -1,134 +1,147 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:green/constants/Mycolors.dart';
-import 'package:green/db/stdTravelHistoryDB.dart';
-import 'package:green/models/StudentTravelHistory_model.dart';
 import 'package:green/screens/Homescreen/Profilescreen/appbar/appbar.dart';
+import 'package:green/screens/Homescreen/TicketScreen/remaningScreenInTicket.dart';
+
 import 'package:intl/intl.dart';
 
-class historyScreen extends StatefulWidget {
+class historyScreen extends StatelessWidget {
   const historyScreen({Key? key}) : super(key: key);
 
   @override
-  _HistoryScreenState createState() => _HistoryScreenState();
-}
-
-class _HistoryScreenState extends State<historyScreen> {
-  bool _isLoading = true;
-
-  @override
-  void initState() {
-    super.initState();
-    fetchData();
-  }
-
-  @override
-  void dispose() {
-    // Cancel any ongoing operations here
-    super.dispose();
-  }
-
-  void fetchData() async {
-    // Simulate fetching data
-    await Future.delayed(Duration(seconds: 2));
-    if (mounted) {
-      // Check if the widget is still in the tree
-      StdTravelHistoryDb().refreshUi();
-      setState(() {
-        _isLoading = false;
-      });
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
+    String studentId = StudentIdStorage.getStudentId();
+    CollectionReference studentCollection =
+        FirebaseFirestore.instance.collection('Student_Travel');
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Travel History"),
-      ),
-      body: _isLoading
-          ? Center(child: CircularProgressIndicator()) // Show loading indicator
-          : ValueListenableBuilder(
-              valueListenable:
-                  StdTravelHistoryDb.instance.stdTravelModelNotifier,
-              builder: (BuildContext context,
-                  List<StudentTravelHistory_model> newList, _) {
-                if (newList.isEmpty) {
-                  // Display a message when the list is empty
-                  return Center(
-                    child: Text(
-                      'No travel history available.',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  );
-                } else {
-                  // Display the ListView when the list is not empty
-                  return ListView.separated(
-                    itemBuilder: (context, index) {
-                      final stdTravel = newList[index];
-                      return SizedBox(
-                        height: 84,
-                        child: Card(
-                          color: Mycolors.materialColor,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          elevation: 5,
-                          child: Center(
-                            child: ListTile(
-                              leading: CircleAvatar(
-                                backgroundColor: Colors.green,
-                                radius: 30,
-                                child: Text(
-                                  parseDate(stdTravel.travelDate),
-                                  textAlign: TextAlign.center,
-                                ),
+      appBar: CustomAppBar(label: "Travel History"),
+      body: Padding(
+        padding: const EdgeInsets.only(top: 15, left: 8, right: 8, bottom: 6),
+        child: StreamBuilder<QuerySnapshot>(
+          stream: studentCollection
+              .doc(studentId)
+              .collection("Travel_History")
+              .orderBy('travel_date', descending: true)
+              .snapshots(),
+          builder:
+              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.hasError) {
+              return Center(
+                child: Text('Error: ${snapshot.error}'),
+              );
+            }
+
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+
+            if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
+              return Center(
+                child: Text('No travel history available.'),
+              );
+            }
+
+            return ListView.separated(
+              itemCount: snapshot.data!.docs.length,
+              itemBuilder: (context, index) {
+                final DocumentSnapshot stdTravel = snapshot.data!.docs[index];
+
+                Timestamp travelDate = stdTravel['travel_date'];
+                String travelStatus = stdTravel['travel_status'];
+
+                // Check if it's the first item or if the date has changed from the previous item
+                bool showDateDivider = index == 0 ||
+                    snapshot.data!.docs[index - 1]['travel_date']
+                            .toDate()
+                            .day !=
+                        travelDate.toDate().day;
+
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (showDateDivider)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 16.0),
+                        child: Center(
+                          child: Text(
+                            parseDatedivider(travelDate),
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 18,
+                                color: Colors.grey),
+                          ),
+                        ),
+                      ),
+                    SizedBox(
+                      height: 84,
+                      child: Card(
+                        color: Mycolors.materialColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        elevation: 5,
+                        child: Center(
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              backgroundColor: Colors.green,
+                              radius: 30,
+                              child: Text(
+                                parseDate(travelDate),
+                                textAlign: TextAlign.center,
                               ),
-                              title: Text(formatTime(stdTravel.travelDate)),
-                              trailing: stdTravel.travelStatus == "Up"
-                                  ? Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(Icons.arrow_upward),
-                                        SizedBox(height: 4),
-                                        Text("Up"),
-                                      ],
-                                    )
-                                  : Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(Icons.arrow_downward),
-                                        SizedBox(height: 4),
-                                        Text("Down"),
-                                      ],
-                                    ),
+                            ),
+                            title: Text(formatTime(travelDate)),
+                            trailing: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  travelStatus == "Up"
+                                      ? Icons.arrow_upward
+                                      : Icons.arrow_downward,
+                                ),
+                                SizedBox(height: 4),
+                                Text(travelStatus),
+                              ],
                             ),
                           ),
                         ),
-                      );
-                    },
-                    separatorBuilder: (BuildContext context, int index) {
-                      return const SizedBox(
-                        height: 20,
-                      );
-                    },
-                    itemCount: newList.length,
-                  );
-                }
+                      ),
+                    ),
+                  ],
+                );
               },
-            ),
+              separatorBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.only(top: 16.0),
+                );
+              },
+            );
+          },
+        ),
+      ),
     );
+  }
+
+  String formatTime(Timestamp timestamp) {
+    // Convert timestamp to DateTime and then format it
+    String formattedTime = DateFormat('h:mm a').format(timestamp.toDate());
+    return formattedTime;
+  }
+
+  String parseDate(Timestamp timestamp) {
+    // Convert timestamp to DateTime and then format it
+    final dated = DateFormat.MMMd().format(timestamp.toDate());
+    final splitedDate = dated.split(' ');
+    return '${splitedDate.last}\n ${splitedDate.first}';
   }
 }
 
-String formatTime(DateTime dateTime) {
-  // Format the DateTime object to "h:mm a" format
-  String formattedTime = DateFormat('h:mm a').format(dateTime);
-  return formattedTime;
-}
-
-String parseDate(DateTime date) {
-  final dated = DateFormat.MMMd().format(date);
-  final splitedDate = dated.split(' ');
-  return '${splitedDate.last}\n ${splitedDate.first}';
+String parseDatedivider(Timestamp timestamp) {
+  final formattedDate = DateFormat('dd MMMM yyyy').format(timestamp.toDate());
+  return '-------$formattedDate-------';
 }

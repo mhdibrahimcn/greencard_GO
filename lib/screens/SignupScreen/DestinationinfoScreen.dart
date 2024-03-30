@@ -24,12 +24,12 @@ class destinationInfoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
+      appBar: CustomAppBar(label: "Destination"),
       body: SingleChildScrollView(
         child: Form(
           key: _formkey,
           child: Column(
             children: [
-              appbar.appBar("Desitination "),
               const SizedBox(
                 height: 30,
               ),

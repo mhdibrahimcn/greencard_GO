@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:green/models/StudentTravelHistory_model.dart';
 import 'package:green/screens/ConductorScreen/homescreen/StudentDetailsScreen.dart';
 import 'package:green/screens/ConductorScreen/homescreen/conductorHomescreen.dart';
 import 'package:green/screens/ConductorScreen/loginpage/conductorLoginScreen.dart';
@@ -16,16 +15,10 @@ import 'package:green/screens/SignupScreen/phone_email_verify.dart';
 import 'package:green/screens/SystemNavbarConfig/Systemnavbarconfig.dart';
 import 'package:green/screens/modechoosingScreen.dart';
 import 'package:green/screens/splashscreen.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await Hive.initFlutter();
-
-  if (!Hive.isAdapterRegistered(StudentTravelHistorymodelAdapter().typeId)) {
-    Hive.registerAdapter(StudentTravelHistorymodelAdapter());
-  }
   runApp(const Myapp());
 }
 
@@ -43,7 +36,7 @@ class Myapp extends StatelessWidget {
             primary: Color.fromARGB(255, 97, 169, 179),
           )),
       debugShowCheckedModeBanner: false,
-      home: const modeChoosingScreen(),
+      home: const SplashScreen(),
       routes: {
         'stdRegistration': (context) => const stdRegistrationScreen(),
         'stdLoginscreen': (context) => const stdLoginScreen(),
