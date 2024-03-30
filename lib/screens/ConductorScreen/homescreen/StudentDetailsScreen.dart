@@ -16,7 +16,7 @@ class StudentDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CustomAppBar(label: "personal"),
+        appBar: CustomAppBar(label: "Ticket ID: ${student.studentid}"),
         body: Column(children: [
           SizedBox(
             height: 50,
@@ -79,7 +79,7 @@ class StudentDetailsScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "To",
+                              "And",
                               style: GoogleFonts.inter(
                                 textStyle: const TextStyle(
                                   fontSize: 20,

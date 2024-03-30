@@ -1,6 +1,6 @@
-import 'package:animate_do/animate_do.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:animate_do/animate_do.dart';
 import 'package:green/screens/Homescreen/Widget/dayProgressbarWidget.dart';
 import 'package:green/screens/Homescreen/Widget/ticketWidget.dart';
 import 'package:green/screens/Homescreen/Widget/travelUp_Down_StatusWidget.dart';
@@ -17,7 +17,12 @@ class remaningScreenInTicket extends StatelessWidget {
     return StreamBuilder(
       stream: studentCollection.snapshots(),
       builder: (context, AsyncSnapshot snapshot) {
-        if (snapshot.hasData) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          // Show a loading indicator while waiting for the snapshot
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (snapshot.hasData) {
           final DocumentSnapshot student =
               snapshot.data.docs[index.studentIndex];
           StudentIdStorage.setStudentId(student['Student Id']);
@@ -87,8 +92,10 @@ class remaningScreenInTicket extends StatelessWidget {
               ],
             ),
           );
+        } else {
+          // If no data is available
+          return Center(child: Text("No data"));
         }
-        return Center(child: Text("No data"));
       },
     );
   }

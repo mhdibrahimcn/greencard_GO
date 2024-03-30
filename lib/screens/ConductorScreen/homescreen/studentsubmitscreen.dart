@@ -6,6 +6,7 @@ import 'package:green/constants/Mycolors.dart';
 
 import 'package:green/screens/ConductorScreen/homescreen/qrScannerScreen.dart';
 import 'package:intl/intl.dart';
+import 'package:slide_to_act/slide_to_act.dart';
 
 class StudentSubmitScreen extends StatefulWidget {
   final Student student;
@@ -100,50 +101,59 @@ class _StudentSubmitScreenState extends State<StudentSubmitScreen> {
         SizedBox(
           height: 50,
         ),
-        SizedBox(
-          height: 60,
-          width: 180,
-          child: TextButton(
-            onPressed: () {
+        Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: SlideAction(
+            borderRadius: 100,
+            elevation: 1,
+            outerColor: Mycolors.materialColor,
+            innerColor: Colors.white,
+            text: "Slide to Submit",
+            textStyle: TextStyle(fontSize: 20),
+            onSubmit: () async {
               submit();
-              Navigator.of(context).pop();
             },
-            child: Text(
-              "Submit",
-              style: GoogleFonts.inter(
-                textStyle: const TextStyle(
-                  fontSize: 17,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(
-                  const Color.fromRGBO(114, 192, 202, 1)),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(
-                      20), // Adjust the radius to change the roundness of the button
-                ),
-              ),
-            ),
           ),
-        )
+        ),
       ],
     );
   }
 
-  submit() async {
+  void submit() async {
     final currentDate = DateTime.now();
     final travelStatus = selectedButton;
     String studentId = widget.student.studentid;
     CollectionReference studentCollection =
         FirebaseFirestore.instance.collection('Student_Travel');
+    if (selectedButton.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Please select Up or Down before submitting.'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+      return; // Exit the method if no button is selected
+    }
 
-    studentCollection.doc(studentId).collection("Travel_History").add({
+    await studentCollection.doc(studentId).collection("Travel_History").add({
       'travel_date': Timestamp.fromDate(currentDate),
       'travel_status': travelStatus,
-    }); // Show toast notification for successful submission
+    }).then((_) async {
+      await Future.delayed(Durations.extralong1);
+      Navigator.of(context).pop();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Successfully added!'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+    }).catchError((error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Failed to add: $error'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+    });
   }
 }

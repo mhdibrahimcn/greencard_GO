@@ -72,7 +72,7 @@ class historyScreen extends StatelessWidget {
                             parseDatedivider(travelDate),
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
-                                fontSize: 18,
+                                fontSize: 15,
                                 color: Colors.grey),
                           ),
                         ),
