@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:green/constants/Mycolors.dart';
 import 'package:green/screens/Homescreen/Profilescreen/appbar/appbar.dart';
+import 'package:green/screens/Homescreen/Profilescreen/widget/roundedbutton.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pinput/pinput.dart';
 
@@ -17,13 +19,12 @@ class _OtpScreenState extends State<OtpScreen> {
   final TextEditingController _otpController = TextEditingController();
   FirebaseAuth _auth = FirebaseAuth.instance;
   String verificationId = '';
-  int _timerCount = 60;
+  int _timerCount = 29;
   late Timer _timer;
-
+  bool verification = false;
   @override
   void initState() {
     super.initState();
-    startTimer();
   }
 
   @override
@@ -51,8 +52,12 @@ class _OtpScreenState extends State<OtpScreen> {
   }
 
   Future<void> verifyPhone() async {
+    startTimer();
     final PhoneVerificationCompleted verified = (AuthCredential authResult) {
       _auth.signInWithCredential(authResult);
+      setState(() {
+        verification = true;
+      });
     };
 
     final PhoneVerificationFailed verificationFailed =
@@ -96,7 +101,7 @@ class _OtpScreenState extends State<OtpScreen> {
   Widget build(BuildContext context) {
     const focusedBorderColor = Color.fromRGBO(23, 171, 144, 1);
     const fillColor = Color.fromRGBO(243, 246, 249, 0);
-    const borderColor = Color.fromRGBO(23, 171, 144, 0.4);
+    final borderColor = Mycolors.materialColor;
 
     final defaultPinTheme = PinTheme(
       width: 56,
@@ -132,26 +137,34 @@ class _OtpScreenState extends State<OtpScreen> {
               Center(
                   child: Text(
                       "OTP will sent to +91${widget.phonenumber} (${_timerCount.toString()}s left)")),
-              ElevatedButton(
-                onPressed: verifyPhone,
-                child: Text('Resend OTP'),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: RoundedButton(
+                    label: "Send OTP",
+                    onPressed: verifyPhone,
+                    isSelected: true),
               ),
               SizedBox(height: 32.0),
               Pinput(
+                length: 6,
                 controller: _otpController,
                 androidSmsAutofillMethod:
                     AndroidSmsAutofillMethod.smsUserConsentApi,
                 listenForMultipleSmsOnAndroid: true,
                 defaultPinTheme: defaultPinTheme,
                 separatorBuilder: (index) => const SizedBox(width: 8),
-                validator: (value) {},
+                validator: (value) {
+                  return verification == true ? "Succesfull" : "Code is error";
+                },
                 hapticFeedbackType: HapticFeedbackType.lightImpact,
+                pinAnimationType: PinAnimationType.fade,
                 onCompleted: (pin) {
                   debugPrint('onCompleted: $pin');
                 },
                 onChanged: (value) {
                   debugPrint('onChanged: $value');
                 },
+                pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
                 cursor: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -181,10 +194,10 @@ class _OtpScreenState extends State<OtpScreen> {
                 ),
               ),
               SizedBox(height: 16.0),
-              ElevatedButton(
-                onPressed: signInWithOTP,
-                child: Text('Verify OTP'),
-              ),
+              RoundedButton(
+                  label: "Verify OTP",
+                  onPressed: signInWithOTP,
+                  isSelected: true)
             ],
           ),
         ),

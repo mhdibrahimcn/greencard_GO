@@ -33,10 +33,6 @@ class bottomNavConductor extends StatelessWidget {
               icon: Icons.qr_code_scanner,
               text: 'Scanner',
             ),
-            GButton(
-              icon: Icons.person,
-              text: 'Profile',
-            ),
           ],
         ),
       ),
