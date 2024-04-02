@@ -7,6 +7,7 @@ import 'package:green/screens/Homescreen/stdHomescreenLogin.dart';
 import 'package:green/screens/Login/stdLoginScreen.dart';
 import 'package:green/screens/Login/stdRegistrationScreen.dart';
 import 'package:green/screens/SignupScreen/AddressVerficationScreen.dart';
+import 'package:green/screens/SignupScreen/Authentication/OtpScreen.dart';
 import 'package:green/screens/SignupScreen/DestinationinfoScreen.dart';
 import 'package:green/screens/SignupScreen/PasswordCreationScreen.dart';
 import 'package:green/screens/SignupScreen/SignupScreen.dart';

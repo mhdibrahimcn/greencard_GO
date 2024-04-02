@@ -2,6 +2,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:green/constants/Mycolors.dart';
 import 'package:green/screens/Homescreen/Profilescreen/appbar/appbar.dart';
+import 'package:green/screens/SignupScreen/Authentication/OtpScreen.dart';
 import 'package:green/screens/SignupScreen/CapiialiseFirstLetter.dart';
 import 'package:green/screens/SignupScreen/studentDetailclass.dart';
 import 'package:lottie/lottie.dart';
@@ -144,8 +145,10 @@ class phoneEmailVerifyScreen extends StatelessWidget {
                           onPressed: () {
                             if (_formkey.currentState!.validate()) {
                               addContactDetails();
-                              Navigator.of(context)
-                                  .pushNamed('DestinationinfoScreen');
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>
+                                    OtpScreen(phoneNumberController.text),
+                              ));
                             }
                           },
                           icon: const Icon(

@@ -35,7 +35,7 @@ class SplashScreen extends StatelessWidget {
   }
 
   void navigateToHomeScreen(BuildContext context) {
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 4), () {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const stdHomescreen()),
       );
@@ -53,14 +53,14 @@ class SplashScreen extends StatelessWidget {
         children: [
           LottieBuilder.asset(
             "assets/splash.json",
-            width: 300,
-            height: 300,
+            width: 500,
+            height: 500,
           ),
           Text(
             "GreenCard Go",
             style: GoogleFonts.inter(
               textStyle: TextStyle(
-                fontSize: 20,
+                fontSize: 28,
                 color: Mycolors.materialColor,
                 fontWeight: FontWeight.bold,
               ),
