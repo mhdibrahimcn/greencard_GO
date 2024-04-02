@@ -139,7 +139,7 @@ class _StudentSubmitScreenState extends State<StudentSubmitScreen> {
       'travel_date': Timestamp.fromDate(currentDate),
       'travel_status': travelStatus,
     }).then((_) async {
-      await Future.delayed(Durations.extralong1);
+      await Future.delayed(Durations.long1);
       Navigator.of(context).pop();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

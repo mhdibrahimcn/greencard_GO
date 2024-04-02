@@ -99,13 +99,21 @@ class historyScreen extends StatelessWidget {
                             trailing: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(
-                                  travelStatus == "Up"
-                                      ? Icons.arrow_upward
-                                      : Icons.arrow_downward,
+                                Container(
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(15)),
+                                  child: Icon(
+                                    travelStatus == "Up"
+                                        ? Icons.arrow_upward
+                                        : Icons.arrow_downward,
+                                  ),
                                 ),
-                                SizedBox(height: 4),
-                                Text(travelStatus),
+                                Text(
+                                  travelStatus,
+                                ),
                               ],
                             ),
                           ),

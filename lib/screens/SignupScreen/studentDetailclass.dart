@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+
 class StudentDetail {
   late String studentid;
   late String name;
@@ -5,6 +9,7 @@ class StudentDetail {
   late String dob;
   late String gurdianName;
   late int aadharNo;
+  late String profileDpURL;
   late String email;
   late int phoneNumber;
   late String password;
@@ -31,6 +36,7 @@ class StudentDetail {
     dob = detail.dob;
     gurdianName = detail.gurdianName;
     aadharNo = detail.aadharNo;
+    profileDpURL = detail.profileDpURL;
     email = detail.email;
     phoneNumber = detail.phoneNumber;
     password = detail.password;

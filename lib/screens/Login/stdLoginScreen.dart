@@ -197,6 +197,7 @@ class _stdLoginScreenState extends State<stdLoginScreen> {
     if (_formKey.currentState!.validate()) {
       final email = usernammeController.text.trim();
       final password = passwordController.text.trim();
+      bool loginSuccessful = false; // Add a flag to track login success
 
       try {
         final studentCollection =
@@ -212,11 +213,15 @@ class _stdLoginScreenState extends State<stdLoginScreen> {
               prefs.setBool('isLoggedIn', true); // Set login status
               prefs.setInt('studentIndex', i); // Set studentIndex
               StudentUtils.instance.studentIndex = i;
-              Navigator.of(context).pushReplacementNamed('stdHomeScreen');
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil('stdHomeScreen', (route) => false);
+              loginSuccessful = true; // Update flag
             }
           }
-        } else {
-          // Show error message if login fails
+        }
+
+        if (!loginSuccessful) {
+          // Show error if login was not successful
           showDialog(
             context: context,
             builder: (context) => AlertDialog(

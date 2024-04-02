@@ -26,7 +26,7 @@ class StudentDetailsScreen extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 50,
-                child: Icon(Icons.person),
+                backgroundImage: NetworkImage(student.profileDpURL),
               ),
               Text(
                 student.name,

@@ -3,7 +3,9 @@ import 'package:green/screens/Homescreen/TicketScreen/ticketScreen.dart';
 import 'package:ticket_widget/ticket_widget.dart';
 
 class ticketWidget extends StatelessWidget {
-  const ticketWidget({super.key});
+  final checkinPayment;
+
+  ticketWidget({super.key, required this.checkinPayment});
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +22,13 @@ class ticketWidget extends StatelessWidget {
           ),
         )
       ]),
-      child: const TicketWidget(
+      child: TicketWidget(
         color: Color.fromRGBO(114, 192, 202, 1),
         width: 350,
         height: 227,
         padding: EdgeInsets.all(7),
         isCornerRounded: true,
-        child: Ticketscreen(),
+        child: Ticketscreen(showqr: checkinPayment),
       ),
     ));
   }

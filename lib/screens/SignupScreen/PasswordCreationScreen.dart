@@ -182,6 +182,7 @@ class passwordCreationScreen extends StatelessWidget {
       "Dob": studentDetail.dob,
       "Guardian_Name": studentDetail.gurdianName,
       "Aadhar_no": studentDetail.aadharNo,
+      "ProfilePictureUrl": studentDetail.profileDpURL,
       "Email": studentDetail.email,
       "PhoneNumber": studentDetail.phoneNumber,
       "Password": studentDetail.password,

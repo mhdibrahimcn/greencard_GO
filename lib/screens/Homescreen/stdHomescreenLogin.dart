@@ -14,7 +14,7 @@ class stdHomescreen extends StatelessWidget {
     remaningScreenInTicket(),
     paymentScreen(),
     historyScreen(),
-    // profileScreen(),
+    profileScreen(),
   ];
   @override
   Widget build(BuildContext context) {

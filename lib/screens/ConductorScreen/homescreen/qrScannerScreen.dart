@@ -120,7 +120,9 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
                 startingDestination: studentData['Starting_Destination'],
                 endingDestination: studentData["Ending_Destination"],
                 ticketStartingDate: studentData["TicketStartingDate"],
-                ticketEndingDate: studentData["TicketEndingDate"]);
+                ticketEndingDate: studentData["TicketEndingDate"],
+                profileDpURL: studentData["ProfilePictureUrl"]);
+
             bottomNavConductor.selectedIndex.value = 0;
             Navigator.push(
               context,
@@ -151,11 +153,12 @@ class Student {
   final String endingDestination;
   final String ticketStartingDate;
   final String ticketEndingDate;
-
+  final String profileDpURL;
   Student(
       {required this.name,
       required this.studentid,
       required this.institution,
+      required this.profileDpURL,
       required this.startingDestination,
       required this.endingDestination,
       required this.ticketStartingDate,

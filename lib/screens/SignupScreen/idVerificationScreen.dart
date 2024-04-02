@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
@@ -22,6 +22,13 @@ class idVerificationScreen extends StatefulWidget {
 class _idVerificationScreenState extends State<idVerificationScreen> {
   final aadharIdContoller = TextEditingController();
   File? _image;
+
+  String? _validateImage(File? image) {
+    if (image == null) {
+      return 'Please pick an image';
+    }
+    return null;
+  }
 
   Future<void> _getImage(BuildContext context) async {
     final picker = ImagePicker();
@@ -143,10 +150,17 @@ class _idVerificationScreenState extends State<idVerificationScreen> {
                       child: IconButton(
                         onPressed: () {
                           if (_formkey.currentState!.validate()) {
-                            addIdDetails();
-                            Navigator.of(context).pushNamed(
-                              'AddressVerficationScreen',
-                            );
+                            String? imageError = _validateImage(_image);
+                            if (imageError == null) {
+                              addIdDetails();
+                              Navigator.of(context).pushNamed(
+                                'AddressVerficationScreen',
+                              );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text(imageError)),
+                              );
+                            }
                           }
                         },
                         icon: Icon(
@@ -168,7 +182,27 @@ class _idVerificationScreenState extends State<idVerificationScreen> {
   Future<void> addIdDetails() async {
     final aadharidstr = aadharIdContoller.text;
     final aadharid = int.tryParse(aadharidstr);
+
+    // Assuming _image is a File object representing the image
+    final File profileDp = _image!;
+
     StudentDetail studentDetail = new StudentDetail();
     studentDetail.aadharNo = aadharid!;
+
+    // Upload image to Firebase Storage
+    final Reference storageRef = FirebaseStorage.instance
+        .ref()
+        .child('profile_images')
+        .child('${studentDetail.studentid}.jpg');
+
+    // Upload the image file to Firebase Storage
+    UploadTask uploadTask = storageRef.putFile(profileDp);
+
+    // Wait for the image to be uploaded and get the download URL
+    TaskSnapshot storageTaskSnapshot = await uploadTask;
+    String imageUrl = await storageTaskSnapshot.ref.getDownloadURL();
+
+    // Save the image URL in the student details
+    studentDetail.profileDpURL = imageUrl;
   }
 }

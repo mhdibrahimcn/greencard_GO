@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -168,7 +169,6 @@ class conductorHomePage extends StatelessWidget {
                       child: TextFormField(
                         controller: studentIdController,
                         inputFormatters: [LengthLimitingTextInputFormatter(8)],
-                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                             hintText: "Enter Student ID",
                             filled: true,
@@ -181,7 +181,7 @@ class conductorHomePage extends StatelessWidget {
                                 const Icon(Icons.location_history_sharp),
                             suffixIcon: TextButton(
                               onPressed: () {
-                                // studentIdSubmit(context);
+                                studentIdSubmit(context);
                               },
                               child: Icon(
                                 Icons.send,
@@ -226,20 +226,49 @@ class conductorHomePage extends StatelessWidget {
     );
   }
 
-  // studentIdSubmit(context) async {
-  //   final studentId = studentIdController.text;
-  //   final studentDetails = await studentDb().getStudentDetails();
+  studentIdSubmit(context) async {
+    final studentId = studentIdController.text;
+    final studentCollection =
+        FirebaseFirestore.instance.collection('studentDetails');
+    final querySnapshot = await studentCollection.get();
 
-  //   if (_formkey.currentState!.validate()) {
-  //     for (var student in studentDetails) {
-  //       if (student.studentid == studentId) {
-  //         Navigator.push(
-  //             context,
-  //             MaterialPageRoute(
-  //                 builder: (context) =>
-  //                     StudentDetailsScreen(student: student)));
-  //       }
-  //     }
-  //   }
-  // }
+    if (_formkey.currentState!.validate()) {
+      if (querySnapshot.docs.isNotEmpty) {
+        for (int i = 0; i < querySnapshot.docs.length; i++) {
+          var studentData = querySnapshot.docs[i].data();
+          if (studentData['Student Id'] == studentId) {
+            var student = Student(
+                name: studentData['Name'],
+                studentid: studentData['Student Id'],
+                institution: studentData['Institution'],
+                startingDestination: studentData['Starting_Destination'],
+                endingDestination: studentData["Ending_Destination"],
+                ticketStartingDate: studentData["TicketStartingDate"],
+                ticketEndingDate: studentData["TicketEndingDate"],
+                profileDpURL: studentData["ProfilePictureUrl"]);
+            bottomNavConductor.selectedIndex.value = 0;
+
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content:
+                    Text('Student ${student.name} details are being loaded'),
+              ),
+            );
+
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        StudentDetailsScreen(student: student)));
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('No student found '),
+              ),
+            );
+          }
+        }
+      }
+    }
+  }
 }

@@ -27,7 +27,7 @@ class SplashScreen extends StatelessWidget {
   }
 
   void navigateToModechoosing(BuildContext context) {
-    Future.delayed(const Duration(seconds: 8), () {
+    Future.delayed(const Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const modeChoosingScreen()),
       );
@@ -35,7 +35,7 @@ class SplashScreen extends StatelessWidget {
   }
 
   void navigateToHomeScreen(BuildContext context) {
-    Future.delayed(const Duration(seconds: 8), () {
+    Future.delayed(const Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const stdHomescreen()),
       );

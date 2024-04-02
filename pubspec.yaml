@@ -12,9 +12,11 @@ dependencies:
   cloud_firestore: ^4.15.10
   eva_icons_flutter: ^3.1.0
   firebase_core: ^2.27.2
+  firebase_storage: ^11.6.11
   flutter:
     sdk: flutter
   flutter_native_splash: ^2.4.0
+  fluttertoast: ^8.2.4
   google_fonts: ^6.2.1
   google_nav_bar: ^5.0.6
   image_picker: ^1.0.7
@@ -30,6 +32,7 @@ dependencies:
   slide_to_act: ^2.0.2
   syncfusion_flutter_gauges: ^25.1.35
   ticket_widget: ^1.0.2
+  upi_india: ^3.0.1
   uuid: ^4.3.3
 
 dev_dependencies:

@@ -8,7 +8,8 @@ import 'package:green/screens/Login/stdLoginScreen.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class Ticketscreen extends StatelessWidget {
-  const Ticketscreen({Key? key});
+  final bool showqr;
+  const Ticketscreen({Key? key, required bool this.showqr});
 
   @override
   Widget build(BuildContext context) {
@@ -161,19 +162,21 @@ class Ticketscreen extends StatelessWidget {
                       const SizedBox(
                         height: 26,
                       ),
-                      TextButton(
-                        onPressed: () =>
-                            floatingActionInNav.bottomSheet(context),
-                        child: QrImageView(
-                          data: student["Student Id"],
-                          version: QrVersions.auto,
-                          size: 70.0,
-                          eyeStyle: const QrEyeStyle(
-                            color: Colors.black,
-                            eyeShape: QrEyeShape.square,
-                          ),
-                        ),
-                      )
+                      showqr == true
+                          ? TextButton(
+                              onPressed: () =>
+                                  floatingActionInNav.bottomSheet(context),
+                              child: QrImageView(
+                                data: student["Student Id"],
+                                version: QrVersions.auto,
+                                size: 70.0,
+                                eyeStyle: const QrEyeStyle(
+                                  color: Colors.black,
+                                  eyeShape: QrEyeShape.square,
+                                ),
+                              ),
+                            )
+                          : Text(""),
                     ],
                   ),
                 ],

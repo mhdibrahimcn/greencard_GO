@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:animate_do/animate_do.dart';
+
 import 'package:green/screens/Homescreen/Widget/dayProgressbarWidget.dart';
 import 'package:green/screens/Homescreen/Widget/ticketWidget.dart';
 import 'package:green/screens/Homescreen/Widget/travelUp_Down_StatusWidget.dart';
@@ -14,6 +15,7 @@ class remaningScreenInTicket extends StatelessWidget {
     CollectionReference studentCollection =
         FirebaseFirestore.instance.collection('studentDetails');
     StudentUtils index = StudentUtils();
+
     return StreamBuilder(
       stream: studentCollection.snapshots(),
       builder: (context, AsyncSnapshot snapshot) {
@@ -26,71 +28,66 @@ class remaningScreenInTicket extends StatelessWidget {
           final DocumentSnapshot student =
               snapshot.data.docs[index.studentIndex];
           StudentIdStorage.setStudentId(student['Student Id']);
-          return GestureDetector(
-            onTap: () {
-              if (ModalRoute.of(context)?.isCurrent == true) {
-                Navigator.pop(context);
-              }
-            },
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 40,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(25.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      FadeInLeft(
-                        duration: const Duration(milliseconds: 700),
-                        child: Text(
-                          capitalizeEveryWord(student['Name']),
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      FadeInRight(
-                        duration: const Duration(milliseconds: 700),
-                        child: const CircleAvatar(
-                          radius: 25,
-                          child: Icon(Icons.person),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 60,
-                ),
-                FadeInLeft(
-                  duration: const Duration(milliseconds: 700),
-                  child: const ticketWidget(),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Row(
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 40,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(25.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    FadeInUp(
+                    FadeInLeft(
                       duration: const Duration(milliseconds: 700),
-                      child: DayProgressbarWidget(
-                        initialDate:
-                            parseDateString(student["TicketStartingDate"]),
-                        maxValue: student["Period"] == '1 Month' ? 30 : 90,
+                      child: Text(
+                        capitalizeEveryWord(student['Name']),
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                    FadeInUp(
+                    FadeInRight(
                       duration: const Duration(milliseconds: 700),
-                      child: travelUpDownStatusWidget(),
-                    ),
+                      child: CircleAvatar(
+                          radius: 40,
+                          backgroundImage:
+                              NetworkImage(student['ProfilePictureUrl'])),
+                    )
                   ],
                 ),
-              ],
-            ),
+              ),
+              const SizedBox(
+                height: 60,
+              ),
+              FadeInLeft(
+                duration: const Duration(milliseconds: 700),
+                child: ticketWidget(
+                  checkinPayment: true,
+                ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Row(
+                children: [
+                  FadeInUp(
+                    duration: const Duration(milliseconds: 700),
+                    child: DayProgressbarWidget(
+                      initialDate:
+                          parseDateString(student["TicketStartingDate"]),
+                      maxValue: student["Period"] == '1 Month' ? 30 : 90,
+                    ),
+                  ),
+                  FadeInUp(
+                    duration: const Duration(milliseconds: 700),
+                    child: travelUpDownStatusWidget(),
+                  ),
+                ],
+              ),
+            ],
           );
         } else {
           // If no data is available
@@ -110,13 +107,13 @@ DateTime parseDateString(String dateString) {
   Map<String, int> monthsMap = {
     'Jan': 1,
     'Feb': 2,
-    'March': 3,
-    'April': 4,
+    'Mar': 3,
+    'Apr': 4,
     'May': 5,
-    'June': 6,
-    'July': 7,
+    'Jun': 6,
+    'Jul': 7,
     'Aug': 8,
-    'Sept': 9,
+    'Sep': 9,
     'Oct': 10,
     'Nov': 11,
     'Dec': 12
