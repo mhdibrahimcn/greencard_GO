@@ -16,9 +16,7 @@ class bottomNavigation extends StatelessWidget {
               onTabChange: (value) {
                 selectedIndex.value = value;
               },
-              iconSize: 20,
               haptic: true,
-              rippleColor: const Color.fromRGBO(96, 149, 156, 1),
               activeColor: Colors.white,
               color: const Color.fromRGBO(8, 14, 31, 1),
               backgroundColor: const Color.fromRGBO(114, 192, 202, 1),

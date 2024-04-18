@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 class StudentDetail {
+  late String uid;
   late String studentid;
   late String name;
   late String institution;
@@ -12,7 +13,7 @@ class StudentDetail {
   late String profileDpURL;
   late String email;
   late int phoneNumber;
-  late String password;
+
   late String startingDestination;
   late String endingDestination;
   late String period;
@@ -39,7 +40,7 @@ class StudentDetail {
     profileDpURL = detail.profileDpURL;
     email = detail.email;
     phoneNumber = detail.phoneNumber;
-    password = detail.password;
+    uid = detail.uid;
     startingDestination = detail.startingDestination;
     endingDestination = detail.endingDestination;
     period = detail.period;

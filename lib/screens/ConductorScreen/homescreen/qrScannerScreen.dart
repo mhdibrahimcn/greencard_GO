@@ -112,10 +112,12 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
         for (int i = 0; i < querySnapshot.docs.length; i++) {
           var studentData = querySnapshot.docs[i].data();
           if (studentData['Student Id'] == scanData.code) {
+            print(studentData['userid']);
             // Found the student matching the ticket ID
             var student = Student(
                 name: studentData['Name'],
                 studentid: studentData['Student Id'],
+                uid: studentData['userid'],
                 institution: studentData['Institution'],
                 startingDestination: studentData['Starting_Destination'],
                 endingDestination: studentData["Ending_Destination"],
@@ -148,6 +150,7 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
 class Student {
   final String name;
   final String studentid;
+  final String uid;
   final String institution;
   final String startingDestination;
   final String endingDestination;
@@ -157,6 +160,7 @@ class Student {
   Student(
       {required this.name,
       required this.studentid,
+      required this.uid,
       required this.institution,
       required this.profileDpURL,
       required this.startingDestination,

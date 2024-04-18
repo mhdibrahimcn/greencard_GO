@@ -8,7 +8,8 @@ import 'package:green/screens/Homescreen/qrBottomSheetScreen/qrBottomSheetScreen
 import 'liquidcrystal/liquidcrysral.dart';
 
 class travelUpDownStatusWidget extends StatefulWidget {
-  const travelUpDownStatusWidget({Key? key}) : super(key: key);
+  final String student;
+  const travelUpDownStatusWidget(this.student, {Key? key}) : super(key: key);
 
   @override
   _travelUpDownStatusWidgetState createState() =>
@@ -65,10 +66,8 @@ class _travelUpDownStatusWidgetState extends State<travelUpDownStatusWidget> {
     CollectionReference studentTravelCollection =
         FirebaseFirestore.instance.collection('Student_Travel');
 
-    String studentId = StudentIdStorage.getStudentId();
-
     QuerySnapshot querySnapshot = await studentTravelCollection
-        .doc(studentId)
+        .doc(widget.student)
         .collection("Travel_History")
         .orderBy('travel_date', descending: true)
         .limit(2) // Limiting to fetch the latest two travel statuses
@@ -98,6 +97,8 @@ class _travelUpDownStatusWidgetState extends State<travelUpDownStatusWidget> {
 
   @override
   Widget build(BuildContext context) {
+    double screenwidth = MediaQuery.of(context).size.width;
+    double screenheight = MediaQuery.of(context).size.height;
     return ClipRRect(
       borderRadius: BorderRadius.circular(30),
       child: Column(
@@ -114,8 +115,8 @@ class _travelUpDownStatusWidgetState extends State<travelUpDownStatusWidget> {
                 ),
               )
             ]),
-            width: 155,
-            height: 80,
+            width: screenwidth * 0.4,
+            height: screenheight * 0.1,
             child: LiquidLinearProgressIndicator(
               value: _downValue,
               valueColor: const AlwaysStoppedAnimation(
@@ -144,8 +145,8 @@ class _travelUpDownStatusWidgetState extends State<travelUpDownStatusWidget> {
                 ),
               )
             ]),
-            width: 155,
-            height: 80,
+            width: screenwidth * 0.4,
+            height: screenheight * 0.1,
             child: LiquidLinearProgressIndicator(
               value: _upValue,
               valueColor: const AlwaysStoppedAnimation(

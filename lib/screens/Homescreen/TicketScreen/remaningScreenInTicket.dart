@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:animate_do/animate_do.dart';
 
@@ -12,22 +13,21 @@ class remaningScreenInTicket extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    User? user = FirebaseAuth.instance.currentUser;
+
     CollectionReference studentCollection =
         FirebaseFirestore.instance.collection('studentDetails');
-    StudentUtils index = StudentUtils();
-
-    return StreamBuilder(
-      stream: studentCollection.snapshots(),
-      builder: (context, AsyncSnapshot snapshot) {
+    double screenwidth = MediaQuery.of(context).size.width;
+    return FutureBuilder(
+      future: user != null ? studentCollection.doc(user.uid).get() : null,
+      builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           // Show a loading indicator while waiting for the snapshot
           return Center(
             child: CircularProgressIndicator(),
           );
         } else if (snapshot.hasData) {
-          final DocumentSnapshot student =
-              snapshot.data.docs[index.studentIndex];
-          StudentIdStorage.setStudentId(student['Student Id']);
+          final DocumentSnapshot student = snapshot.data!;
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -60,7 +60,7 @@ class remaningScreenInTicket extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 60,
+                height: 20,
               ),
               FadeInLeft(
                 duration: const Duration(milliseconds: 700),
@@ -69,7 +69,7 @@ class remaningScreenInTicket extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 30,
+                height: 20,
               ),
               Row(
                 children: [
@@ -83,7 +83,7 @@ class remaningScreenInTicket extends StatelessWidget {
                   ),
                   FadeInUp(
                     duration: const Duration(milliseconds: 700),
-                    child: travelUpDownStatusWidget(),
+                    child: travelUpDownStatusWidget(student["Student Id"]),
                   ),
                 ],
               ),
@@ -139,16 +139,4 @@ String capitalizeEveryWord(String text) {
   }
 
   return capitalizedWords.join(' ');
-}
-
-class StudentIdStorage {
-  static late String studentId;
-
-  static void setStudentId(String id) {
-    studentId = id;
-  }
-
-  static String getStudentId() {
-    return studentId;
-  }
 }

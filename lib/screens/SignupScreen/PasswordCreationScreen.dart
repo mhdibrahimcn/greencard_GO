@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -91,8 +93,6 @@ class passwordCreationScreen extends StatelessWidget {
                       return 'Please re-enter your password';
                     }
                     if (value != _password) {
-                      print(value);
-                      print(_password);
                       return 'Passwords do not match';
                     }
                     return null;
@@ -172,92 +172,113 @@ class passwordCreationScreen extends StatelessWidget {
       true_date = date.add(Duration(days: 90));
     }
     final ticketEndingDate = formatDate(true_date);
-    studentDetail.password = password;
+    print(ticketStartingDate);
+
     studentDetail.ticketStartingDate = ticketStartingDate;
     studentDetail.ticketEndingDate = ticketEndingDate;
-    final studentdetails = {
-      "Student Id": studentDetail.studentid,
-      "Name": studentDetail.name,
-      "Institution": studentDetail.institution,
-      "Dob": studentDetail.dob,
-      "Guardian_Name": studentDetail.gurdianName,
-      "Aadhar_no": studentDetail.aadharNo,
-      "ProfilePictureUrl": studentDetail.profileDpURL,
-      "Email": studentDetail.email,
-      "PhoneNumber": studentDetail.phoneNumber,
-      "Password": studentDetail.password,
-      "Starting_Destination": studentDetail.startingDestination,
-      "Ending_Destination": studentDetail.endingDestination,
-      "Period": studentDetail.period,
-      "Depo_name": studentDetail.deponame,
-      "District": studentDetail.distict,
-      "City": studentDetail.city,
-      "Pincode": studentDetail.pincode,
-      "TicketStartingDate": studentDetail.ticketStartingDate,
-      "TicketEndingDate": studentDetail.ticketEndingDate
-    };
 
-    CollectionReference studentCollection =
-        FirebaseFirestore.instance.collection('studentDetails');
+    try {
+      // Create user in Firebase Authentication
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: studentDetail.email,
+        password: password,
+      );
 
-    studentCollection.add(studentdetails);
+      // Get the UID of the newly created user
+      String uid = userCredential.user!.uid;
+      studentDetail.uid = uid;
+      final studentdetails = {
+        "userid": studentDetail.uid,
+        "Student Id": studentDetail.studentid,
+        "Name": studentDetail.name,
+        "Institution": studentDetail.institution,
+        "Dob": studentDetail.dob,
+        "Guardian_Name": studentDetail.gurdianName,
+        "Aadhar_no": studentDetail.aadharNo,
+        "ProfilePictureUrl": studentDetail.profileDpURL,
+        "Email": studentDetail.email,
+        "PhoneNumber": studentDetail.phoneNumber,
+        "Starting_Destination": studentDetail.startingDestination,
+        "Ending_Destination": studentDetail.endingDestination,
+        "Period": studentDetail.period,
+        "Depo_name": studentDetail.deponame,
+        "District": studentDetail.distict,
+        "City": studentDetail.city,
+        "Pincode": studentDetail.pincode,
+        "TicketStartingDate": studentDetail.ticketStartingDate,
+        "TicketEndingDate": studentDetail.ticketEndingDate
+      };
+
+      // Set student details in Firestore using the UID as student ID
+      await FirebaseFirestore.instance
+          .collection('studentDetails')
+          .doc(uid)
+          .set(studentdetails);
+
+      print('User created and student details set successfully');
+    } catch (error) {
+      print('Error creating user and setting student details: $error');
+      // Handle error here
+    }
   }
-}
 
-String formatDate(DateTime date) {
-  String formattedDate = DateFormat('dd MMM yyyy').format(date);
-  String daySuffix = _getDaySuffix(date.day);
-  String monthAbbreviation = _getMonthAbbreviation(date.month);
-  return formattedDate.replaceFirstMapped(
-        RegExp(r'(\d+)'),
-        (match) => "${match.group(1)}$daySuffix",
-      ) +
-      " $monthAbbreviation ${date.year}";
-}
-
-String _getDaySuffix(int day) {
-  if (day >= 11 && day <= 13) {
-    return 'th';
+  String formatDate(DateTime date) {
+    String formattedDate = DateFormat('dd MMM yyyy').format(date);
+    String daySuffix = _getDaySuffix(date.day);
+    String monthAbbreviation = _getMonthAbbreviation(date.month);
+    print(formattedDate);
+    return formattedDate.replaceFirstMapped(
+          RegExp(r'(\d+)'),
+          (match) => "${match.group(1)}$daySuffix",
+        ) +
+        " $monthAbbreviation ${date.year}";
   }
-  switch (day % 10) {
-    case 1:
-      return 'st';
-    case 2:
-      return 'nd';
-    case 3:
-      return 'rd';
-    default:
+
+  String _getDaySuffix(int day) {
+    if (day >= 11 && day <= 13) {
       return 'th';
+    }
+    switch (day % 10) {
+      case 1:
+        return 'st';
+      case 2:
+        return 'nd';
+      case 3:
+        return 'rd';
+      default:
+        return 'th';
+    }
   }
-}
 
-String _getMonthAbbreviation(int month) {
-  switch (month) {
-    case 1:
-      return 'Jan';
-    case 2:
-      return 'Feb';
-    case 3:
-      return 'Mar';
-    case 4:
-      return 'Apr';
-    case 5:
-      return 'May';
-    case 6:
-      return 'Jun';
-    case 7:
-      return 'Jul';
-    case 8:
-      return 'Aug';
-    case 9:
-      return 'Sep';
-    case 10:
-      return 'Oct';
-    case 11:
-      return 'Nov';
-    case 12:
-      return 'Dec';
-    default:
-      return '';
+  String _getMonthAbbreviation(int month) {
+    switch (month) {
+      case 1:
+        return 'Jan';
+      case 2:
+        return 'Feb';
+      case 3:
+        return 'Mar';
+      case 4:
+        return 'Apr';
+      case 5:
+        return 'May';
+      case 6:
+        return 'Jun';
+      case 7:
+        return 'Jul';
+      case 8:
+        return 'Aug';
+      case 9:
+        return 'Sep';
+      case 10:
+        return 'Oct';
+      case 11:
+        return 'Nov';
+      case 12:
+        return 'Dec';
+      default:
+        return '';
+    }
   }
 }

@@ -240,6 +240,7 @@ class conductorHomePage extends StatelessWidget {
             var student = Student(
                 name: studentData['Name'],
                 studentid: studentData['Student Id'],
+                uid: studentData['userid'],
                 institution: studentData['Institution'],
                 startingDestination: studentData['Starting_Destination'],
                 endingDestination: studentData["Ending_Destination"],

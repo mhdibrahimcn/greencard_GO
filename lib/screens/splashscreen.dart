@@ -18,8 +18,7 @@ class SplashScreen extends StatelessWidget {
     print(isLoggedIn);
     print(index);
 
-    if (isLoggedIn && index != null) {
-      StudentUtils.instance.studentIndex = index;
+    if (isLoggedIn) {
       navigateToHomeScreen(context);
     } else {
       navigateToModechoosing(context);

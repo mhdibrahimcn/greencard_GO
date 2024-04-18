@@ -145,10 +145,11 @@ class phoneEmailVerifyScreen extends StatelessWidget {
                           onPressed: () {
                             if (_formkey.currentState!.validate()) {
                               addContactDetails();
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>
-                                    OtpScreen(phoneNumberController.text),
-                              ));
+                              // Navigator.of(context).push(MaterialPageRoute(
+                              //   builder: (context) =>
+                              //       OtpScreen(phoneNumberController.text),
+                              Navigator.of(context)
+                                  .pushNamed("DestinationinfoScreen");
                             }
                           },
                           icon: const Icon(

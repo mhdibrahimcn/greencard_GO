@@ -122,7 +122,7 @@ class _StudentSubmitScreenState extends State<StudentSubmitScreen> {
   void submit() async {
     final currentDate = DateTime.now();
     final travelStatus = selectedButton;
-    String studentId = widget.student.studentid;
+    String uid = widget.student.uid;
     CollectionReference studentCollection =
         FirebaseFirestore.instance.collection('Student_Travel');
     if (selectedButton.isEmpty) {
@@ -135,7 +135,7 @@ class _StudentSubmitScreenState extends State<StudentSubmitScreen> {
       return; // Exit the method if no button is selected
     }
 
-    await studentCollection.doc(studentId).collection("Travel_History").add({
+    await studentCollection.doc(uid).collection("Travel_History").add({
       'travel_date': Timestamp.fromDate(currentDate),
       'travel_status': travelStatus,
     }).then((_) async {

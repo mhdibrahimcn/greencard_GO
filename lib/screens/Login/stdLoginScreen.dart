@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:green/screens/ConductorScreen/homescreen/qrScannerScreen.dart';
@@ -200,72 +201,62 @@ class _stdLoginScreenState extends State<stdLoginScreen> {
       bool loginSuccessful = false; // Add a flag to track login success
 
       try {
-        final studentCollection =
-            FirebaseFirestore.instance.collection('studentDetails');
-        final querySnapshot = await studentCollection.get();
-
-        if (querySnapshot.docs.isNotEmpty) {
-          for (int i = 0; i < querySnapshot.docs.length; i++) {
-            var studentData = querySnapshot.docs[i].data();
-            if (studentData['Email'] == email &&
-                studentData['Password'] == password) {
-              SharedPreferences prefs = await SharedPreferences.getInstance();
-              prefs.setBool('isLoggedIn', true); // Set login status
-              prefs.setInt('studentIndex', i); // Set studentIndex
-              StudentUtils.instance.studentIndex = i;
-              Navigator.of(context)
-                  .pushNamedAndRemoveUntil('stdHomeScreen', (route) => false);
-              loginSuccessful = true; // Update flag
-            }
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+        // If no error occurred during signInWithEmailAndPassword, login is successful
+        loginSuccessful = true;
+      } catch (error) {
+        String errorMessage =
+            "An error occurred while signing in. Please try again.";
+        if (error is FirebaseAuthException) {
+          switch (error.code) {
+            case "invalid-email":
+              errorMessage = "The email address is invalid.";
+              break;
+            case "user-disabled":
+              errorMessage = "The user account has been disabled.";
+              break;
+            case "user-not-found":
+            case "wrong-password":
+              errorMessage = "The email or password provided is incorrect.";
+              break;
+            case "too-many-requests":
+              errorMessage =
+                  "Too many unsuccessful login attempts. Please try again later.";
+              break;
+            default:
+              errorMessage =
+                  "An error occurred while signing in. Please try again.";
           }
         }
-
-        if (!loginSuccessful) {
-          // Show error if login was not successful
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: Text('Login Failed'),
-              content: Text('Invalid email or password. Please try again.'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  child: Text('OK'),
-                ),
-              ],
-            ),
-          );
-        }
-      } catch (e) {
-        print('Error: $e');
-        // Show error message if an exception occurs
         showDialog(
           context: context,
-          builder: (context) => AlertDialog(
-            title: Text('Error'),
-            content: Text('An error occurred. Please try again later.'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: Text('OK'),
-              ),
-            ],
-          ),
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("Authentication Failed"),
+              content: Text(errorMessage),
+              actions: <Widget>[
+                TextButton(
+                  child: Text("OK"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
         );
       }
+
+      // Check if login was successful before navigating
+      if (loginSuccessful) {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setBool('isLoggedIn', true);
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil("stdHomeScreen", (route) => false);
+      }
     }
-  }
-}
-
-class StudentUtils {
-  late int studentIndex;
-
-  StudentUtils._internal();
-  static StudentUtils instance = StudentUtils._internal();
-  factory StudentUtils() {
-    return instance;
-  }
-  void updateFormValues(StudentUtils detail) {
-    studentIndex = detail.studentIndex;
   }
 }

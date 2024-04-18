@@ -9,6 +9,8 @@ class ticketWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenwidth = MediaQuery.of(context).size.width;
+    double screenheight = MediaQuery.of(context).size.height;
     return Center(
         child: Container(
       decoration: BoxDecoration(boxShadow: [
@@ -24,8 +26,8 @@ class ticketWidget extends StatelessWidget {
       ]),
       child: TicketWidget(
         color: Color.fromRGBO(114, 192, 202, 1),
-        width: 350,
-        height: 227,
+        width: screenwidth * 0.95,
+        height: screenheight * 0.29,
         padding: EdgeInsets.all(7),
         isCornerRounded: true,
         child: Ticketscreen(showqr: checkinPayment),

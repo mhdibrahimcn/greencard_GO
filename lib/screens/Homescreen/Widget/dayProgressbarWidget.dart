@@ -52,6 +52,8 @@ class _DayProgressbarWidgetState extends State<DayProgressbarWidget> {
 
   @override
   Widget build(BuildContext context) {
+    double screenwidth = MediaQuery.of(context).size.width;
+    double screenheight = MediaQuery.of(context).size.height;
     return ClipRRect(
       borderRadius: BorderRadius.circular(30),
       child: Padding(
@@ -72,8 +74,8 @@ class _DayProgressbarWidgetState extends State<DayProgressbarWidget> {
               )
             ],
           ),
-          width: 160,
-          height: 170,
+          width: screenwidth * 0.4,
+          height: screenheight * 0.23,
           child: SimpleCircularProgressBar(
             size: 120,
             progressStrokeWidth: 17,

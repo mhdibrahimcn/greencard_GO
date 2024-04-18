@@ -13,8 +13,8 @@ class stdHomescreen extends StatelessWidget {
   final pages = const [
     remaningScreenInTicket(),
     paymentScreen(),
-    historyScreen(),
-    profileScreen(),
+    HistoryScreen(),
+    ProfileScreen(),
   ];
   @override
   Widget build(BuildContext context) {
