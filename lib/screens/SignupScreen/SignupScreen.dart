@@ -193,6 +193,7 @@ class _signupScreenState extends State<signupScreen> {
     studentDetail.name = fullname;
     studentDetail.institution = institutionName;
     studentDetail.dob = dob;
+    print(studentDetail.studentid);
   }
 }
 

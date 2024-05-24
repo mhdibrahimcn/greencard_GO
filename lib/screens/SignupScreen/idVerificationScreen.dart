@@ -9,18 +9,19 @@ import 'package:green/screens/Homescreen/Profilescreen/appbar/appbar.dart';
 import 'package:green/screens/SignupScreen/studentDetailclass.dart';
 import 'package:lottie/lottie.dart';
 import 'package:image_picker/image_picker.dart'; // Import added here
+import 'package:firebase_auth/firebase_auth.dart';
 
 final _formkey = GlobalKey<FormState>();
 
-class idVerificationScreen extends StatefulWidget {
-  idVerificationScreen({Key? key}) : super(key: key);
+class IdVerificationScreen extends StatefulWidget {
+  IdVerificationScreen({Key? key}) : super(key: key);
 
   @override
-  _idVerificationScreenState createState() => _idVerificationScreenState();
+  _IdVerificationScreenState createState() => _IdVerificationScreenState();
 }
 
-class _idVerificationScreenState extends State<idVerificationScreen> {
-  final aadharIdContoller = TextEditingController();
+class _IdVerificationScreenState extends State<IdVerificationScreen> {
+  final aadharIdController = TextEditingController();
   File? _image;
 
   String? _validateImage(File? image) {
@@ -96,12 +97,12 @@ class _idVerificationScreenState extends State<idVerificationScreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
-                  controller: aadharIdContoller,
+                  controller: aadharIdController,
                   keyboardType: TextInputType.number,
                   inputFormatters: [LengthLimitingTextInputFormatter(12)],
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter a Aadhar number';
+                      return 'Please enter an Aadhar number';
                     }
                     if (value.length != 12) {
                       return 'Aadhar number must be 12 digits long';
@@ -130,9 +131,7 @@ class _idVerificationScreenState extends State<idVerificationScreen> {
                 ),
               ),
               const SizedBox(height: 20),
-
-              const SizedBox(
-                  height: 20), // Display picked image in CircleAvatar
+              const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.only(top: 0.0, right: 8),
                 child: Row(
@@ -154,7 +153,7 @@ class _idVerificationScreenState extends State<idVerificationScreen> {
                             if (imageError == null) {
                               addIdDetails();
                               Navigator.of(context).pushNamed(
-                                'AddressVerficationScreen',
+                                'AddressVerificationScreen',
                               );
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
@@ -180,14 +179,31 @@ class _idVerificationScreenState extends State<idVerificationScreen> {
   }
 
   Future<void> addIdDetails() async {
-    final aadharidstr = aadharIdContoller.text;
-    final aadharid = int.tryParse(aadharidstr);
+    final aadharIdStr = aadharIdController.text;
+    final aadharId = int.tryParse(aadharIdStr);
+
+    if (aadharId == null || _image == null) {
+      // Handle error appropriately
+      return;
+    }
+
+    // Check if user is authenticated
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      // User is not authenticated
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('User not authenticated')),
+      );
+      return;
+    }
 
     // Assuming _image is a File object representing the image
     final File profileDp = _image!;
 
-    StudentDetail studentDetail = new StudentDetail();
-    studentDetail.aadharNo = aadharid!;
+    StudentDetail studentDetail = StudentDetail();
+    studentDetail.aadharNo = aadharId;
+    studentDetail.studentid =
+        user.uid; // Assuming user ID is used for student ID
 
     // Upload image to Firebase Storage
     final Reference storageRef = FirebaseStorage.instance
@@ -195,14 +211,27 @@ class _idVerificationScreenState extends State<idVerificationScreen> {
         .child('profile_images')
         .child('${studentDetail.studentid}.jpg');
 
-    // Upload the image file to Firebase Storage
-    UploadTask uploadTask = storageRef.putFile(profileDp);
+    try {
+      // Upload the image file to Firebase Storage
+      UploadTask uploadTask = storageRef.putFile(profileDp);
 
-    // Wait for the image to be uploaded and get the download URL
-    TaskSnapshot storageTaskSnapshot = await uploadTask;
-    String imageUrl = await storageTaskSnapshot.ref.getDownloadURL();
+      // Wait for the image to be uploaded and get the download URL
+      TaskSnapshot storageTaskSnapshot = await uploadTask;
+      String imageUrl = await storageTaskSnapshot.ref.getDownloadURL();
 
-    // Save the image URL in the student details
-    studentDetail.profileDpURL = imageUrl;
+      // Save the image URL in the student details
+      studentDetail.profileDpURL = imageUrl;
+
+      // Update student details in your database (not shown in this code)
+      // ...
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('ID Details added successfully')),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to upload image: $e')),
+      );
+    }
   }
 }

@@ -229,10 +229,9 @@ class passwordCreationScreen extends StatelessWidget {
     String monthAbbreviation = _getMonthAbbreviation(date.month);
     print(formattedDate);
     return formattedDate.replaceFirstMapped(
-          RegExp(r'(\d+)'),
-          (match) => "${match.group(1)}$daySuffix",
-        ) +
-        " $monthAbbreviation ${date.year}";
+      RegExp(r'(\d+)'),
+      (match) => "${match.group(1)}$daySuffix",
+    );
   }
 
   String _getDaySuffix(int day) {
