@@ -202,8 +202,6 @@ class _IdVerificationScreenState extends State<IdVerificationScreen> {
 
     StudentDetail studentDetail = StudentDetail();
     studentDetail.aadharNo = aadharId;
-    studentDetail.studentid =
-        user.uid; // Assuming user ID is used for student ID
 
     // Upload image to Firebase Storage
     final Reference storageRef = FirebaseStorage.instance

@@ -20,7 +20,7 @@ class bottomNavigation extends StatelessWidget {
               activeColor: Colors.white,
               color: const Color.fromRGBO(8, 14, 31, 1),
               backgroundColor: const Color.fromRGBO(114, 192, 202, 1),
-              gap: 15,
+              gap: 13,
               tabs: const [
                 GButton(
                   icon: Icons.home,

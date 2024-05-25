@@ -30,11 +30,14 @@ class qrBottomSheetScreen extends StatelessWidget {
             width: 400,
             child: Column(
               children: [
-                const SizedBox(height: 55),
+                const SizedBox(height: 40),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const CircleAvatar(child: Icon(Icons.person)),
+                    CircleAvatar(
+                        radius: 30,
+                        backgroundImage:
+                            NetworkImage(student['ProfilePictureUrl'])),
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: Text(

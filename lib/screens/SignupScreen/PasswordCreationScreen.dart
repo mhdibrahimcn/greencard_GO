@@ -172,7 +172,7 @@ class passwordCreationScreen extends StatelessWidget {
       true_date = date.add(Duration(days: 90));
     }
     final ticketEndingDate = formatDate(true_date);
-    print(ticketStartingDate);
+    print(studentDetail.studentid);
 
     studentDetail.ticketStartingDate = ticketStartingDate;
     studentDetail.ticketEndingDate = ticketEndingDate;
@@ -187,6 +187,7 @@ class passwordCreationScreen extends StatelessWidget {
 
       // Get the UID of the newly created user
       String uid = userCredential.user!.uid;
+      print(studentDetail.studentid);
       studentDetail.uid = uid;
       final studentdetails = {
         "userid": studentDetail.uid,

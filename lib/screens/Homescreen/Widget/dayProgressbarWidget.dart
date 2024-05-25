@@ -75,7 +75,7 @@ class _DayProgressbarWidgetState extends State<DayProgressbarWidget> {
             ],
           ),
           width: screenwidth * 0.4,
-          height: screenheight * 0.23,
+          height: screenheight * 0.2,
           child: SimpleCircularProgressBar(
             size: 120,
             progressStrokeWidth: 17,

@@ -27,7 +27,7 @@ class ticketWidget extends StatelessWidget {
       child: TicketWidget(
         color: Color.fromRGBO(114, 192, 202, 1),
         width: screenwidth * 0.95,
-        height: screenheight * 0.29,
+        height: screenheight * 0.28,
         padding: EdgeInsets.all(7),
         isCornerRounded: true,
         child: Ticketscreen(showqr: checkinPayment),

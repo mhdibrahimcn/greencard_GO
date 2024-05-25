@@ -2,9 +2,6 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import 'package:green/screens/Homescreen/TicketScreen/remaningScreenInTicket.dart';
-import 'package:green/screens/Homescreen/qrBottomSheetScreen/qrBottomSheetScreen.dart';
-
 import 'liquidcrystal/liquidcrysral.dart';
 
 class travelUpDownStatusWidget extends StatefulWidget {
@@ -63,36 +60,41 @@ class _travelUpDownStatusWidgetState extends State<travelUpDownStatusWidget> {
   }
 
   Future<void> _fetchTravelStatus() async {
-    CollectionReference studentTravelCollection =
-        FirebaseFirestore.instance.collection('Student_Travel');
+    try {
+      print("Starting to fetch travel status...");
+      CollectionReference studentTravelCollection =
+          FirebaseFirestore.instance.collection('Student_Travel');
 
-    QuerySnapshot querySnapshot = await studentTravelCollection
-        .doc(widget.student)
-        .collection("Travel_History")
-        .orderBy('travel_date', descending: true)
-        .limit(2) // Limiting to fetch the latest two travel statuses
-        .get();
+      QuerySnapshot querySnapshot = await studentTravelCollection
+          .doc(widget.student)
+          .collection("Travel_History")
+          .orderBy('travel_date', descending: true)
+          .limit(2)
+          .get();
 
-    // Reset values initially
-    _resetValues();
+      print("Query executed. Documents fetched: ${querySnapshot.docs.length}");
 
-    // Iterate over fetched documents
-    for (var document in querySnapshot.docs) {
-      var travelStatus = document['travel_status'] as String?;
-      if (travelStatus == 'Up') {
-        _upValue = 0.8; // Max value for 'Up' status
-      } else if (travelStatus == 'Down') {
-        _downValue = 0.8; // Max value for 'Down' status
+      // Reset values initially
+      _resetValues();
+
+      // Iterate over fetched documents
+      for (var document in querySnapshot.docs) {
+        var travelStatus = document['travel_status'] as String?;
+        print("Fetched travel status: $travelStatus");
+
+        if (travelStatus == 'Up') {
+          _upValue = 0.8; // Max value for 'Up' status
+        } else if (travelStatus == 'Down') {
+          _downValue = 0.8; // Max value for 'Down' status
+        }
       }
-    }
 
-    // Update both progress values if both statuses are present
-    if (_upValue == 0.8 && _downValue == 0.8) {
-      _upValue = 0.8;
-      _downValue = 0.8;
-    }
+      print("Updated _upValue: $_upValue, _downValue: $_downValue");
 
-    setState(() {});
+      setState(() {});
+    } catch (e) {
+      print("Error fetching travel status: $e");
+    }
   }
 
   @override

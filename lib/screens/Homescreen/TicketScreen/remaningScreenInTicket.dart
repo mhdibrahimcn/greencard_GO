@@ -60,7 +60,7 @@ class remaningScreenInTicket extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 20,
+                height: 40,
               ),
               FadeInLeft(
                 duration: const Duration(milliseconds: 700),
@@ -83,7 +83,7 @@ class remaningScreenInTicket extends StatelessWidget {
                   ),
                   FadeInUp(
                     duration: const Duration(milliseconds: 700),
-                    child: travelUpDownStatusWidget(student["Student Id"]),
+                    child: travelUpDownStatusWidget(student["userid"]),
                   ),
                 ],
               ),
